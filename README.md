@@ -18,8 +18,8 @@
    - All the end-points and base-url should be in env files.
 
    - Use `assets` folder for images,pdf,video..etc
-   - Use `components` folder for making componnets either in folder or without folder 
-     just be sure naming should not match with other folder/file to avoid conclusion
+   - Use `components` folder for making components either in folder or without folder 
+     just be sure naming should not match with other folder/file to avoid collision
    - Use `pages` folder to create all the pages
    - Use `routes`  folder to all the routing related stuffs
    - Use `scripts` folder for any js script you wanna write.(this folder helps you to 
@@ -60,7 +60,7 @@ Step-3- install some common dependencies:- <br />
             -$git switch <branch-name>  (without angle brackets)
         
         4- How to pull:
-            -$git pull <branch-name>    (without angle brackets)
+            -$git pull origin <branch-name>    (without angle brackets)
 
 
 => Some helpful Tools during development :<br />
