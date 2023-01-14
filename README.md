@@ -28,17 +28,17 @@
    - Use `constants` folder to create all the constants (Helps you reducing hard-coding)(Most recommended)
 
 <!-- Cloning related and Getting started related stuffs -->
-=> Clone the directory to start work $git clone  https://github.com/dev-Imsaurabh/third-ice-7307.git
+=> Clone the directory to start work `$git clone  https://github.com/dev-Imsaurabh/third-ice-7307.git`
 
 => Ok guys here are the some basic instruction before you start , If you are here you are successfully pulled the code and you are ready to type you first command in terminal.
 
-Step-1- Navigate to proeject directory using $cd third-ice-7307
+Step-1- Navigate to proeject directory using `$cd third-ice-7307`
 
-Step-2- install node_modules using $cd npm install
+Step-2- install node_modules using `$cd npm install`
 
 Step-3- install some common dependencies:- 
-            - $npm install react-router-dom redux react-redux redux-thunk axios 
-            - $npm install @chakra-ui/react @emotion/react @emotion/styled framer-motion
+            - `$npm install react-router-dom redux react-redux redux-thunk axios`
+            - `$npm install @chakra-ui/react @emotion/react @emotion/styled framer-motion`
 
 <!-- Git related stuffs -->
 => Some basic requirements(Mandatory):
@@ -64,11 +64,11 @@ Step-3- install some common dependencies:-
 
 
 => Some helpful Tools during development :
-    - Chakra-UI - https://chakra-ui.com/
-    - Chakra-Templets - https://chakra-templates.dev/#
-    - String Builder - https://codebeautify.org/string-builder
-    - Chat-gpt - https://chat.openai.com/chat
-    - Your-Team-members- https://chat.whatsapp.com/KR80RM0zbWi6agJVFL66Z9
+    - Chakra-UI - https://chakra-ui.com/<br />
+    - Chakra-Templets - https://chakra-templates.dev/#<br />
+    - String Builder - https://codebeautify.org/string-builder<br />
+    - Chat-gpt - https://chat.openai.com/chat<br />
+    - Your-Team-members- https://chat.whatsapp.com/KR80RM0zbWi6agJVFL66Z9<br />
 
 
 
