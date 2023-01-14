@@ -36,8 +36,8 @@ Step-1- Navigate to proeject directory using `$cd third-ice-7307`
 
 Step-2- install node_modules using `$cd npm install`
 
-Step-3- install some common dependencies:- 
-            - `$npm install react-router-dom redux react-redux redux-thunk axios`
+Step-3- install some common dependencies:- <br />
+            - `$npm install react-router-dom redux react-redux redux-thunk axios`<br />
             - `$npm install @chakra-ui/react @emotion/react @emotion/styled framer-motion`
 
 <!-- Git related stuffs -->
@@ -63,7 +63,7 @@ Step-3- install some common dependencies:-
             -$git pull <branch-name>    (without angle brackets)
 
 
-=> Some helpful Tools during development :
+=> Some helpful Tools during development :<br />
     - Chakra-UI - https://chakra-ui.com/<br />
     - Chakra-Templets - https://chakra-templates.dev/#<br />
     - String Builder - https://codebeautify.org/string-builder<br />
