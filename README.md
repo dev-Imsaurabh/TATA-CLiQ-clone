@@ -77,7 +77,7 @@ Step-3- install some common dependencies:- <br />
 
 # Work Flow Chart
 
-*Note:- Bhavnesh will all the backend and admin panel so you will get apis and endpoint on day-2 morning.
+*Note:- Bhavnesh will do all the backend and admin panel so you will get apis and endpoint on day-2 morning.
 
 # Endpoints
 `/users`
