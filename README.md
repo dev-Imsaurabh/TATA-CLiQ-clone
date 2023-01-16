@@ -74,3 +74,327 @@ Step-3- install some common dependencies:- <br />
 
 ************************************* All the best guys ************************************************ 
 
+
+# Work Flow Chart
+
+*Note:- Bhavnesh will all the backend and admin panel so you will get apis and endpoint on day-2 morning.
+
+# Endpoints
+`/users`
+`/products`
+
+
+# Schemas
+
+  `Product Schema`
+```
+{   
+    "id":0,
+    "images":["" , ""],
+    "name":"",
+    "short_desc":"",
+    "long_desc":"",
+    "price":0,
+    "strike_price":0,
+    "ratings":0,
+    "colors":"green",
+    "delivery_time":3,
+    "sizes":""
+
+} 
+```
+
+
+
+  `User Schema`
+  
+```
+{
+   "id":0,   
+  "name": "",
+  "email": "",
+  "password": "",
+  "account": {
+    "cart": [
+      {"id":0,
+        "images": ["", ""],
+        "name": "",
+        "short_desc": "",
+        "long_desc": "",
+        "price": 0,
+        "strike_price": 0,
+        "ratings": 0,
+        "colors":"",
+        "delivery_time": 0,
+        "sizes":"",
+        "quantity":0
+      },
+      {
+        "id":1,
+        "images": ["", ""],
+        "name": "",
+        "short_desc": "",
+        "long_desc": "",
+        "price": 0,
+        "strike_price": 0,
+        "ratings": 0,
+        "colors":"",
+        "delivery_time": 0,
+        "sizes":"",
+        "quantity":0
+      }
+    ],
+    "orders": [{
+        "id":0,
+        "images": ["", ""],
+        "name": "",
+        "short_desc": "",
+        "long_desc": "",
+        "price": 0,
+        "strike_price": 0,
+        "ratings": 0,
+        "colors":"",
+        "delivery_time": 0,
+        "sizes":"",
+        "quantity":0,
+        "address":""
+    }]
+  }
+}
+```
+- Whole  `db.json` Database look
+
+```
+ 
+ {
+  "users": [
+    {
+     "id":0,   
+    "name": "user-1",
+    "email": "",
+    "password": "",
+    "account": {
+      "cart": [
+        {"id":0,
+          "images": ["", ""],
+          "name": "",
+          "short_desc": "",
+          "long_desc": "",
+          "price": 0,
+          "strike_price": 0,
+          "ratings": 0,
+          "colors":"",
+          "delivery_time": 0,
+          "sizes":"",
+          "quantity":0
+        },
+        {
+          "id":1,
+          "images": ["", ""],
+          "name": "",
+          "short_desc": "",
+          "long_desc": "",
+          "price": 0,
+          "strike_price": 0,
+          "ratings": 0,
+          "colors":"",
+          "delivery_time": 0,
+          "sizes":"",
+          "quantity":0
+        }
+      ],
+      "orders": [{
+          "id":0,
+          "images": ["", ""],
+          "name": "",
+          "short_desc": "",
+          "long_desc": "",
+          "price": 0,
+          "strike_price": 0,
+          "ratings": 0,
+          "colors":"",
+          "delivery_time": 0,
+          "sizes":"",
+          "quantity":0,
+          "address":""
+      }]
+    }
+  },{
+    "id":1,   
+    "name": "user-2",
+    "email": "",
+    "password": "",
+    "account": {
+      "cart": [
+        {"id":0,
+          "images": ["", ""],
+          "name": "",
+          "short_desc": "",
+          "long_desc": "",
+          "price": 0,
+          "strike_price": 0,
+          "ratings": 0,
+          "colors":"",
+          "delivery_time": 0,
+          "sizes":"",
+          "quantity":0
+        },
+        {
+          "id":1,
+          "images": ["", ""],
+          "name": "",
+          "short_desc": "",
+          "long_desc": "",
+          "price": 0,
+          "strike_price": 0,
+          "ratings": 0,
+          "colors":"",
+          "delivery_time": 0,
+          "sizes":"",
+          "quantity":0
+        }
+      ],
+      "orders": [{
+          "id":0,
+          "images": ["", ""],
+          "name": "",
+          "short_desc": "",
+          "long_desc": "",
+          "price": 0,
+          "strike_price": 0,
+          "ratings": 0,
+          "colors":"",
+          "delivery_time": 0,
+          "sizes":"",
+          "quantity":0,
+          "address":""
+      }]
+    }
+  }
+  
+  ],
+
+
+  "products": [
+
+    {
+      "id": "category-name-1",
+      "items": [
+        {
+          "id": 0,
+          "images": ["", ""],
+          "name": "",
+          "short_desc": "",
+          "long_desc": "",
+          "price": 0,
+          "strike_price": 0,
+          "ratings": 0,
+          "colors": "",
+          "delivery_time": 0,
+          "sizes": ""
+        },
+        {
+          "id": 1,
+          "images": ["", ""],
+          "name": "",
+          "short_desc": "",
+          "long_desc": "",
+          "price": 0,
+          "strike_price": 0,
+          "ratings": 0,
+          "colors": "",
+          "delivery_time": 0,
+          "sizes": ""
+        }
+      ]
+    },
+
+    {
+        "id": "category-name-2",
+        "items": [
+          {
+            "id": 0,
+            "images": ["", ""],
+            "name": "",
+            "short_desc": "",
+            "long_desc": "",
+            "price": 0,
+            "strike_price": 0,
+            "ratings": 0,
+            "colors": "",
+            "delivery_time": 0,
+            "sizes": ""
+          },
+          {
+            "id": 1,
+            "images": ["", ""],
+            "name": "",
+            "short_desc": "",
+            "long_desc": "",
+            "price": 0,
+            "strike_price": 0,
+            "ratings": 0,
+            "colors": "",
+            "delivery_time": 0,
+            "sizes": ""
+          }
+        ]
+      }
+
+  ]
+
+  
+}
+
+```
+
+
+# Pages  
+  These are the pages we need in this project.
+
+   //Tinkle
+   - `HomePage`-------------------->Saurabh/ Tinkle (Day1-Day2)
+
+   - `ViewProductPage`-------------------> Tinkle / Anyone(Help if needed) (Day1-Day2)
+
+   //Farhaz
+   - `SignupPage`------------------------->Farhaz (Day1-Day2) 
+
+   - `LoginPage`--------------------------->Farhaz (Day2) //with API connected
+
+
+   //Saurabh
+   - `SearchPage`------------------------> Saurabh (Day3)
+   
+   - `ProductPage`------------------------> Saurabh (Day3-Day4)
+
+   - `OtpPage`------------------------------>Saurabh / Anyone(Help if needed)
+
+
+   //Surya
+   - `AccountPage`------------------------->Surya / Anyone(Help if needed) (Day-1) (day-2)
+   
+   - `CartPage`----------------------------> Surya (Day3-Day4) 
+
+   - `Checkout-Page`----------------------------> Surya (Day3-Day4) 
+
+   # Components
+     These are the components we need in this project.
+
+   //HomePage
+   - `Navbar`----------Tinkle (Day-1)
+   - `Footer`----------Tinkle (Day-1)
+   - `carousel` ------------Surya (Day-1)
+   - `Category-circular-Card`------Saurabh (Day-1)
+   - `Category-rectangular-Card`--------Saurabh (Day-1)
+   - `brands-Card`-----------Saurabh (Day-1)
+   - `banner-Card`-------saurabh (Day-1)
+   - `Trending-Card`---------Saurabh (Day-1)
+
+   //ProdcutPage
+   - `Filter-box`------Saurabh (Day-2)
+   - `Product-Card`---------Saurabh (Day-2)
+   - `Sort-Box`---------Saurabh (Day-2)
+   
+   //SearchBar
+   - `Search bar`------Tinkle--> Comes with Navbar (Day-1)
