@@ -9,7 +9,9 @@ import {
   mensWearByCliqData,
   newOnCliqData,
   popularpiqsData,
+  shoesData,
   trendingNowData,
+  westSideData,
   womensWearData,
 } from "../constants/staticData";
 import {
@@ -35,11 +37,20 @@ import theweddingedits from "../assets/theweddingedits.png";
 import winterstyle_banner from "../assets/winterstyle_banner.png";
 import trendingnow_banner from "../assets/trendingnow_banner.png";
 import strike_choice_banner from "../assets/strike_choice_banner.png";
+
+import baby_hop_banner from "../assets/baby_hop_banner.png";
+import beauty_banner from "../assets/beauty_banner.png";
+import cosy_corner_banner from "../assets/cosy_corner_banner.png";
+import shoes_banner from "../assets/shoes_banner.png";
+import trending_men_banner from "../assets/trending_men_banner.png";
+
 import { Heading } from "../components/Heading";
+import { Carousel } from "../components/Carousel";
+
 
 export default function Homepage() {
   return (
-    <Box className="container">
+    <Box w={FILL_PARENT} className="container">
       {/* circular category card */}
       <Grid gridTemplateColumns={{ base: R3, sm: R6, lg: R11 }}>
         {circularCategoryData.map((el) => (
@@ -183,17 +194,49 @@ export default function Homepage() {
         <Heading h1={"WHAT'S TRENDING NOW"} h2={"Style tips for the morden men"} />
         <Gap gap={60} />
 
-        
+        <CardComponent src={trending_men_banner} w={AUTO} />
 
+        <Gap gap={60} />
 
+        <Heading h1={"ALL ABOUT SHOES"} h2={"Hype-worthy add-ons to buy"} />
 
+        <Gap gap={60} />
 
+        <CardComponent src={shoes_banner} w={AUTO} />
+        <Gap gap={150} />
 
+         {/* shoes Data*/}
+         <Grid gap={8} rowGap={40} gridTemplateColumns={{ base: R1, sm: R2, lg: R4 }}>
+          {shoesData.map((el) => (
+            <CardComponent {...el} />
+          ))}
+        </Grid>
+        {/* gap component for simple gap */}
+        <Gap gap={60} />
+        <Heading h1={"THE NEWSIDE STORE"} h2={"New trends, everyday"} />
+        <Gap gap={150} />
 
-       
-
+         {/* westside store*/}
+         <Grid  gap={8} gridTemplateColumns={{ base: R1, sm: R2, lg: R4 }}>
+          {westSideData.map((el) => (
+            <CardComponent {...el} />
+          ))}
+        </Grid>
+        {/* gap component for simple gap */}
+        <Gap gap={60} />
 
       </Box>
+
+      <CardComponent src={"https://assets.tatacliq.com/medias/sys_master/images/45589087453214.gif"} w={FILL_PARENT} />
+      <Gap gap={150} />
+
+
+
+
+
+
+
     </Box>
+
   );
 }
