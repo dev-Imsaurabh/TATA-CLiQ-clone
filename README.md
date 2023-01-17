@@ -98,9 +98,9 @@ Step-3- install some common dependencies:- <br />
     "price":0,
     "strike_price":0,
     "ratings":0,
-    "colors":"green",
+    "color":"green",
     "delivery_time":3,
-    "sizes":""
+    "size":""
 
 } 
 ```
@@ -126,9 +126,9 @@ Step-3- install some common dependencies:- <br />
         "category":"",
         "strike_price": 0,
         "ratings": 0,
-        "colors":"",
+        "color":"",
         "delivery_time": 0,
-        "sizes":"",
+        "size":"",
         "quantity":0
       },
       {
@@ -141,9 +141,9 @@ Step-3- install some common dependencies:- <br />
         "category":"",
         "strike_price": 0,
         "ratings": 0,
-        "colors":"",
+        "color":"",
         "delivery_time": 0,
-        "sizes":"",
+        "size":"",
         "quantity":0
       }
     ],
@@ -157,9 +157,9 @@ Step-3- install some common dependencies:- <br />
         "category":"",
         "strike_price": 0,
         "ratings": 0,
-        "colors":"",
+        "color":"",
         "delivery_time": 0,
-        "sizes":"",
+        "size":"",
         "quantity":0,
         "address":""
     }]
@@ -188,9 +188,9 @@ Step-3- install some common dependencies:- <br />
           "category":"",
           "strike_price": 0,
           "ratings": 0,
-          "colors":"",
+          "color":"",
           "delivery_time": 0,
-          "sizes":"",
+          "size":"",
           "quantity":0
         },
         {
@@ -203,9 +203,9 @@ Step-3- install some common dependencies:- <br />
           "category":"",
           "strike_price": 0,
           "ratings": 0,
-          "colors":"",
+          "color":"",
           "delivery_time": 0,
-          "sizes":"",
+          "size":"",
           "quantity":0
         }
       ],
@@ -219,9 +219,9 @@ Step-3- install some common dependencies:- <br />
           "category":"",
           "strike_price": 0,
           "ratings": 0,
-          "colors":"",
+          "color":"",
           "delivery_time": 0,
-          "sizes":"",
+          "size":"",
           "quantity":0,
           "address":""
       }]
@@ -242,9 +242,9 @@ Step-3- install some common dependencies:- <br />
           "category":"",
           "strike_price": 0,
           "ratings": 0,
-          "colors":"",
+          "color":"",
           "delivery_time": 0,
-          "sizes":"",
+          "size":"",
           "quantity":0
         },
         {
@@ -257,9 +257,9 @@ Step-3- install some common dependencies:- <br />
           "category":"",
           "strike_price": 0,
           "ratings": 0,
-          "colors":"",
+          "color":"",
           "delivery_time": 0,
-          "sizes":"",
+          "size":"",
           "quantity":0
         }
       ],
@@ -273,9 +273,9 @@ Step-3- install some common dependencies:- <br />
           "category":"",
           "strike_price": 0,
           "ratings": 0,
-          "colors":"",
+          "color":"",
           "delivery_time": 0,
-          "sizes":"",
+          "size":"",
           "quantity":0,
           "address":""
       }]
@@ -300,9 +300,9 @@ Step-3- install some common dependencies:- <br />
           "category":"",
           "strike_price": 0,
           "ratings": 0,
-          "colors": "",
+          "color": "",
           "delivery_time": 0,
-          "sizes": ""
+          "size": ""
         },
         {
           "id": 1,
@@ -314,9 +314,9 @@ Step-3- install some common dependencies:- <br />
           "category":"",
           "strike_price": 0,
           "ratings": 0,
-          "colors": "",
+          "color": "",
           "delivery_time": 0,
-          "sizes": ""
+          "size": ""
         }
       ]
     },
@@ -334,9 +334,9 @@ Step-3- install some common dependencies:- <br />
             "category":"",
             "strike_price": 0,
             "ratings": 0,
-            "colors": "",
+            "color": "",
             "delivery_time": 0,
-            "sizes": ""
+            "size": ""
           },
           {
             "id": 1,
@@ -348,9 +348,9 @@ Step-3- install some common dependencies:- <br />
             "category":"",
             "strike_price": 0,
             "ratings": 0,
-            "colors": "",
+            "color": "",
             "delivery_time": 0,
-            "sizes": ""
+            "size": ""
           }
         ]
       }
