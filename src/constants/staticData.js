@@ -341,6 +341,9 @@ export const womensWearData=[
 
 
 
+
+
+
 export const trendingNowData=[
 
   {
@@ -490,6 +493,131 @@ export const mensWearByCliqData=[
 
   }, {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45584576708638.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  },
+]
+
+
+
+
+export const shoesData=[
+
+  {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45581153566750.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  }, {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45581153632286.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  }, {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45581153697822.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  }, {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45581153763358.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  },
+  {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45581153959966.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  }, {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45581154222110.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  }, {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45581154287646.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  }, {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45581153894430.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  },
+]
+
+
+
+
+export const westSideData=[
+
+  {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45536787726366.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  }, {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45536791330846.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  }, {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45536791396382.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  }, {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45536791461918.jpg",
     w: AUTO,
     h: "",
     bs: "",
