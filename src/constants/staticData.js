@@ -1,12 +1,12 @@
 import my_border from "../scripts/my_border";
 import my_pixel from "../scripts/my_pixel";
-import { RED, SOLID, WHEAT, WHITE } from "./typography";
+import { FILL_10PARENT, FILL_PARENT, RED, SOLID, WHEAT, WHITE ,AUTO} from "./typography";
 
 export const circularCategoryData = [
   {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45548090884126.jpg",
-    w: my_pixel(150),
-    h: my_pixel(150),
+    w: AUTO,
+    h: AUTO,
     bs: "",
     border: "",
     br: 0,
@@ -14,8 +14,8 @@ export const circularCategoryData = [
   },
   {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45519822749726.jpg",
-    w: my_pixel(150),
-    h: my_pixel(150),
+    w: AUTO,
+    h: AUTO,
     bs: "",
     border: "",
     br: 0,
@@ -23,8 +23,8 @@ export const circularCategoryData = [
   },
   {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45519822782494.jpg",
-    w: my_pixel(150),
-    h: my_pixel(150),
+    w: AUTO,
+    h: AUTO,
     bs: "",
     border: "",
     br: 0,
@@ -32,8 +32,8 @@ export const circularCategoryData = [
   },
   {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45519822815262.jpg",
-    w: my_pixel(150),
-    h: my_pixel(150),
+    w: AUTO,
+    h: AUTO,
     bs: "",
     border: "",
     br: 0,
@@ -41,8 +41,8 @@ export const circularCategoryData = [
   },
   {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45519822848030.jpg",
-    w: my_pixel(150),
-    h: my_pixel(150),
+    w: AUTO,
+    h: AUTO,
     bs: "",
     border: "",
     br: 0,
@@ -50,8 +50,8 @@ export const circularCategoryData = [
   },
   {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45536787791902.gif",
-    w: my_pixel(150),
-    h: my_pixel(150),
+    w: AUTO,
+    h: AUTO,
     bs: "",
     border: "",
     br: 0,
@@ -59,8 +59,8 @@ export const circularCategoryData = [
   },
   {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45519822880798.jpg",
-    w: my_pixel(150),
-    h: my_pixel(150),
+    w: AUTO,
+    h: AUTO,
     bs: "",
     border: "",
     br: 0,
@@ -68,8 +68,8 @@ export const circularCategoryData = [
   },
   {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45519822913566.jpg",
-    w: my_pixel(150),
-    h: my_pixel(150),
+    w: AUTO,
+    h: AUTO,
     bs: "",
     border: "",
     br: 0,
@@ -77,8 +77,8 @@ export const circularCategoryData = [
   },
   {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45519822946334.jpg",
-    w: my_pixel(150),
-    h: my_pixel(150),
+    w: AUTO,
+    h: AUTO,
     bs: "",
     border: "",
     br: 0,
@@ -86,8 +86,8 @@ export const circularCategoryData = [
   },
   {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45519822979102.jpg",
-    w: my_pixel(150),
-    h: my_pixel(150),
+    w: AUTO,
+    h: AUTO,
     bs: "",
     border: "",
     br: 0,
@@ -95,8 +95,8 @@ export const circularCategoryData = [
   },
   {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45519823011870.jpg",
-    w: my_pixel(150),
-    h: my_pixel(150),
+    w: AUTO,
+    h: AUTO,
     bs: "",
     border: "",
     br: 0,
@@ -124,3 +124,378 @@ export const bankImageData = [
     name: "",
   },
 ];
+
+
+export const dealsWheelData=[
+
+  {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45539109175326.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  }, {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45539107635230.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  }, {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45536789692446.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  }, {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45536789954590.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  },
+]
+
+
+
+export const newOnCliqData=[
+
+  {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45587495813150.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  }, {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45581157761054.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  }, {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45581157826590.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  }, {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45567395594270.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  },
+]
+
+
+export const featuredBrandData=[
+
+  {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45587477364766.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  }, {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45423735734302.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  }, {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45587477430302.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  }, {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45587477495838.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  },
+]
+
+
+export const popularpiqsData=[
+
+  {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45576213397534.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  }, {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45581156089886.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  }, {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45581156155422.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  }, {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45581156220958.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  },
+]
+
+
+
+
+export const womensWearData=[
+
+  {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45382586564638.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  }, {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45382586630174.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  }, {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45435992703006.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  }, {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45382586761246.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  },
+]
+
+
+
+
+export const trendingNowData=[
+
+  {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45584580378654.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  }, {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45584580313118.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  }, {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45584586997790.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  }, {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45584587063326.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  },
+  {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45584587325470.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  }, {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45584587391006.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  }, {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45584587456542.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  }, {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45584587522078.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  },
+]
+
+
+
+
+export const mensWearByCliqData=[
+
+  {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45584575987742.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  }, {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45584580313118.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  }, {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45584576118814.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  }, {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45584576184350.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  },
+  {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45584576446494.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  }, {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45584576512030.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  }, {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45554447581214.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  }, {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45584576708638.jpg",
+    w: AUTO,
+    h: "",
+    bs: "",
+    border: "",
+    br: 4,
+    name: "",
+
+  },
+]

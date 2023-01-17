@@ -25,6 +25,11 @@ export const FILL_25PARENT = "25%"
 export const FILL_15PARENT = "15%"
 export const FILL_5PARENT = "5%"
 
+//Font Weight
+export const BOLD = "bold"
+export const ITALIC = "italic"
+export const NORMAL = "normal"
+
 //GridTempletColumns
 export const R1="repeat(1,1fr)"
 export const R2="repeat(2,1fr)"
