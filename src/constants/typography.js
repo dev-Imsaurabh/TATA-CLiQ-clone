@@ -5,6 +5,25 @@ export const LARGE ="lg"
 export const XLARGE ="xl"
 export const X1LARGE ="2xl"
 export const X2LARGE ="3xl"
+export const FILL_PARENT = "100%"
+export const FILL_90PARENT = "90%"
+export const FILL_80PARENT = "80%"
+export const FILL_70PARENT = "70%"
+export const FILL_60PARENT = "60%"
+export const FILL_50PARENT = "50%"
+export const FILL_40PARENT = "40%"
+export const FILL_30PARENT = "30%"
+export const FILL_20PARENT = "20%"
+export const FILL_10PARENT = "10%"
+export const FILL_85PARENT = "85%"
+export const FILL_75PARENT = "75%"
+export const FILL_65PARENT = "65%"
+export const FILL_55PARENT = "55%"
+export const FILL_45PARENT = "45%"
+export const FILL_35PARENT = "35%"
+export const FILL_25PARENT = "25%"
+export const FILL_15PARENT = "15%"
+export const FILL_5PARENT = "5%"
 
 //GridTempletColumns
 export const R1="repeat(1,1fr)"
@@ -19,6 +38,24 @@ export const R9="repeat(9,1fr)"
 export const R10="repeat(10,1fr)"
 export const R11="repeat(11,1fr)"
 export const R12="repeat(12,1fr)"
+
+//Margins
+export const AUTO = "auto"
+
+//Alignments
+export const CENTER = "center"
+export const LEFT = "left"
+export const START = "start"
+export const SB = "space-between"
+export const SE = "space-evenly"
+
+//Flex direction
+export const ROW = "row"
+export const COLUMN = "column"
+
+//border
+export const SOLID= "solid"
+
 
 //Colors
 export const ALICEBLUE = "aliceblue"
