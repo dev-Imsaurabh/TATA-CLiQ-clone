@@ -1,4 +1,6 @@
+import my_border from "../scripts/my_border";
 import my_pixel from "../scripts/my_pixel";
+import { RED, SOLID, WHEAT, WHITE } from "./typography";
 
 export const circularCategoryData = [
   {
@@ -6,7 +8,8 @@ export const circularCategoryData = [
     w: my_pixel(150),
     h: my_pixel(150),
     bs: "",
-    br: "",
+    border: "",
+    br: 0,
     name: "",
   },
   {
@@ -14,7 +17,8 @@ export const circularCategoryData = [
     w: my_pixel(150),
     h: my_pixel(150),
     bs: "",
-    br: "",
+    border: "",
+    br: 0,
     name: "",
   },
   {
@@ -22,7 +26,8 @@ export const circularCategoryData = [
     w: my_pixel(150),
     h: my_pixel(150),
     bs: "",
-    br: "",
+    border: "",
+    br: 0,
     name: "",
   },
   {
@@ -30,7 +35,8 @@ export const circularCategoryData = [
     w: my_pixel(150),
     h: my_pixel(150),
     bs: "",
-    br: "",
+    border: "",
+    br: 0,
     name: "",
   },
   {
@@ -38,7 +44,8 @@ export const circularCategoryData = [
     w: my_pixel(150),
     h: my_pixel(150),
     bs: "",
-    br: "",
+    border: "",
+    br: 0,
     name: "",
   },
   {
@@ -46,7 +53,8 @@ export const circularCategoryData = [
     w: my_pixel(150),
     h: my_pixel(150),
     bs: "",
-    br: "",
+    border: "",
+    br: 0,
     name: "",
   },
   {
@@ -54,7 +62,8 @@ export const circularCategoryData = [
     w: my_pixel(150),
     h: my_pixel(150),
     bs: "",
-    br: "",
+    border: "",
+    br: 0,
     name: "",
   },
   {
@@ -62,15 +71,17 @@ export const circularCategoryData = [
     w: my_pixel(150),
     h: my_pixel(150),
     bs: "",
-    br: "",
-    name: "",
+    border: "",
+    br: 0,
+    name: "shoes",
   },
   {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45519822946334.jpg",
     w: my_pixel(150),
     h: my_pixel(150),
     bs: "",
-    br: "",
+    border: "",
+    br: 0,
     name: "",
   },
   {
@@ -78,7 +89,8 @@ export const circularCategoryData = [
     w: my_pixel(150),
     h: my_pixel(150),
     bs: "",
-    br: "",
+    border: "",
+    br: 0,
     name: "",
   },
   {
@@ -86,7 +98,29 @@ export const circularCategoryData = [
     w: my_pixel(150),
     h: my_pixel(150),
     bs: "",
-    br: "",
+    border: "",
+    br: 0,
+    name: "",
+  },
+];
+
+export const bankImageData = [
+  {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45103367290910.jpg",
+    w: my_pixel(350),
+    h: my_pixel(80),
+    bs: "",
+    border: my_border(1,SOLID,WHEAT),
+    br: 6,
+    name: "",
+  },
+  {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45433290981406.jpg",
+    w: my_pixel(350),
+    h: my_pixel(80),
+    bs: "",
+    border: my_border(1,SOLID,WHEAT),
+    br: 6,
     name: "",
   },
 ];
