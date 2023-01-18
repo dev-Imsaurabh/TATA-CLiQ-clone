@@ -1,11 +1,16 @@
 import { Image, VStack } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
+import { PRODUCTS } from "../../constants/constants";
 import my_pixel from "../../scripts/my_pixel";
 
-export default function CardComponent({ src, w, h, br, bs, name, border }) {
+export default function CardComponent({ src, w, h, br, bs, category, border }) {
+  let nav = useNavigate()
+  let products="/products"
+
   return (
     <VStack>
       <Image
-        alt={name}
+        alt={category}
         src={src}
         w={my_pixel(w)}
         h={my_pixel(h)}
@@ -15,9 +20,11 @@ export default function CardComponent({ src, w, h, br, bs, name, border }) {
         borderRadius={br ? br : ""}
         border={border ? border : ""}
         onClick={() => {
-          // do something
+          category&&nav(`${products+"/"+category}`)
         }}
       ></Image>
     </VStack>
   );
 }
+
+

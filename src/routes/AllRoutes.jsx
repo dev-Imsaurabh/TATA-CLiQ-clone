@@ -1,11 +1,13 @@
 import { Route, Routes } from "react-router-dom";
 import Homepage from "../pages/Homepage";
+import ProductsPage from "../pages/ProductsPage";
 
 export default function AllRoutes(){
 
     return <Routes>
 
-        <Route path="/" element={<Homepage></Homepage>}></Route>
+        <Route path="/" element={<Homepage />}></Route>
+        <Route path="/products/:id" element={<ProductsPage />}></Route>
 
 
 

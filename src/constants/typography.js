@@ -25,6 +25,11 @@ export const FILL_25PARENT = "25%"
 export const FILL_15PARENT = "15%"
 export const FILL_5PARENT = "5%"
 
+//Positions
+export const FIXED="fixed"
+export const RELATIVE="relative"
+export const ABSOLUTE="absolute"
+
 //Font Weight
 export const BOLD = "bold"
 export const ITALIC = "italic"
@@ -50,9 +55,16 @@ export const AUTO = "auto"
 //Alignments
 export const CENTER = "center"
 export const LEFT = "left"
+export const TOP = "top"
+export const BOTTOM = "bottom"
+export const RIGHT = "right"
 export const START = "start"
 export const SB = "space-between"
 export const SE = "space-evenly"
+
+//none
+export const NONE = "none"
+
 
 //Flex direction
 export const ROW = "row"
@@ -61,8 +73,13 @@ export const COLUMN = "column"
 //border
 export const SOLID= "solid"
 
+//text decoration
+export const LINE_THROUGH = "line-through"
+export const UNDERLINE = "underline"
+
 
 //Colors
+export const TRANSPARENT = "transparent"
 export const ALICEBLUE = "aliceblue"
 export const LIGHTSALMON = "lightsalmon"
 export const ANTIQUEWHITE = "antiquewhite"
