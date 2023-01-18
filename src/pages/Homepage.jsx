@@ -47,6 +47,7 @@ import trending_men_banner from "../assets/trending_men_banner.png";
 import { Heading } from "../components/Heading";
 import { Carousel } from "../components/Carousel";
 import { BASE_URL, PRODUCTS, USERS } from "../constants/constants";
+import { ProductCard } from "../components/ProductCard";
 
 
 export default function Homepage() {
@@ -235,8 +236,6 @@ export default function Homepage() {
 
       <CardComponent src={"https://assets.tatacliq.com/medias/sys_master/images/45589087453214.gif"} w={FILL_PARENT} />
       <Gap gap={150} />
-
-
 
 
 
