@@ -46,9 +46,15 @@ import trending_men_banner from "../assets/trending_men_banner.png";
 
 import { Heading } from "../components/Heading";
 import { Carousel } from "../components/Carousel";
+import { BASE_URL, PRODUCTS, USERS } from "../constants/constants";
 
 
 export default function Homepage() {
+
+  console.log(BASE_URL)
+  console.log(PRODUCTS)
+  console.log(USERS)
+
   return (
     <Box w={FILL_PARENT} className="container">
       {/* circular category card */}
