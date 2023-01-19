@@ -25,7 +25,10 @@ import {
 } from "../constants/constants";
 import {
   AUTO,
+  BACKGROUND,
+  BOLD,
   CENTER,
+  DEEPPINK,
   FILL_25PARENT,
   FILL_75PARENT,
   FILL_80PARENT,
@@ -38,6 +41,8 @@ import {
   R4,
   SB,
   SOLID,
+  STICKY,
+  TRANSPARENT,
 } from "../constants/typography";
 import { getCategoryData } from "../redux/products/product.actions";
 import my_border from "../scripts/my_border";
@@ -45,6 +50,8 @@ import my_pixel from "../scripts/my_pixel";
 import "../styles/style.css";
 import { BsFilter } from "react-icons/bs";
 import discount from "../scripts/discount";
+import { Filter } from "../components/Filter";
+import { FilterData } from "../constants/staticData";
 
 export default function ProductsPage() {
   const [searchParams,setSearchParams]=useSearchParams()
@@ -55,6 +62,7 @@ export default function ProductsPage() {
 //   console.log(error);
 
   let { id } = useParams();
+  const [filter,setFilters]=useState({})
 
   useEffect(() => {
     dispatch(getCategoryData(id));
@@ -62,9 +70,9 @@ export default function ProductsPage() {
 
   useEffect(()=>{
 
-    if(value==undefined){
-        setSearchParams(`?sort=${POPULARITY}`)
-    }
+    // if(value==undefined){
+    //     setSearchParams(`?sort=${POPULARITY}`)
+    // }
     
     if(value==POPULARITY){
         setProductData(data)
@@ -74,7 +82,7 @@ export default function ProductsPage() {
     }else if(value==HTL){
         let htlData= data?.sort((a,b)=>b.price-a.price)
         setProductData(htlData)
-    }else if(value==DISCOUNT){
+    }else if(value==DISCOUNT.toLowerCase()){
         let discountData= data?.sort((a,b)=>discount(b.strike_price,b.price)-discount(a.strike_price,a.price))
         setProductData(discountData)
 
@@ -82,13 +90,16 @@ export default function ProductsPage() {
        setProductData(data)
     }
 
+
+
   },[data])
 
+  console.log(filter)
 
   if (loading) return <Loader gif={LOADER_URL} />;
   if (error) return <Loader gif={ERROR_URL} />;
   return (
-    <Box className="container">
+    <Box bg={BACKGROUND} className="container">
       <Heading textAlign={CENTER}>{id.toUpperCase()}</Heading>
       <Text fontSize={my_pixel(16)} color={GRAY}>
         {productData&&productData.length} Products
@@ -102,15 +113,16 @@ export default function ProductsPage() {
           <HStack  flex={1}>
             <Text color={GRAY}>Sort:</Text>
             <select
+
             value={value}
             onChange={(e)=>setSearchParams(`?sort=${e.target.value}`)}
               border={0}
-              style={{ WebkitAppearance: NONE, outline: NONE }}
+              style={{ WebkitAppearance: NONE, outline: NONE ,backgroundColor:TRANSPARENT}}
             >
-              <option value={POPULARITY}>Popularity</option>
+              <option  value={POPULARITY}>Popularity</option>
               <option value={LTH}>Price Low to High</option>
               <option value={HTL}>Price High to Low</option>
-              <option value={DISCOUNT}>Discount</option>
+              <option value={DISCOUNT.toLowerCase()}>Discount</option>
 
             </select>
           </HStack>
@@ -122,8 +134,12 @@ export default function ProductsPage() {
 
       <Flex gap={4} w={FILL_80PARENT} m={AUTO}>
         <Box w={FILL_25PARENT}>
-          <Card w={FILL_PARENT}>
-            <CardBody width={FILL_PARENT}></CardBody>
+          <Card borderRadius={10} position={STICKY} top={5} w={FILL_PARENT}>
+          <Flex padding={4} bg={"gray.100"} justify={SB} alignItems={CENTER}><Text fontWeight={BOLD}>Filters</Text ><Text color={DEEPPINK} fontWeight={BOLD}>Clear All</Text></Flex>
+            <CardBody width={FILL_PARENT}>
+                <Filter setFilters={setFilters} data={FilterData} />
+
+            </CardBody>
           </Card>
         </Box>
 

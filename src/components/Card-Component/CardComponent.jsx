@@ -1,6 +1,7 @@
 import { Image, VStack } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { PRODUCTS } from "../../constants/constants";
+import { POINTER } from "../../constants/typography";
 import my_pixel from "../../scripts/my_pixel";
 
 export default function CardComponent({ src, w, h, br, bs, category, border }) {
@@ -8,7 +9,7 @@ export default function CardComponent({ src, w, h, br, bs, category, border }) {
   let products="/products"
 
   return (
-    <VStack>
+    <VStack cursor={POINTER}>
       <Image
         alt={category}
         src={src}
