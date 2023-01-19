@@ -10,10 +10,13 @@ import {
     VStack,
     Wrap,
   } from '@chakra-ui/react'
+import React from 'react'
   import {AiOutlinePlus} from "react-icons/ai"
 import { CHECK_BOX, LEFT } from '../../constants/typography'
+import { CheckFilter } from '../CheckFilter'
+ function Filter({data,setFilters}){
 
-  export default function Filter({data,setFilters}){
+
     
     let allFilters = data?.map(({name,options})=>{
 
@@ -27,9 +30,8 @@ import { CHECK_BOX, LEFT } from '../../constants/typography'
         </AccordionButton>
       </h2>
       <AccordionPanel pb={4}> 
-      <Wrap >
-      {options.map((el=><Checkbox value={el}>{el}</Checkbox>))}
-
+      <Wrap>
+      {options.map((el=><CheckFilter name={el} setFilters={setFilters} />))}
       </Wrap>
        
       </AccordionPanel>
@@ -46,3 +48,8 @@ import { CHECK_BOX, LEFT } from '../../constants/typography'
   </Accordion>
     
   }
+
+  export default React.memo(Filter)
+
+  
+  

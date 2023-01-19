@@ -39,6 +39,7 @@ import {
 import my_pixel from "../../scripts/my_pixel";
 import { AiFillStar, AiOutlineHeart } from "react-icons/ai";
 import discount from "../../scripts/discount";
+import { useNavigate } from "react-router-dom";
 
 export default function ProductCard({
   id,
@@ -54,8 +55,12 @@ export default function ProductCard({
   delivery_time,
   size,
 }) {
+
+  let nav = useNavigate()
   return (
-    <Card cursor={POINTER} w={AUTO}>
+    <Card maxHeight={500}  cursor={POINTER} w={AUTO} onClick={()=>{
+      nav(`/${category}/${id}`)
+    }}>
       <CardBody padding={0} margin={0}>
         <Box position={RELATIVE}>
           <Flex

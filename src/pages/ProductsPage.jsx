@@ -35,6 +35,7 @@ import {
   FILL_PARENT,
   GRAY,
   NONE,
+  POINTER,
   R1,
   R2,
   R3,
@@ -52,49 +53,97 @@ import { BsFilter } from "react-icons/bs";
 import discount from "../scripts/discount";
 import { Filter } from "../components/Filter";
 import { FilterData } from "../constants/staticData";
+import axios from "axios";
 
 export default function ProductsPage() {
-  const [searchParams,setSearchParams]=useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams();
   let { loading, error, data } = useSelector((state) => state.productsManager);
-  const [productData , setProductData] = useState()
-  let value = searchParams.get("sort")
+  const [productData, setProductData] = useState();
+  const [clear,setClear] =useState(false)
+  let value = searchParams.get("sort");
+  let filterValues = searchParams.get("filter")?.toString().split("+") || [];
+
   let dispatch = useDispatch();
-//   console.log(error);
+  //   console.log(error);
 
   let { id } = useParams();
-  const [filter,setFilters]=useState({})
+  const [filter, setFilters] = useState([]);
 
   useEffect(() => {
     dispatch(getCategoryData(id));
-  }, [searchParams]);
+  }, [clear]);
 
-  useEffect(()=>{
-
+  useEffect(() => {
     // if(value==undefined){
     //     setSearchParams(`?sort=${POPULARITY}`)
     // }
-    
-    if(value==POPULARITY){
-        setProductData(data)
-    }else if(value==LTH){
-        let lthData =data?.sort((a,b)=>a.price-b.price)
-        setProductData(lthData)
-    }else if(value==HTL){
-        let htlData= data?.sort((a,b)=>b.price-a.price)
-        setProductData(htlData)
-    }else if(value==DISCOUNT.toLowerCase()){
-        let discountData= data?.sort((a,b)=>discount(b.strike_price,b.price)-discount(a.strike_price,a.price))
-        setProductData(discountData)
 
-    }else{
-       setProductData(data)
+    if (value == POPULARITY) {
+      setProductData([...data]);
+    } else if (value == LTH) {
+      let lthData = data?.sort((a, b) => a.price - b.price);
+      setProductData([...lthData]);
+    } else if (value == HTL) {
+      let htlData = data?.sort((a, b) => b.price - a.price);
+      setProductData([...htlData]);
+    } else if (value == DISCOUNT.toLowerCase()) {
+      let discountData = data?.sort(
+        (a, b) =>
+          discount(b.strike_price, b.price) - discount(a.strike_price, a.price)
+      );
+      setProductData([...discountData]);
+    } else {
+      setProductData([...data]);
     }
+  }, [data, searchParams, filter]);
+
+  useEffect(() => {
+    setSearchParams({
+      sort: value || [],
+      filter: filter.length > 0 ? filter.join("+") : filterValues,
+    });
+  }, [filter]);
+
+  useEffect(() => {
 
 
+    let filteredData = [];
+    filterValues?.forEach((el) => {
+      // console.log(el)
+      productData?.forEach((option) => {
+        if (
+          option.color == el ||
+          Math.floor(option.ratings) == el ||
+          option.sizes.includes(el)
+        ) {
+          // console.log(option);
+          if(filteredData.length>0){
+            filteredData.forEach((el)=>{
+              if(JSON.stringify(el)!==JSON.stringify(option)){
+                filteredData = [...filteredData, option];
+              }
+            })
 
-  },[data])
+          }else{
+            filteredData = [...filteredData, option];
 
-  console.log(filter)
+          }
+        
+       
+        }
+      });
+    });
+
+    if (filteredData.length > 0) {
+      let unique = filteredData.filter((v,i,a)=>a.findIndex(v2=>(v2.id===v.id))===i)
+
+      setProductData([...unique]);
+    }else{
+      setProductData([])
+    }
+  }, [searchParams]);
+
+  // console.log(filter)
 
   if (loading) return <Loader gif={LOADER_URL} />;
   if (error) return <Loader gif={ERROR_URL} />;
@@ -102,28 +151,41 @@ export default function ProductsPage() {
     <Box bg={BACKGROUND} className="container">
       <Heading textAlign={CENTER}>{id.toUpperCase()}</Heading>
       <Text fontSize={my_pixel(16)} color={GRAY}>
-        {productData&&productData.length} Products
+        {productData && productData.length} Products
       </Text>
       <Gap gap={70} />
 
       <Flex m={AUTO} w={FILL_80PARENT}>
         <HStack flex={2.5}></HStack>
 
-        <Flex borderRadius={4} gap={8} alignItems={CENTER} padding={2} border={my_border(1, SOLID, GRAY)}>
-          <HStack  flex={1}>
+        <Flex
+          borderRadius={4}
+          gap={8}
+          alignItems={CENTER}
+          padding={2}
+          border={my_border(1, SOLID, GRAY)}
+        >
+          <HStack flex={1}>
             <Text color={GRAY}>Sort:</Text>
             <select
-
-            value={value}
-            onChange={(e)=>setSearchParams(`?sort=${e.target.value}`)}
+              value={value}
+              onChange={(e) => {
+                setSearchParams({
+                  sort: e.target.value,
+                  filter: filter.length > 0 ? filter.join("+") : [],
+                });
+              }}
               border={0}
-              style={{ WebkitAppearance: NONE, outline: NONE ,backgroundColor:TRANSPARENT}}
+              style={{
+                WebkitAppearance: NONE,
+                outline: NONE,
+                backgroundColor: TRANSPARENT,
+              }}
             >
-              <option  value={POPULARITY}>Popularity</option>
+              <option value={POPULARITY}>Popularity</option>
               <option value={LTH}>Price Low to High</option>
               <option value={HTL}>Price High to Low</option>
               <option value={DISCOUNT.toLowerCase()}>Discount</option>
-
             </select>
           </HStack>
           <BsFilter color={GRAY} />
@@ -135,10 +197,16 @@ export default function ProductsPage() {
       <Flex gap={4} w={FILL_80PARENT} m={AUTO}>
         <Box w={FILL_25PARENT}>
           <Card borderRadius={10} position={STICKY} top={5} w={FILL_PARENT}>
-          <Flex padding={4} bg={"gray.100"} justify={SB} alignItems={CENTER}><Text fontWeight={BOLD}>Filters</Text ><Text color={DEEPPINK} fontWeight={BOLD}>Clear All</Text></Flex>
+            <Flex padding={4} bg={"gray.100"} justify={SB} alignItems={CENTER}>
+              <Text fontWeight={BOLD}>Filters</Text>
+              <Text cursor={POINTER} onClick={()=>{
+                setClear((prev)=>!prev)
+              }} color={DEEPPINK} fontWeight={BOLD}>
+                Clear All
+              </Text>
+            </Flex>
             <CardBody width={FILL_PARENT}>
-                <Filter setFilters={setFilters} data={FilterData} />
-
+              <Filter setFilters={setFilters} data={FilterData} />
             </CardBody>
           </Card>
         </Box>
