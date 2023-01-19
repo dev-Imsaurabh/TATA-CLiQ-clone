@@ -48,6 +48,7 @@ import { Heading } from "../components/Heading";
 import { Carousel } from "../components/Carousel";
 import { BASE_URL, PRODUCTS, USERS } from "../constants/constants";
 import { ProductCard } from "../components/ProductCard";
+import { useEffect } from "react";
 
 
 export default function Homepage() {
@@ -55,6 +56,9 @@ export default function Homepage() {
   console.log(BASE_URL)
   console.log(PRODUCTS)
   console.log(USERS)
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <Box w={FILL_PARENT} className="container">

@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { Loader } from "../components/Loader";
 import ProductImageSlider from "../components/ProductImageSlider/ProductImageSlider";
 import { ERROR_URL, LOADER_URL } from "../constants/constants";
+import "../styles/style.css"
 import {
     ABSOLUTE,
   AUTO,
@@ -34,6 +35,9 @@ export default function ViewProductPage() {
     setProductData(data)
 
   },[data])
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     let product = productData?.filter((el) => el.id == pid);
