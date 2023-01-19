@@ -100,7 +100,7 @@ export default function ProductsPage() {
   useEffect(() => {
     setSearchParams({
       sort: value || [],
-      filter: filter.length > 0 ? filter.join("+") : filterValues,
+      filter: filter.length > 0 ? filter.join("+") : [],
     });
   }, [filter]);
 
@@ -138,8 +138,6 @@ export default function ProductsPage() {
       let unique = filteredData.filter((v,i,a)=>a.findIndex(v2=>(v2.id===v.id))===i)
 
       setProductData([...unique]);
-    }else{
-      setProductData([])
     }
   }, [searchParams]);
 
