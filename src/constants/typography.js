@@ -29,6 +29,7 @@ export const FILL_5PARENT = "5%"
 export const FIXED="fixed"
 export const RELATIVE="relative"
 export const ABSOLUTE="absolute"
+export const STICKY="sticky"
 
 //Font Weight
 export const BOLD = "bold"
@@ -51,6 +52,9 @@ export const R12="repeat(12,1fr)"
 
 //Margins
 export const AUTO = "auto"
+
+//curson
+export const POINTER ="pointer"
 
 //Alignments
 export const CENTER = "center"
@@ -77,9 +81,13 @@ export const SOLID= "solid"
 export const LINE_THROUGH = "line-through"
 export const UNDERLINE = "underline"
 
+//types
+export const CHECK_BOX = "checkbox"
+
 
 //Colors
 export const TRANSPARENT = "transparent"
+export const BACKGROUND = "#ececec"
 export const ALICEBLUE = "aliceblue"
 export const LIGHTSALMON = "lightsalmon"
 export const ANTIQUEWHITE = "antiquewhite"

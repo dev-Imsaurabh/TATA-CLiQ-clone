@@ -28,6 +28,7 @@ import {
   LINE_THROUGH,
   MEDIUM,
   PINK,
+  POINTER,
   RED,
   RELATIVE,
   SB,
@@ -54,7 +55,7 @@ export default function ProductCard({
   size,
 }) {
   return (
-    <Card w={AUTO}>
+    <Card cursor={POINTER} w={AUTO}>
       <CardBody padding={0} margin={0}>
         <Box position={RELATIVE}>
           <Flex
@@ -72,11 +73,11 @@ export default function ProductCard({
           >
             {discount(strike_price, price) + PERCENT_SYMBOL}
           </Flex>
-          <Image src={images[0]} w={FILL_PARENT}></Image>
+          <Image _hover={{transform:"scale(1.02)"}} transition={"transform 1s"} src={images[0]} w={FILL_PARENT}></Image>
         </Box>
 
         <Box>
-          <Flex justify={SB} padding={2}>
+          <Flex alignItems={CENTER} justify={SB} padding={2}>
             <Text fontWeight={BOLD} fontSize={MEDIUM}>
               {name}
             </Text>
@@ -87,7 +88,7 @@ export default function ProductCard({
               leftIcon={<AiOutlineHeart />}
             ></Button>
           </Flex>
-          <Flex direction={COLUMN} padding={2} alignItems={START}>
+          <Flex gap={2} direction={COLUMN} padding={2} alignItems={START}>
             <Text textAlign={LEFT} fontSize={MEDIUM}>
               {short_desc}
             </Text>

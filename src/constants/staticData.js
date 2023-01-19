@@ -1,17 +1,9 @@
 import my_border from "../scripts/my_border";
 import my_pixel from "../scripts/my_pixel";
+import { ALL_DISCOUNT, AVAILABILITY, BRAND, COLLAR, COLORS_TYPES, COLOUR, DISCOUNT, FABRIC_FAMILY, FEATURES, FEATURES_TYPES, FIT, OCCASION, PATTERN, PRICE, RATINGS, RATINGS_TYPES, SIZE, SIZES_TYPES, TYPE } from "./constants";
 import { FILL_10PARENT, FILL_PARENT, RED, SOLID, WHEAT, WHITE ,AUTO} from "./typography";
 
 export const circularCategoryData = [
-  {
-    src: "https://assets.tatacliq.com/medias/sys_master/images/45548090884126.jpg",
-    w: AUTO,
-    h: AUTO,
-    bs: "",
-    border: "",
-    br: 0,
-    endpoint: "",
-  },
   {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45519822749726.jpg",
     w: AUTO,
@@ -31,15 +23,6 @@ export const circularCategoryData = [
     category:"shoes",
   },
   {
-    src: "https://assets.tatacliq.com/medias/sys_master/images/45519822815262.jpg",
-    w: AUTO,
-    h: AUTO,
-    bs: "",
-    border: "",
-    br: 0,
-    endpoint: "",
-  },
-  {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45519822848030.jpg",
     w: AUTO,
     h: AUTO,
@@ -49,22 +32,40 @@ export const circularCategoryData = [
     category:"womenswear",
   },
   {
-    src: "https://assets.tatacliq.com/medias/sys_master/images/45536787791902.gif",
-    w: AUTO,
-    h: AUTO,
-    bs: "",
-    border: "",
-    br: 0,
-    endpoint: "",
-  },
-  {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45519822880798.jpg",
     w: AUTO,
     h: AUTO,
     bs: "",
     border: "",
     br: 0,
-    endpoint: "",
+    category: "gadgets",
+  },
+  {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45519822815262.jpg",
+    w: AUTO,
+    h: AUTO,
+    bs: "",
+    border: "",
+    br: 0,
+    category: "",
+  },
+  {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45536787791902.gif",
+    w: AUTO,
+    h: AUTO,
+    bs: "",
+    border: "",
+    br: 0,
+    category: "",
+  },
+  {
+    src: "https://assets.tatacliq.com/medias/sys_master/images/45548090884126.jpg",
+    w: AUTO,
+    h: AUTO,
+    bs: "",
+    border: "",
+    br: 0,
+    category: "",
   },
   {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45519822913566.jpg",
@@ -73,7 +74,7 @@ export const circularCategoryData = [
     bs: "",
     border: "",
     br: 0,
-    endpoint: "shoes",
+    category: "shoes",
   },
   {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45519822946334.jpg",
@@ -82,7 +83,7 @@ export const circularCategoryData = [
     bs: "",
     border: "",
     br: 0,
-    endpoint: "",
+    category: "",
   },
   {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45519822979102.jpg",
@@ -91,7 +92,7 @@ export const circularCategoryData = [
     bs: "",
     border: "",
     br: 0,
-    endpoint: "",
+    category: "",
   },
   {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45519823011870.jpg",
@@ -100,7 +101,7 @@ export const circularCategoryData = [
     bs: "",
     border: "",
     br: 0,
-    endpoint: "",
+    category: "",
   },
 ];
 
@@ -112,7 +113,7 @@ export const bankImageData = [
     bs: "",
     border: my_border(1,SOLID,WHEAT),
     br: 6,
-    endpoint: "",
+    category: "",
   },
   {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45433290981406.jpg",
@@ -121,7 +122,7 @@ export const bankImageData = [
     bs: "",
     border: my_border(1,SOLID,WHEAT),
     br: 6,
-    endpoint: "",
+    category: "",
   },
 ];
 
@@ -135,7 +136,7 @@ export const dealsWheelData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "shoes",
 
   }, {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45539107635230.jpg",
@@ -144,7 +145,7 @@ export const dealsWheelData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "womenswear",
 
   }, {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45536789692446.jpg",
@@ -153,7 +154,7 @@ export const dealsWheelData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "menswear",
 
   }, {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45536789954590.jpg",
@@ -162,7 +163,7 @@ export const dealsWheelData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "",
 
   },
 ]
@@ -178,7 +179,7 @@ export const newOnCliqData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "",
 
   }, {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45581157761054.jpg",
@@ -187,7 +188,7 @@ export const newOnCliqData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "",
 
   }, {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45581157826590.jpg",
@@ -196,7 +197,7 @@ export const newOnCliqData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "",
 
   }, {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45567395594270.jpg",
@@ -205,7 +206,7 @@ export const newOnCliqData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "",
 
   },
 ]
@@ -220,7 +221,7 @@ export const featuredBrandData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "",
 
   }, {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45423735734302.jpg",
@@ -229,7 +230,7 @@ export const featuredBrandData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "",
 
   }, {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45587477430302.jpg",
@@ -238,7 +239,7 @@ export const featuredBrandData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "",
 
   }, {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45587477495838.jpg",
@@ -247,7 +248,7 @@ export const featuredBrandData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "",
 
   },
 ]
@@ -262,7 +263,7 @@ export const popularpiqsData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "",
 
   }, {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45581156089886.jpg",
@@ -271,7 +272,7 @@ export const popularpiqsData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "",
 
   }, {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45581156155422.jpg",
@@ -280,7 +281,7 @@ export const popularpiqsData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "",
 
   }, {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45581156220958.jpg",
@@ -289,7 +290,7 @@ export const popularpiqsData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "",
 
   },
 ]
@@ -306,7 +307,7 @@ export const womensWearData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "",
 
   }, {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45382586630174.jpg",
@@ -315,7 +316,7 @@ export const womensWearData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "",
 
   }, {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45435992703006.jpg",
@@ -324,7 +325,7 @@ export const womensWearData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "",
 
   }, {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45382586761246.jpg",
@@ -333,7 +334,7 @@ export const womensWearData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "",
 
   },
 ]
@@ -353,7 +354,7 @@ export const trendingNowData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "",
 
   }, {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45584580313118.jpg",
@@ -362,7 +363,7 @@ export const trendingNowData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "",
 
   }, {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45584586997790.jpg",
@@ -371,7 +372,7 @@ export const trendingNowData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "",
 
   }, {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45584587063326.jpg",
@@ -380,7 +381,7 @@ export const trendingNowData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "",
 
   },
   {
@@ -390,7 +391,7 @@ export const trendingNowData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "",
 
   }, {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45584587391006.jpg",
@@ -399,7 +400,7 @@ export const trendingNowData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "",
 
   }, {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45584587456542.jpg",
@@ -408,7 +409,7 @@ export const trendingNowData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "",
 
   }, {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45584587522078.jpg",
@@ -417,7 +418,7 @@ export const trendingNowData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "",
 
   },
 ]
@@ -434,7 +435,7 @@ export const mensWearByCliqData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "",
 
   }, {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45584580313118.jpg",
@@ -443,7 +444,7 @@ export const mensWearByCliqData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "",
 
   }, {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45584576118814.jpg",
@@ -452,7 +453,7 @@ export const mensWearByCliqData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "",
 
   }, {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45584576184350.jpg",
@@ -461,7 +462,7 @@ export const mensWearByCliqData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "",
 
   },
   {
@@ -471,7 +472,7 @@ export const mensWearByCliqData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "",
 
   }, {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45584576512030.jpg",
@@ -480,7 +481,7 @@ export const mensWearByCliqData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "",
 
   }, {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45554447581214.jpg",
@@ -489,7 +490,7 @@ export const mensWearByCliqData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "",
 
   }, {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45584576708638.jpg",
@@ -498,7 +499,7 @@ export const mensWearByCliqData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "",
 
   },
 ]
@@ -515,7 +516,7 @@ export const shoesData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "",
 
   }, {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45581153632286.jpg",
@@ -524,7 +525,7 @@ export const shoesData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "",
 
   }, {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45581153697822.jpg",
@@ -533,7 +534,7 @@ export const shoesData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "",
 
   }, {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45581153763358.jpg",
@@ -542,7 +543,7 @@ export const shoesData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "",
 
   },
   {
@@ -552,7 +553,7 @@ export const shoesData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "",
 
   }, {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45581154222110.jpg",
@@ -561,7 +562,7 @@ export const shoesData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "",
 
   }, {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45581154287646.jpg",
@@ -570,7 +571,7 @@ export const shoesData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "",
 
   }, {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45581153894430.jpg",
@@ -579,7 +580,7 @@ export const shoesData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "",
 
   },
 ]
@@ -596,7 +597,7 @@ export const westSideData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "",
 
   }, {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45536791330846.jpg",
@@ -605,7 +606,7 @@ export const westSideData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "",
 
   }, {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45536791396382.jpg",
@@ -614,7 +615,7 @@ export const westSideData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "",
 
   }, {
     src: "https://assets.tatacliq.com/medias/sys_master/images/45536791461918.jpg",
@@ -623,7 +624,73 @@ export const westSideData=[
     bs: "",
     border: "",
     br: 4,
-    endpoint: "",
+    category: "",
 
   },
 ]
+
+export const FilterData=[
+  {
+      name:SIZE,
+      options:SIZES_TYPES
+  },
+  {
+      name:COLOUR,
+      options:COLORS_TYPES
+  },
+  {
+    name:RATINGS,
+    options:RATINGS_TYPES
+  },
+  {
+    name:FEATURES,
+    options:FEATURES_TYPES
+  },
+  {
+    name:BRAND,
+    options:[]
+},
+{
+    name:PRICE,
+    options:[]
+},
+{
+    name:DISCOUNT,
+    options:[]
+},
+{
+    name:TYPE,
+    options:[]
+},
+{
+    name:FABRIC_FAMILY,
+    options:[]
+},
+{
+    name:PATTERN,
+    options:[]
+},
+{
+    name:FIT,
+    options:[]
+},
+{
+    name:COLLAR,
+    options:[]
+},
+{
+    name:OCCASION,
+    options:[]
+},
+{
+    name:ALL_DISCOUNT,
+    options:[]
+},
+{
+    name:AVAILABILITY,
+    options:[]
+},
+
+]
+
+
