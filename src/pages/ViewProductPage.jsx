@@ -102,6 +102,9 @@ export default function ViewProductPage() {
   let [option, setOption] = useState(0);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  useEffect(() => {
     dispatch(getCategoryData(id));
   }, []);
 

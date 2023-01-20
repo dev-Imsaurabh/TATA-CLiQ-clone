@@ -18,7 +18,6 @@ function App() {
   return (
     <Box className="App">
       <Navbar />
-      <Carousels/>
       <AllRoutes />
       <Footer/>
     </Box>
