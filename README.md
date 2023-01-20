@@ -417,3 +417,11 @@ Step-3- install some common dependencies:- <br />
    
    //SearchBar
    - `Search bar`------Tinkle--> Comes with Navbar (Day-1)
+
+# Carousel Image addresses
+   - `https://assets.tatacliq.com/medias/sys_master/images/45625097289758.jpg`
+   - `https://assets.tatacliq.com/medias/sys_master/images/45625097420830.jpg`
+   - `https://assets.tatacliq.com/medias/sys_master/images/45625097486366.jpg`
+   - `https://assets.tatacliq.com/medias/sys_master/images/45625097551902.jpg`
+   - `https://assets.tatacliq.com/medias/sys_master/images/45625097355294.jpg`
+

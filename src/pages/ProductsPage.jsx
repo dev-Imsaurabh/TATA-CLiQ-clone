@@ -68,6 +68,10 @@ export default function ProductsPage() {
 
   let { id } = useParams();
   const [filter, setFilters] = useState([]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
 
   useEffect(() => {
     dispatch(getCategoryData(id));

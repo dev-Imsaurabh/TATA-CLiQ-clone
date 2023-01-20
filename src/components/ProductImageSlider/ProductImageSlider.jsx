@@ -25,7 +25,7 @@ export default function ProductImageSlider({ images }) {
   const [current, setCurrent] = useState(0);
 
   return (
-    <Box w={FILL_PARENT} mt={120}>
+    <Box w={FILL_PARENT}>
       <Flex alignItems={CENTER} w={FILL_PARENT}>
         <IconButton
         
