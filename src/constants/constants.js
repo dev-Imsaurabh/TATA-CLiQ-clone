@@ -5,7 +5,6 @@ export const BASE_URL = process.env.REACT_APP_BASE_URL;
 export const PRODUCTS = BASE_URL + process.env.REACT_APP_PRODUCTS;
 export const USERS = BASE_URL + process.env.REACT_APP_USERS;
 
-
 export const RUPEES_SYMBOL = "₹";
 export const PERCENT_SYMBOL = "% off";
 export const LOADER_URL =
@@ -34,7 +33,16 @@ export const ALL_DISCOUNT = "All Discount";
 export const AVAILABILITY = "Availability";
 
 //Sizes
-export const SIZES_TYPES = ["UK/IND-6", "UK/IND-7", "UK/IND-8", "UK/IND-9"];
+export const SIZES_TYPES = [
+  "UK/IND-6",
+  "UK/IND-7",
+  "UK/IND-8",
+  "UK/IND-9",
+  "S",
+  "M",
+  "XL",
+  "L",
+];
 export const COLORS_TYPES = ["grey", "black", "blue", "white"];
 export const RATINGS_TYPES = [1, 2, 3, 4, 5];
 export const FEATURES_TYPES = ["wireless", "wired", "bluetooth", "HD Sound"];
