@@ -6,6 +6,7 @@ import {
 } from "redux";
 import thunk from "redux-thunk";
 import { authReducer } from "./auth/auth.reducer";
+import { cartReducer } from "./cart/cart.reducer";
 
 import productReducer from "./products/product.reducer";
 
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   //pass all the reducer as key and child
   productsManager: productReducer,
   authManager: authReducer,
+  cartManager:cartReducer
 });
 export const store = legacy_createStore(rootReducer, applyMiddleware(thunk));
 
