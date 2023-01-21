@@ -5,7 +5,8 @@ import {
   applyMiddleware,
 } from "redux";
 import thunk from "redux-thunk";
-import { authReducer } from "../backup/auth/auth.reducer";
+import { authReducer } from "./auth/auth.reducer";
+
 import productReducer from "./products/product.reducer";
 
 //@TODO combine all reducer functions here
@@ -15,3 +16,4 @@ const rootReducer = combineReducers({
   authManager: authReducer,
 });
 export const store = legacy_createStore(rootReducer, applyMiddleware(thunk));
+
