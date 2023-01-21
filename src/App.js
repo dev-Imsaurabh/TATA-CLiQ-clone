@@ -12,15 +12,14 @@ function App() {
   console.log(process.env.REACT_APP_ENV_CHECK); //this will log simple text in console ".env is working fine"
 
   //this is example of how we use constants to store strings and repeating data (you can more explore in constants>constants.js folder)
-  console.log(THIS_IS_SIMPLE_CONSTANTS)  //this will log simple text in console "this is simple constant"
-
+  console.log(THIS_IS_SIMPLE_CONSTANTS); //this will log simple text in console "this is simple constant"
 
   return (
     <Box className="App">
       <Navbar />
       {/* <Carousel/> */}
       <AllRoutes />
-      <Footer/>
+      <Footer />
     </Box>
   );
 }
