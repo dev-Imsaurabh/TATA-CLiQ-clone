@@ -49,7 +49,7 @@ import { Carousel } from "../components/Carousel";
 import { BASE_URL, PRODUCTS, USERS } from "../constants/constants";
 import { ProductCard } from "../components/ProductCard";
 import { useEffect } from "react";
-import { SignupModal } from "../backup/SignupModal";
+
 import Carousels from "../components/Carousel/Carousel";
 
 export default function Homepage() {
