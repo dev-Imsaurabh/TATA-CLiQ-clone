@@ -37,6 +37,8 @@ import { CartItem } from "../components/CartItem";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { GetCart } from "../redux/cart/cart.actions";
+import { Loader } from "../components/Loader";
+import { ERROR_URL, LOADER_URL } from "../constants/constants";
 
 export default function CartPage() {
 
@@ -53,17 +55,19 @@ export default function CartPage() {
 
     },[])
 
-
-    console.log(data)
-
-
-
-
+    
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [data]);
 
 
+
+   
+if(loading) return <Loader gif={LOADER_URL} />
+if(error) return <Loader gif={ERROR_URL} />
 
   return (
-    <Box className="container">
+    data.length>0?<Box className="container">
       <Flex w={FILL_PARENT} justify={SE} alignItems={CENTER}>
         <Heading size={LARGE}>My Bag</Heading>
         <Box w={"50%"}></Box>
@@ -84,12 +88,13 @@ export default function CartPage() {
             <Gap gap={30} />
 
 
-            <Box w={FILL_PARENT}>
+            <VStack gap={4} w={FILL_PARENT}>
 
                 {/* //inflate all cart items here */}
-                <CartItem />
+                {data?.map((el)=><CartItem {...el} />)}
+                
 
-            </Box>
+            </VStack>
 
             <Gap gap={30} />
             <Center>
@@ -178,6 +183,6 @@ export default function CartPage() {
           </Box>
         </Flex>
       </Box>
-    </Box>
-  );
+    </Box>:""
+  )
 }

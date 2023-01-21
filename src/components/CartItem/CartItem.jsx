@@ -8,28 +8,31 @@ import { AiFillStar, AiOutlineHeart } from "react-icons/ai";
 
 import { Gap } from "../Gap";
 import { Button } from "@chakra-ui/button";
+import future_date from "../../scripts/future_date";
+import { RUPEES_SYMBOL } from "../../constants/constants";
+import { color } from "@chakra-ui/styled-system";
 
-export default function CartItem() {
+export default function CartItem({images,id,name,long_desc,color,short_desc,price,strike_price,size,sizes,quantity,delivery_time}) {
   return (
     <Card w={FILL_PARENT}>
       <CardBody>
         <Flex gap={4}>
           <Image
             borderRadius={my_pixel(4)}
-            src="https://img.tatacliq.com/images/i8/437Wx649H/MP000000012982060_437Wx649H_202204291446101.jpeg"
+            src={images[0]}
             w={"15%"}
           ></Image>
 
           <Box w={"85%"}>
             <Flex justify={SB} gap={4}>
-              <Text color={GRAY}>
-                Wardrobe by Westside Light Beige Christy Top
+              <Text maxW={"50%"} isTruncated={true} color={GRAY}>
+                {short_desc}
               </Text>
               <HStack>
                 <TbTruckDelivery color={GRAY} size={24} />
                 <Text color={GRAY}>
                   Delivery by <span style={{ color: GRAY}}>
-                    {"27 | "}
+                    {`${future_date(delivery_time)} | `}
                   </span>
                 </Text>
                 <Text color={GREEN}>FREE</Text>
@@ -38,15 +41,16 @@ export default function CartItem() {
             </Flex>
 
             <HStack>
-                <Text fontWeight={BOLD} color={"gray.600"} >699.0</Text>
-                <Text color={GRAY} textDecoration={LINE_THROUGH}>1299.0</Text>
+                <Text fontWeight={BOLD} color={"gray.600"} >{RUPEES_SYMBOL+price}</Text>
+                <Text color={GRAY} textDecoration={LINE_THROUGH}>{RUPEES_SYMBOL+strike_price}</Text>
             </HStack>
             
-            <Text color={GRAY}>Color: {"Light Beige"} &nbsp; &nbsp; &nbsp; Size: {"XL"}</Text>
+            <Text color={GRAY}>Color: {color} &nbsp; &nbsp; &nbsp; {size?"Size":"Variant"}: {sizes}</Text>
             <Gap gap={40} />
             <Divider color={GRAY} />
             <Flex justify={SB} alignItems={CENTER}>
             <select
+            value={quantity}
              onChange={(e)=>{
 
              }}

@@ -138,6 +138,11 @@ export default function ViewProductPage() {
     window.scrollTo(0, 0);
   }, []);
 
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [productData]);
+
   useEffect(() => {
     let product = productData?.filter((el) => el.id == pid);
     setItem(product);
