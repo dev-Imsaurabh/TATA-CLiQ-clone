@@ -18,9 +18,9 @@ import { AiOutlineArrowDown } from "react-icons/ai";
 import { BiSearchAlt2 } from "react-icons/bi";
 import { useState } from "react";
 import logo from "../../assets/cliq_mart_logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { SearchIcon, ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
-import {CENTER, DEEPPINK, TRANSPARENT} from "../../constants/typography"
+import {CENTER, DEEPPINK, FIXED, STICKY, TRANSPARENT} from "../../constants/typography"
 import {SignupModal} from "../SignupModal"
 import { useSelector } from "react-redux";
 import {FaUserCircle} from "react-icons/fa"
@@ -30,8 +30,13 @@ export default function Navbar() {
   const { loading, signup, auth, no_user,error, exist, userId } = useSelector(
     (state) => state.authManager
   );
+
+  let nav = useNavigate()
   return (
     <Box
+    position={FIXED}
+    zIndex={100}
+    top={0}
       bg="#212121"
       color="white"
       fontSize={{ base: ".3rem", md: ".6rem", lg: ".9rem" }}
@@ -44,7 +49,7 @@ export default function Navbar() {
         float="right"
         padding={2}
       >
-        <Box flexGrow="1" flexBasis="0" textAlign="left">
+        <Box flexGrow="1"  flexBasis="0" textAlign="left">
           <Link>Tata CLiQ Luxury</Link>
         </Box>
         <Box
@@ -70,6 +75,7 @@ export default function Navbar() {
         </Box>
       </Box>
       <Box
+      
         display="flex"
         w="100%"
         justifyContent="space-between"
@@ -82,7 +88,7 @@ export default function Navbar() {
           position="relative"
           bottom={5}
         >
-          <Link>
+          <Link to="/">
             <Image w="100%" src={logo} />
           </Link>
         </Box>
@@ -145,7 +151,9 @@ export default function Navbar() {
               <BsSuitHeart size="18%" />
             </Box>
             <Box display="flex" justifyContent="center" alignItems="center">
-              <FiShoppingBag size="18%" />
+              <FiShoppingBag onClick={()=>{
+                nav("/cart")
+              }} size="18%" />
             </Box>
           </Box>
         </Box>
