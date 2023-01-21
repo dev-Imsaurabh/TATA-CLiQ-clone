@@ -33,7 +33,7 @@ import {
 import { useEffect, useState } from "react";
 import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Loader } from "../components/Loader";
 import ProductImageSlider from "../components/ProductImageSlider/ProductImageSlider";
 import {
@@ -92,14 +92,20 @@ import { TbTruckDelivery } from "react-icons/tb";
 import { AiFillStar, AiOutlineHeart } from "react-icons/ai";
 import discount from "../scripts/discount";
 import future_date from "../scripts/future_date";
+import { GetCart, UdpateCart } from "../redux/cart/cart.actions";
 
 export default function ViewProductPage() {
+  let nav = useNavigate()
   let dispatch = useDispatch();
   let { loading, error, data } = useSelector((state) => state.productsManager);
+  let cart = useSelector((state)=>state.cartManager)
+  let {userId} = useSelector((state)=>state.authManager)
   let { id, pid } = useParams();
   let [item, setItem] = useState({});
   let [productData, setProductData] = useState([]);
   let [option, setOption] = useState(0);
+  let [exist,setExist] = useState(false)
+
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -107,6 +113,23 @@ export default function ViewProductPage() {
   useEffect(() => {
     dispatch(getCategoryData(id));
   }, []);
+
+  useEffect(()=>{
+    dispatch(GetCart(userId.id))
+  },[])
+
+  useEffect(()=>{
+
+    cart.data.forEach((el)=>{
+      if(el.id==pid){
+        setExist(true)
+      
+
+      }
+    })
+   
+
+  },[cart.data])
 
   useEffect(() => {
     setProductData(data);
@@ -120,8 +143,12 @@ export default function ViewProductPage() {
     setItem(product);
   }, [productData]);
 
-  if (loading) return <Loader gif={LOADER_URL} />;
-  if (error) return <Loader gif={ERROR_URL} />;
+
+  console.log(exist)
+
+console.log("loading",cart.loading)
+  if (loading||cart.loading) return <Loader gif={LOADER_URL} />;
+  if (error||cart.error) return <Loader gif={ERROR_URL} />;
 
   return item.length > 0 ? (
     <Box className="container" w={FILL_PARENT} m={AUTO}>
@@ -129,7 +156,7 @@ export default function ViewProductPage() {
         direction={{ base: COLUMN, sm: COLUMN, lg: ROW }}
         gap={8}
         m={AUTO}
-        mt={120}
+        mt={my_pixel(160)}
         w={FILL_80PARENT}
       >
         <Box w={{ base: FILL_PARENT, sm: FILL_PARENT, lg: FILL_50PARENT }}>
@@ -273,6 +300,22 @@ export default function ViewProductPage() {
                   BUY NOW
                 </Button>
                 <Button
+                onClick={()=>{
+                  if(exist){
+                    nav("/cart")
+                    return
+                  }
+
+                  let copyItem = {...item[0]}
+                  copyItem.quantity=1
+                  copyItem.sizes=item[0].sizes[option]
+
+                  let addItem = {
+                    cart:[...cart.data,copyItem]
+                  }
+                  dispatch(UdpateCart(userId.id,addItem))
+
+                }}
                   h={45}
                   w={200}
                   borderRadius={50}
@@ -280,7 +323,7 @@ export default function ViewProductPage() {
                   colorScheme={"pink"}
                   size="md"
                 >
-                  ADD TO BAG
+                 {exist?"GO TO CART":" ADD TO BAG"}
                 </Button>
               </HStack>
             </Box>
