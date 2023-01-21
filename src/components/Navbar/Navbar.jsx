@@ -1,6 +1,8 @@
 import {
   Box,
   Flex,
+  Text,
+  Image,
   Input,
   InputGroup,
   InputLeftElement,
@@ -14,95 +16,124 @@ import { FiShoppingBag } from "react-icons/fi";
 import { AiOutlineArrowDown } from "react-icons/ai";
 import { BiSearchAlt2 } from "react-icons/bi";
 import { useState } from "react";
+import logo from "../../assets/cliq_mart_logo.png";
+import { Link } from "react-router-dom";
+import { SearchIcon, ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [arrow1, setArrow1] = useState(false);
+  const [arrow2, setArrow2] = useState(false);
   return (
-    <Box>
-      {/* Sample navbar with folder export */}
-      <Flex
-        position={"fixed"}
-        top={0}
-        w={"100%"}
-        background={"#212121"}
-        zIndex={1}
+    <Box
+      bg="#212121"
+      color="white"
+      fontSize={{ base: ".3rem", md: ".6rem", lg: ".9rem" }}
+    >
+      <Box
+        display="flex"
+        justifyContent="space-between"
+        bg="black"
+        w="82%"
+        float="right"
+        padding={2}
       >
-        <Box style={{ border: "2px solid red", width: "20%" }}>Logo</Box>
-        <Box style={{ border: "2px solid red", width: "80%" }}>
-          <Box>
-            <Flex
-              justifyContent={"space-between"}
-              bg={"black"}
-              fontFamily="semiBold"
-              height={"40px"}
-              fontSize="12px"
-              fontWeight={"bold"}
-              color={"white"}
+        <Box flexGrow="1" flexBasis="0" textAlign="left">
+          <Link>Tata CLiQ Luxury</Link>
+        </Box>
+        <Box
+          display="flex"
+          justifyContent="space-evenly"
+          flexGrow="1"
+          flexBasis="0"
+        >
+          <Link>CLiQ Cash</Link>
+          <Link>Gift Card</Link>
+          <Link>CLiQ Care</Link>
+          <Link>Track Orders</Link>
+          <Link>Sign in / Sign Up</Link>
+        </Box>
+      </Box>
+      <Box
+        display="flex"
+        w="100%"
+        justifyContent="space-between"
+        alignItems="center"
+      >
+        <Box
+          padding={2}
+          flexGrow="1"
+          flexBasis="0"
+          position="relative"
+          bottom={5}
+        >
+          <Link>
+            <Image w="100%" src={logo} />
+          </Link>
+        </Box>
+        <Box
+          flexGrow="7"
+          flexBasis="0"
+          display="flex"
+          alignItems="center"
+          justifyContent="space-evenly"
+        >
+          <Box
+            flexGrow="2"
+            flexBasis="0"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Box
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+              w="75%"
+              margin="auto"
             >
-              <Box margin={"auto 20px"}>Tata CLiQ Luxury</Box>
-              <Flex justifyContent={"space-around"} border="2px solid green">
-                <Box margin={"auto 20px"}>CLiQ Cash</Box>
-                <Box margin={"auto 20px"}>Gift Card</Box>
-                <Box margin={"auto 20px"}>CLiQ Care</Box>
-                <Box margin={"auto 20px"}>Track Orders</Box>
-                <Box margin={"auto 80px auto 20px"}>Sign in / Sign Up</Box>
-              </Flex>
-            </Flex>
+              <Box
+                display="flex"
+                onMouseEnter={() => setArrow1(true)}
+                onMouseLeave={() => setArrow1(false)}
+              >
+                <Text>Categories</Text>
+                <Box>{arrow1 ? <ChevronUpIcon /> : <ChevronDownIcon />}</Box>
+              </Box>
+              <Box
+                display="flex"
+                onMouseEnter={() => setArrow2(true)}
+                onMouseLeave={() => setArrow2(false)}
+              >
+                <Text>Brands</Text>
+                <Box>{arrow2 ? <ChevronUpIcon /> : <ChevronDownIcon />}</Box>
+              </Box>
+            </Box>
           </Box>
-          <Box>
-            <Flex
-              justifyContent={"space-between"}
-              fontFamily="semiBold"
-              height={"60px"}
-              fontSize="20px"
-              fontWeight={"bold"}
-              color={"white"}
-            >
-              <Menu>
-                <MenuButton onHover={() => setIsOpen(!isOpen)}>
-                  Categories <AiOutlineArrowDown />
-                </MenuButton>
-                <MenuList >
-                  <MenuItem>Item 1</MenuItem>
-                  <MenuItem>Item 2</MenuItem>
-                  <MenuItem>Item 3</MenuItem>
-                </MenuList>
-              </Menu>
-
-              <Box>
-                <Menu>
-                  <MenuButton onHover={() => setIsOpen(!isOpen)}>
-                    Brands <AiOutlineArrowDown />
-                  </MenuButton>
-                  <MenuList display={isOpen ? "block" : "none"}>
-                    <MenuItem>Item 1</MenuItem>
-                    <MenuItem>Item 2</MenuItem>
-                    <MenuItem>Item 3</MenuItem>
-                  </MenuList>
-                </Menu>
-              </Box>
-              <InputGroup>
-                <InputLeftElement
-                  pointerEvents="none"
-                  color="gray"
-                  children={<BiSearchAlt2 />}
-                />
-                <Input
-                  type="text"
-                  placeholder="Search for Products"
-                  maxW={"50%"}
-                />
-              </InputGroup>
-              <Box>
-                <BsSuitHeart />
-              </Box>
-              <Box>
-                <FiShoppingBag />
-              </Box>
-            </Flex>
+          <Box flexGrow="4" flexBasis="0">
+            <InputGroup>
+              <InputLeftElement
+                pointerEvents="none"
+                children={<SearchIcon color="gray.300" />}
+              />
+              <Input type="tel" placeholder="Search for Products" />
+            </InputGroup>
+          </Box>
+          <Box
+            flexGrow="2"
+            flexBasis="0"
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Box display="flex" justifyContent="center" alignItems="center">
+              <BsSuitHeart size="18%" />
+            </Box>
+            <Box display="flex" justifyContent="center" alignItems="center">
+              <FiShoppingBag size="18%" />
+            </Box>
           </Box>
         </Box>
-      </Flex>
+      </Box>
     </Box>
   );
 }
