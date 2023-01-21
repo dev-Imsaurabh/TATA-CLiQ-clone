@@ -50,12 +50,12 @@ import { BASE_URL, PRODUCTS, USERS } from "../constants/constants";
 import { ProductCard } from "../components/ProductCard";
 import { useEffect } from "react";
 
+import Carousels from "../components/Carousel/Carousel";
 
 export default function Homepage() {
-
-  console.log(BASE_URL)
-  console.log(PRODUCTS)
-  console.log(USERS)
+  console.log(BASE_URL);
+  console.log(PRODUCTS);
+  console.log(USERS);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -63,6 +63,7 @@ export default function Homepage() {
   return (
     <Box w={FILL_PARENT} className="container">
       {/* circular category card */}
+      <Carousels />
       <Grid gridTemplateColumns={{ base: R3, sm: R6, lg: R11 }}>
         {circularCategoryData.map((el) => (
           <CardComponent {...el} />
@@ -153,7 +154,7 @@ export default function Homepage() {
         <Gap gap={60} />
 
         {/* women wears*/}
-        <Grid  gap={8} gridTemplateColumns={{ base: R1, sm: R2, lg: R4 }}>
+        <Grid gap={8} gridTemplateColumns={{ base: R1, sm: R2, lg: R4 }}>
           {womensWearData.map((el) => (
             <CardComponent {...el} />
           ))}
@@ -170,9 +171,12 @@ export default function Homepage() {
         <CardComponent src={winterstyle_banner} w={AUTO} />
         <Gap gap={150} />
 
-
-         {/* Trending now*/}
-         <Grid gap={8} rowGap={40} gridTemplateColumns={{ base: R1, sm: R2, lg: R4 }}>
+        {/* Trending now*/}
+        <Grid
+          gap={8}
+          rowGap={40}
+          gridTemplateColumns={{ base: R1, sm: R2, lg: R4 }}
+        >
           {trendingNowData.map((el) => (
             <CardComponent {...el} />
           ))}
@@ -181,19 +185,29 @@ export default function Homepage() {
         <Gap gap={60} />
 
         {/* heading for trending now */}
-        <Heading h1={"WHAT'S TRENDING NOW"} h2={"Style tips for the contemporary women"} />
+        <Heading
+          h1={"WHAT'S TRENDING NOW"}
+          h2={"Style tips for the contemporary women"}
+        />
         <Gap gap={60} />
         <CardComponent src={trendingnow_banner} w={AUTO} />
 
         <Gap gap={100} />
-        <Heading h1={"MENSWEAR BY CLiQ"} h2={"Season's hottest looks, styled for you"} />
-        
+        <Heading
+          h1={"MENSWEAR BY CLiQ"}
+          h2={"Season's hottest looks, styled for you"}
+        />
+
         <Gap gap={60} />
         <CardComponent src={strike_choice_banner} w={AUTO} />
         <Gap gap={150} />
 
-         {/* MeansWear by click*/}
-         <Grid gap={8} rowGap={40} gridTemplateColumns={{ base: R1, sm: R2, lg: R4 }}>
+        {/* MeansWear by click*/}
+        <Grid
+          gap={8}
+          rowGap={40}
+          gridTemplateColumns={{ base: R1, sm: R2, lg: R4 }}
+        >
           {mensWearByCliqData.map((el) => (
             <CardComponent {...el} />
           ))}
@@ -202,7 +216,10 @@ export default function Homepage() {
         <Gap gap={60} />
 
         {/* heading for trending now */}
-        <Heading h1={"WHAT'S TRENDING NOW"} h2={"Style tips for the morden men"} />
+        <Heading
+          h1={"WHAT'S TRENDING NOW"}
+          h2={"Style tips for the morden men"}
+        />
         <Gap gap={60} />
 
         <CardComponent src={trending_men_banner} w={AUTO} />
@@ -216,8 +233,12 @@ export default function Homepage() {
         <CardComponent src={shoes_banner} w={AUTO} />
         <Gap gap={150} />
 
-         {/* shoes Data*/}
-         <Grid gap={8} rowGap={40} gridTemplateColumns={{ base: R1, sm: R2, lg: R4 }}>
+        {/* shoes Data*/}
+        <Grid
+          gap={8}
+          rowGap={40}
+          gridTemplateColumns={{ base: R1, sm: R2, lg: R4 }}
+        >
           {shoesData.map((el) => (
             <CardComponent {...el} />
           ))}
@@ -227,25 +248,23 @@ export default function Homepage() {
         <Heading h1={"THE NEWSIDE STORE"} h2={"New trends, everyday"} />
         <Gap gap={150} />
 
-         {/* westside store*/}
-         <Grid  gap={8} gridTemplateColumns={{ base: R1, sm: R2, lg: R4 }}>
+        {/* westside store*/}
+        <Grid gap={8} gridTemplateColumns={{ base: R1, sm: R2, lg: R4 }}>
           {westSideData.map((el) => (
             <CardComponent {...el} />
           ))}
         </Grid>
         {/* gap component for simple gap */}
         <Gap gap={60} />
-
       </Box>
 
-      <CardComponent src={"https://assets.tatacliq.com/medias/sys_master/images/45589087453214.gif"} w={FILL_PARENT} />
+      <CardComponent
+        src={
+          "https://assets.tatacliq.com/medias/sys_master/images/45589087453214.gif"
+        }
+        w={FILL_PARENT}
+      />
       <Gap gap={150} />
-
-
-
-
-
     </Box>
-
   );
 }

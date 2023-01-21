@@ -5,7 +5,7 @@ import AllRoutes from "./routes/AllRoutes";
 import { Navbar } from "./components/Navbar";
 import { THIS_IS_SIMPLE_CONSTANTS } from "./constants/constants";
 import Footer from "./components/Footer/Footer";
-// import Carousel from "./components/Carousel/Carousel";
+import Carousels from "./components/Carousel/Carousel";
 
 function App() {
   //cheking for .env file working or not
@@ -17,7 +17,6 @@ function App() {
   return (
     <Box className="App">
       <Navbar />
-      {/* <Carousel/> */}
       <AllRoutes />
       <Footer />
     </Box>

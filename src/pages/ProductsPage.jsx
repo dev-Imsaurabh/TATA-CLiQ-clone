@@ -63,15 +63,17 @@ export default function ProductsPage() {
   let value = searchParams.get("sort");
   let filterValues = searchParams.get("filter")?.toString().split("+") || [];
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [data]);
+
+
   let dispatch = useDispatch();
   //   console.log(error);
 
   let { id } = useParams();
   const [filter, setFilters] = useState([]);
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
+  
 
   useEffect(() => {
     dispatch(getCategoryData(id));
