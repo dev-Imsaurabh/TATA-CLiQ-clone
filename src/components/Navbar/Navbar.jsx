@@ -10,6 +10,7 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
+  Button,
 } from "@chakra-ui/react";
 import { BsSuitHeart } from "react-icons/bs";
 import { FiShoppingBag } from "react-icons/fi";
@@ -19,10 +20,16 @@ import { useState } from "react";
 import logo from "../../assets/cliq_mart_logo.png";
 import { Link } from "react-router-dom";
 import { SearchIcon, ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
-
+import {CENTER, DEEPPINK, TRANSPARENT} from "../../constants/typography"
+import {SignupModal} from "../SignupModal"
+import { useSelector } from "react-redux";
+import {FaUserCircle} from "react-icons/fa"
 export default function Navbar() {
   const [arrow1, setArrow1] = useState(false);
   const [arrow2, setArrow2] = useState(false);
+  const { loading, signup, auth, no_user,error, exist, userId } = useSelector(
+    (state) => state.authManager
+  );
   return (
     <Box
       bg="#212121"
@@ -42,6 +49,7 @@ export default function Navbar() {
         </Box>
         <Box
           display="flex"
+          alignItems={CENTER}
           justifyContent="space-evenly"
           flexGrow="1"
           flexBasis="0"
@@ -50,7 +58,15 @@ export default function Navbar() {
           <Link>Gift Card</Link>
           <Link>CLiQ Care</Link>
           <Link>Track Orders</Link>
-          <Link>Sign in / Sign Up</Link>
+          <Menu>
+  <MenuButton bg={TRANSPARENT} _active={{bg:{TRANSPARENT}}} _hover={{bg:{TRANSPARENT}}} as={Button}>
+    {auth?<FaUserCircle color={DEEPPINK} />:"Sign up/Sign in"}
+  </MenuButton>
+  <MenuList>
+    <SignupModal />
+    
+  </MenuList>
+</Menu>
         </Box>
       </Box>
       <Box

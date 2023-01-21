@@ -23,6 +23,7 @@ import { LOADER_URL } from "../../constants/constants";
 import {
     ABSOLUTE,
   AUTO,
+  BLACK,
   CENTER,
   COLUMN,
   DEEPPINK,
@@ -30,6 +31,7 @@ import {
   POINTER,
   RELATIVE,
   TRANSPARENT,
+  WHITE,
 } from "../../constants/typography";
 import { Login, resetAuth, Signup } from "../../redux/auth/auth.actions";
 import { Loader } from "../Loader";
@@ -147,7 +149,7 @@ export default function SignupModal() {
 
   return (
     <>
-      <Text onClick={()=>{
+      <Text cursor={POINTER} color={BLACK} onClick={()=>{
         if(auth){
             dispatch(resetAuth())
         }else{
