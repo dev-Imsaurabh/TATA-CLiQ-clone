@@ -10,6 +10,7 @@ import {
   Image,
   Input,
   Text,
+  useToast,
   Wrap,
 } from "@chakra-ui/react";
 import {
@@ -46,6 +47,7 @@ import CardComponent from "../components/Card-Component/CardComponent";
 
 import "../styles/style.css";
 
+
 import {
   ABSOLUTE,
   AUTO,
@@ -64,6 +66,7 @@ import {
   LEFT,
   LINE_THROUGH,
   MEDIUM,
+  NONE,
   NORMAL,
   POINTER,
   RED,
@@ -95,6 +98,7 @@ import future_date from "../scripts/future_date";
 import { GetCart, UdpateCart } from "../redux/cart/cart.actions";
 
 export default function ViewProductPage() {
+  let toast = useToast()
   let nav = useNavigate()
   let dispatch = useDispatch();
   let { loading, error, data } = useSelector((state) => state.productsManager);
@@ -300,6 +304,7 @@ export default function ViewProductPage() {
                 <Button
                   w={200}
                   h={45}
+                  display={NONE}
                   borderRadius={50}
                   colorScheme={"pink"}
                   size="md"
@@ -325,6 +330,15 @@ export default function ViewProductPage() {
                     cart:[...cart.data,copyItem]
                   }
                   dispatch(UdpateCart(userId.id,addItem))
+                  if(!loading){
+                    toast({
+                      title: 'Item added in your cart',
+                      description: "Go to Cart to see item",
+                      status: 'success',
+                      duration: 2000,
+                      isClosable: true,
+                    })
+                  }
 
                 }}
                   h={45}

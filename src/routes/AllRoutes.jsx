@@ -22,8 +22,6 @@ export default function AllRoutes(){
         <Route path="/products/:id" element={<ProductsPage />}></Route>
 
         <Route path="/checkout" element={<CheckoutPage />}></Route>
-        <Route path="/otpmodal" element={<OtpModal />}></Route>
-
         <Route path="/login" element={<LoginPage />}></Route>
         <Route path="*" element={<Error404 />}></Route>
         <Route path="/search" element={<SearchPage />}></Route>

@@ -18,25 +18,24 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { AddressContext } from "../../contexts/AddressContextProvider";
 
-export default function OtpModal() {
+export default function OtpModal({callback,total}) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
-  const {firstName,
-    lastName,
-    
-  } =useContext(AddressContext)
+  const { firstName, lastName } = useContext(AddressContext);
 
-  const displaySuccessful = () => {
-
-    alert(`Hey, ${firstName+" "+lastName},Your Order Placed Successfully`);
-    navigate("/");
-  };
-  useEffect(() => {
-    onOpen();
-  }, [onOpen]);
 
   return (
-    <Box mt={"150px"}>
+    <Box>
+      <Button
+        colorScheme="red"
+        _hover={{
+          background: "darkgreen",
+          color: "black",
+        }}
+        onClick={onOpen}
+      >
+        Save & Continue
+      </Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
@@ -57,11 +56,14 @@ export default function OtpModal() {
 
           <ModalFooter>
             <Button
-              onClick={() => displaySuccessful()}
+              onClick={()=>{
+                console.log("clked")
+                callback(onClose)
+              }}
               colorScheme="blue"
               mr={3}
             >
-              Submit
+              Pay
             </Button>
             <Button onClick={onClose}>Cancel</Button>
           </ModalFooter>

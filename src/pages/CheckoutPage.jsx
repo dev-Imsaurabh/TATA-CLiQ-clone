@@ -11,12 +11,22 @@ import {
   Textarea,
   RadioGroup,
   FormControl,
+  HStack,
+  Wrap,
+  useToast,
 } from "@chakra-ui/react";
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useId, useState } from "react";
+import { useRef } from "react";
 import { useContext } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { COLUMN, ROW, SB } from "../constants/typography";
+import { Loader } from "../components/Loader";
+import { OtpModal } from "../components/OtpModal";
+import { LOADER_URL, RUPEES_SYMBOL, USERS } from "../constants/constants";
+import { AUTO, CENTER, COLUMN, FILL_80PARENT, FILL_PARENT, NONE, ROW, SB } from "../constants/typography";
 import { AddressContext } from "../contexts/AddressContextProvider";
+import { GetCart, UdpateCart } from "../redux/cart/cart.actions";
 import "../styles/style.css";
 
 const CheckoutPage = () => {
@@ -42,13 +52,97 @@ const CheckoutPage = () => {
     setState,
     clearAll,
   } = useContext(AddressContext);
+  let toast =useToast()
 
-  const getOtpModal = () => {
-    navigate("/otpmodal");
-  };
+  const { userId } = useSelector((state) => state.authManager);
+  const { data, loading, error } = useSelector((state) => state.cartManager);
+  const [bagTotal, setBagTotal] = useState(0);
+  const [bagSubTotal, setBagSubTotal] = useState(0);
+  const [discount, setDiscount] = useState(0);
+  const [total, setTotal] = useState(0);
+  const [cartData, setCartData] = useState([]);
+  let nav = useNavigate()
+  let full_address = useRef()
+  let dispatch = useDispatch();
+  const [prevorder,setPrevOrder]=useState([])
+
+  useEffect(() => {
+    dispatch(GetCart(userId.id));
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  
+  useEffect(() => {
+    let bag_total = 0;
+    let checkout_total = 0;
+    let final_discount = 0;
+
+    data.forEach(({ price, strike_price, quantity }) => {
+      // console.log(strike_price);
+      checkout_total += price * quantity;
+      bag_total += strike_price * quantity;
+    });
+
+    final_discount = bag_total - checkout_total;
+    setTotal(checkout_total);
+    setDiscount(final_discount);
+    setBagTotal(bag_total);
+    setBagSubTotal(bag_total);
+    // console.log(checkout_total,bag_total,final_discount)
+  }, [data]);
+
+  useEffect(()=>{
+
+    if(data.length==0){
+      nav("/cart")
+    }
+
+  },[data])
+
+  useEffect(()=>{
+    const orders = async()=>{
+      let res = await axios.get(USERS+"/"+userId.id)
+      setPrevOrder(res.data.orders)
+    }
+
+    orders()
+  },[])
+
+
+  const makeOrder =(onClose)=>{
+    let orders = [...data]
+    // console.log(orders)
+    let newdata = orders.map((el)=>{
+      el.address=full_address.current.textContent
+      return el
+
+    })
+
+    // console.log(prevorder)
+    
+
+    dispatch(UdpateCart(userId.id,{cart:[],orders:[...prevorder,...newdata]}))
+    if(!loading){
+
+      toast({
+        title: 'Order Placed',
+        description: "Go to orders page to see your orders",
+        status: 'success',
+        duration: 2000,
+        isClosable: true,
+      })
+      onClose()
+
+    }
+  }
+
+  if(loading) return <Loader gif={LOADER_URL}/>
 
   return (
-    <Box className="container">
+    <Box margin={AUTO} mt={170}  w={FILL_80PARENT} >
       <Heading textAlign={"left"}>Checkout</Heading>
       <Flex
         gap={"30px"}
@@ -59,20 +153,23 @@ const CheckoutPage = () => {
           boxShadow="rgba(0, 0, 0, 0.35) 0px 5px 15px"
           width={{ base: "90%", sm: "90%", md: "90%", lg: "60%" }}
           borderRadius={"10px"}
+          padding={4}
         >
           <Flex p={"30px"} justifyContent={SB}>
             <Box display={"inline-flex"}>
-              <Heading
+              <Flex
                 as={"h6"}
                 size="sm"
+                padding={2}
                 border={"1px solid black "}
                 borderRadius={"50%"}
-                w={"6%"}
                 h={"25px"}
+                justify={CENTER}
+                alignItems={CENTER}
                 marginRight={"5px"}
               >
                 1
-              </Heading>
+              </Flex>
               <Heading as={"h6"} size="sm">
                 Add Shipping Address
               </Heading>
@@ -183,25 +280,11 @@ const CheckoutPage = () => {
               <Radio value="Office">Office</Radio>
             </RadioGroup>
           </Box>
+          <Flex display={"flex"} alignItems={CENTER} justify={"end"} >
+          <Button display={NONE}  mr={"20px"}>Cancel</Button>
+            <OtpModal callback={makeOrder} />
+          </Flex>
 
-          <Divider m={"-15px auto 40px auto"} />
-          <Box
-            textAlign={"right"}
-            m={"0px 20px 30px 0px"}
-            borderRadius={"20px"}
-          >
-            <Button mr={"20px"}>Cancel</Button>
-            <Button
-              colorScheme="red"
-              _hover={{
-                background: "darkgreen",
-                color: "black",
-              }}
-              onClick={() => getOtpModal()}
-            >
-              Save & Continue
-            </Button>
-          </Box>
         </Box>
 
         <Flex
@@ -215,7 +298,7 @@ const CheckoutPage = () => {
         >
           <Flex justifyContent={SB}>
             <Text>Bag Total</Text>
-            <Text>Bag Total</Text>
+            <Text>{RUPEES_SYMBOL+bagTotal.toFixed(2)}</Text>
           </Flex>
           <Flex justifyContent={SB}>
             <Text>Shipping Charge</Text>
@@ -225,26 +308,26 @@ const CheckoutPage = () => {
           </Flex>
           <Flex justifyContent={SB}>
             <Text>Bag Subtotal</Text>
-            <Text>Bag Subtotal</Text>
+            <Text>{RUPEES_SYMBOL+bagSubTotal.toFixed(2)}</Text>
           </Flex>
           <Flex justifyContent={SB}>
             <Text>Product Discount(s)</Text>
-            <Text>Bag Total</Text>
+            <Text>{"-" + (RUPEES_SYMBOL + discount.toFixed(2))}</Text>
           </Flex>
 
           <Text textAlign={"left"} color={"darkgreen"} fontWeight={"bold"}>
-            You will save {} on this order.
+            You will save {(RUPEES_SYMBOL + discount.toFixed(2))} on this order.
           </Text>
 
           <Divider />
           <Flex justifyContent={SB}>
             <Heading size="sm">Total Payable</Heading>
-            <Heading size="sm">Bag Total</Heading>
+            <Heading size="sm">{RUPEES_SYMBOL+total.toFixed(2)}</Heading>
           </Flex>
           <Heading textAlign={"left"} as={"h6"} size="sm">
             Will be delivered to:-{selectedValue}
           </Heading>
-          {firstName +
+         <Wrap ref={full_address}> {firstName +
             " " +
             lastName +
             " " +
@@ -258,7 +341,7 @@ const CheckoutPage = () => {
             " " +
             state +
             " " +
-            pinCode}
+            pinCode}</Wrap>
         </Flex>
       </Flex>
     </Box>
