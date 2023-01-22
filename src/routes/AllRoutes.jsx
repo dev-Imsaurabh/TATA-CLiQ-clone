@@ -13,6 +13,9 @@ import LoginPage from "../pages/LoginPage";
 import Error404 from "../pages/Error404";
 
 import ProfilePage from "../pages/ProfilePage";
+import AdminPanel from "../pages/AdminPanel";
+import SearchPage from "../pages/SearchPage";
+import ProtectAdmin from "../contexts/ProtectAdmin";
 export default function AllRoutes() {
   return (
     <Routes>
@@ -39,7 +42,11 @@ export default function AllRoutes() {
       ></Route>
 
       {/* profile */}
-      <Route path="/my-profile" element={<ProfilePage />} />
+      <Route path="/profile" element={<PrivateRoute><ProfilePage /></PrivateRoute>} />
+      <Route path="/admin" element={<PrivateRoute><ProtectAdmin><AdminPanel /></ProtectAdmin></PrivateRoute>} />
+      <Route path="/search" element={<SearchPage />} />
+
+
     </Routes>
   );
 }

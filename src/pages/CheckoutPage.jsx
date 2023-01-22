@@ -282,7 +282,7 @@ const CheckoutPage = () => {
           </Box>
           <Flex display={"flex"} alignItems={CENTER} justify={"end"} >
           <Button display={NONE}  mr={"20px"}>Cancel</Button>
-            <OtpModal callback={makeOrder} />
+            <OtpModal total={total} callback={makeOrder} />
           </Flex>
 
         </Box>

@@ -330,7 +330,7 @@ export default function ViewProductPage() {
                     cart:[...cart.data,copyItem]
                   }
                   dispatch(UdpateCart(userId.id,addItem))
-                  if(!loading){
+                  if(!loading&&!error){
                     toast({
                       title: 'Item added in your cart',
                       description: "Go to Cart to see item",
