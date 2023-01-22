@@ -4,6 +4,7 @@ import { Box, Image } from "@chakra-ui/react";
 import styles from "./Carousel.module.css";
 const settings = {
   //   useKeyboardArrows: true,
+  showThumbs:false,
   fade: true,
   infiniteLoop: true,
   autoPlay: true,
