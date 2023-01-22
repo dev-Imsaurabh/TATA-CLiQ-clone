@@ -34,8 +34,9 @@ import { useState } from "react";
 import logo from "../../assets/cliq_mart_logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { SearchIcon, ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
-import {BLACK, CENTER, DEEPPINK, FIXED, POINTER, STICKY, TRANSPARENT} from "../../constants/typography"
+import {BLACK, CENTER, DEEPPINK, FIXED, POINTER, STICKY, TRANSPARENT, WHITE} from "../../constants/typography"
 import {SignupModal} from "../SignupModal"
+import {MdAdminPanelSettings} from "react-icons/md"
 
 import { useSelector } from "react-redux";
 import { FaUserCircle } from "react-icons/fa";
@@ -74,7 +75,7 @@ const handleSeacrh=(event)=>{
         padding={2}
       >
         <Box flexGrow="1"  flexBasis="0" textAlign="left">
-          <Link>Tata CLiQ Luxury</Link>
+          <Link>CLiQ Luxury</Link>
         </Box>
         <Box
           display="flex"
@@ -83,10 +84,10 @@ const handleSeacrh=(event)=>{
           flexGrow="1"
           flexBasis="0"
         >
-          <Link>CLiQ Cash</Link>
-          <Link>Gift Card</Link>
-          <Link>CLiQ Care</Link>
-          <Link>Track Orders</Link>
+          <Link to="/profile">CLiQ Cash</Link>
+          <Link to="/profile">Gift Card</Link>
+          <Link to="/profile">CLiQ Care</Link>
+          <Link to="/profile">Track Orders</Link>
           <Menu>
             <MenuButton
               bg={TRANSPARENT}
@@ -299,10 +300,13 @@ const handleSeacrh=(event)=>{
             <Box display="flex" justifyContent="center" alignItems="center">
               <BsSuitHeart size="18%" />
             </Box>
+            <Box display={(auth==true && userId.email=="admin@gmail.com")?"flex":"none"} justifyContent="center" alignItems="center">
+              <MdAdminPanelSettings cursor={POINTER}  color={"white"} size="18%" />
+            </Box>
             <Box display="flex" justifyContent="center" alignItems="center">
-              <FiShoppingBag cursor={POINTER} onClick={()=>{
+              <FiShoppingBag size={"18%"} cursor={POINTER} onClick={()=>{
                 nav("/cart")
-              }} size="18%" />
+              }}  />
             </Box>
           </Box>
         </Box>

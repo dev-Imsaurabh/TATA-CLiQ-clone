@@ -15,6 +15,7 @@ import {
   Flex,
   Box,
   Image,
+  HStack,
 } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react-use-disclosure";
 import { useEffect, useState } from "react";
@@ -39,6 +40,8 @@ import { Login, resetAuth, Signup } from "../../redux/auth/auth.actions";
 import { Loader } from "../Loader";
 import { useToast } from '@chakra-ui/react'
 import my_pixel from "../../scripts/my_pixel";
+import { FaUserCircle } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 export default function SignupModal({color,bg,br,w,h,cs}) {
   const toast = useToast()
@@ -47,6 +50,7 @@ export default function SignupModal({color,bg,br,w,h,cs}) {
   const [password, setPassword] = useState("");
   const [option, setOption] = useState(0);
   let dispatch = useDispatch();
+  let nav = useNavigate()
   const { loading, signup, auth, no_user,error, exist, userId } = useSelector(
     (state) => state.authManager
   );
@@ -154,11 +158,11 @@ export default function SignupModal({color,bg,br,w,h,cs}) {
     <>
       <Button h={h} colorScheme={cs} _hover={{bg:bg}} w={w} color={color} cursor={POINTER} bg={bg} borderRadius={my_pixel(br)} onClick={()=>{
         if(auth){
-            dispatch(resetAuth())
+           nav("/profile")
         }else{
             onOpen()
         }
-      }}>{auth?userId.name:"Sign in/Sigin up"}</Button>
+      }}>{auth?<HStack><FaUserCircle color={DEEPPINK} /><Text>My Account</Text></HStack>:"Sign in/Sigin up"}</Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
