@@ -45,8 +45,17 @@ export default function Navbar() {
   const { loading, signup, auth, no_user, error, exist, userId } = useSelector(
     (state) => state.authManager
   );
+  const [value,setValue] = useState("")
 
   let nav = useNavigate()
+const handleSeacrh=(event)=>{
+
+  if(event.key=="Enter"){
+    nav(`/search?q=${value}`)
+  }
+
+}
+
   return (
     <Box
     position={FIXED}
@@ -277,7 +286,7 @@ export default function Navbar() {
                 pointerEvents="none"
                 children={<SearchIcon color="gray.300" />}
               />
-              <Input type="tel" placeholder="Search for Products" />
+              <Input value={value} onKeyDown={handleSeacrh} onChange={(e)=>setValue(e.target.value)} type="tel" placeholder="Search for Products" />
             </InputGroup>
           </Box>
           <Box

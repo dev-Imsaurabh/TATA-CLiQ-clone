@@ -1,4 +1,4 @@
-import { getDataByCategory } from "./product.api"
+import { getAllProducts, getDataByCategory } from "./product.api"
 import { ERROR_PRODUCTS, LODING_PRODUCTS, SUCCESS_PRODUCTS } from "./product.types"
 
 export const  getCategoryData=(category)=>async(dispatch)=>{
