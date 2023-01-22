@@ -255,7 +255,9 @@ export default function CartPage() {
                         </Text>
                       </VStack>
 
-                      <Button colorScheme={"pink"} borderRadius={my_pixel(50)}>
+                      <Button onClick={()=>{
+                        nav("/checkout")
+                      }} colorScheme={"pink"} borderRadius={my_pixel(50)}>
                         Checkout
                       </Button>
                     </Flex>

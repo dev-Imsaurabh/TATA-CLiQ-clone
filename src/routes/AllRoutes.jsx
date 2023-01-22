@@ -13,7 +13,6 @@ import LoginPage from "../pages/LoginPage";
 import Error404 from "../pages/Error404";
 
 import ProfilePage from "../pages/ProfilePage";
-
 export default function AllRoutes() {
   return (
     <Routes>
@@ -41,7 +40,6 @@ export default function AllRoutes() {
 
       {/* profile */}
       <Route path="/my-profile" element={<ProfilePage />} />
-
     </Routes>
   );
 }
