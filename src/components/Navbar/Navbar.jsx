@@ -301,7 +301,9 @@ const handleSeacrh=(event)=>{
               <BsSuitHeart size="18%" />
             </Box>
             <Box display={(auth==true && userId.email=="admin@gmail.com")?"flex":"none"} justifyContent="center" alignItems="center">
-              <MdAdminPanelSettings cursor={POINTER}  color={"white"} size="18%" />
+              <MdAdminPanelSettings cursor={POINTER}  color={"white"} size="18%" onClick={()=>{
+                nav("/admin")
+              }} />
             </Box>
             <Box display="flex" justifyContent="center" alignItems="center">
               <FiShoppingBag size={"18%"} cursor={POINTER} onClick={()=>{
