@@ -7,9 +7,11 @@ import CartPage from "../pages/CartPage";
 import Homepage from "../pages/Homepage";
 import ProductsPage from "../pages/ProductsPage";
 import ViewProductPage from "../pages/ViewProductPage";
+import { OtpModal } from "../components/OtpModal";
 import PrivateRoute from "./PrivateRoute";
 import LoginPage from "../pages/LoginPage";
 import Error404 from "../pages/Error404";
+
 import ProfilePage from "../pages/ProfilePage";
 
 export default function AllRoutes() {
@@ -39,6 +41,7 @@ export default function AllRoutes() {
 
       {/* profile */}
       <Route path="/my-profile" element={<ProfilePage />} />
+
     </Routes>
   );
 }

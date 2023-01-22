@@ -3,7 +3,6 @@ import {
   Flex,
   Heading,
   Text,
-  FormControl,
   Input,
   Stack,
   Radio,
@@ -11,13 +10,45 @@ import {
   Button,
   Textarea,
   RadioGroup,
+  FormControl,
 } from "@chakra-ui/react";
 import React from "react";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { COLUMN, ROW, SB } from "../constants/typography";
+import { AddressContext } from "../contexts/AddressContextProvider";
+import "../styles/style.css";
 
 const CheckoutPage = () => {
+  const navigate = useNavigate();
+  const {
+    firstName,
+    lastName,
+    city,
+    state,
+    pinCode,
+    address,
+    landMark,
+    mobile,
+    selectedValue,
+    setSelectedValue,
+    setFirstName,
+    setAddress,
+    setCity,
+    setLandMark,
+    setMobile,
+    setPinCode,
+    setLastName,
+    setState,
+    clearAll,
+  } = useContext(AddressContext);
+
+  const getOtpModal = () => {
+    navigate("/otpmodal");
+  };
+
   return (
-    <Box margin={"auto 40px"}>
+    <Box className="container">
       <Heading textAlign={"left"}>Checkout</Heading>
       <Flex
         gap={"30px"}
@@ -54,6 +85,7 @@ const CheckoutPage = () => {
                   color: "teal.500",
                   cursor: "pointer",
                 }}
+                onClick={() => clearAll()}
               >
                 Clear all
               </Text>
@@ -65,36 +97,55 @@ const CheckoutPage = () => {
               direction={{ base: COLUMN, sm: COLUMN, md: COLUMN, lg: ROW }}
             >
               <Box>
-                <FormControl>
-                  <Stack spacing={3}>
-                    <Box>
-                      <Input
-                        placeholder="First Name"
-                        required
-                        width={{
-                          base: "100%",
-                          sm: "100%",
-                          md: "100%",
-                          lg: "48%",
-                        }}
-                        mr={"12px"}
-                        mb={"10px"}
-                      />
-                      <Input
-                        placeholder="Last Name"
-                        required
-                        width={{
-                          base: "100%",
-                          sm: "100%",
-                          md: "100%",
-                          lg: "48%",
-                        }}
-                      />
-                    </Box>
-                    <Input placeholder="City" required />
-                    <Input placeholder="State" required />
-                    <Input placeholder="Landmark" required />
-                  </Stack>
+                <FormControl isRequired={true}>
+                <Stack spacing={3}>
+                  <Box>
+                    <Input
+                      placeholder="First Name"
+                      
+                      width={{
+                        base: "100%",
+                        sm: "100%",
+                        md: "100%",
+                        lg: "48%",
+                      }}
+                      mr={"12px"}
+                      mb={"10px"}
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                    />
+                    <Input
+                      placeholder="Last Name"
+              
+                      width={{
+                        base: "100%",
+                        sm: "100%",
+                        md: "100%",
+                        lg: "48%",
+                      }}
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
+                    />
+                  </Box>
+                  <Input
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                    placeholder="City"
+                    
+                  />
+                  <Input
+                    value={state}
+                    onChange={(e) => setState(e.target.value)}
+                    placeholder="State"
+                    
+                  />
+                  <Input
+                    value={landMark}
+                    onChange={(e) => setLandMark(e.target.value)}
+                    placeholder="Landmark"
+                    
+                  />
+                </Stack>
                 </FormControl>
               </Box>
               <Box
@@ -102,23 +153,34 @@ const CheckoutPage = () => {
                 width={{ base: "100%", sm: "100%", md: "100%", lg: "48%" }}
                 direction={{ base: COLUMN, sm: COLUMN, md: COLUMN, lg: ROW }}
               >
-                <FormControl>
-                  <Stack spacing={3}>
-                    <Input
-                      mt={{ base: "10px", sm: "10px", md: "10px", lg: "0px" }}
-                      placeholder="Enter your Pin Code"
-                    />
-                    <Textarea height={"102px"} placeholder="Address" />
-                    <Input placeholder="Enter your Mobile Number" />
-                  </Stack>
-                </FormControl>
+                <Stack spacing={3}>
+                  <Input
+                    mt={{ base: "10px", sm: "10px", md: "10px", lg: "0px" }}
+                    placeholder="Enter your Pin Code"
+                    value={pinCode}
+                    onChange={(e) => setPinCode(e.target.value)}
+                  />
+                  <Textarea
+                    height={"102px"}
+                    placeholder="Address"
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                  />
+                  <Input
+                    placeholder="Enter your Mobile Number"
+                    value={mobile}
+                    onChange={(e) => setMobile(e.target.value)}
+                  />
+                </Stack>
               </Box>
             </Flex>
           </Box>
           <Box textAlign={"left"} padding={"30px 30px"}>
-            <RadioGroup>
-              <Radio mr={"20%"}>Home</Radio>
-              <Radio>Office</Radio>
+            <RadioGroup value={selectedValue} onChange={setSelectedValue}>
+              <Radio value="Home" mr={"20%"}>
+                Home
+              </Radio>
+              <Radio value="Office">Office</Radio>
             </RadioGroup>
           </Box>
 
@@ -135,6 +197,7 @@ const CheckoutPage = () => {
                 background: "darkgreen",
                 color: "black",
               }}
+              onClick={() => getOtpModal()}
             >
               Save & Continue
             </Button>
@@ -147,7 +210,7 @@ const CheckoutPage = () => {
           boxShadow="rgba(0, 0, 0, 0.35) 0px 5px 15px"
           borderRadius={"10px"}
           direction={"column"}
-          height="300px"
+          height="380px"
           gap={"10px"}
         >
           <Flex justifyContent={SB}>
@@ -178,6 +241,24 @@ const CheckoutPage = () => {
             <Heading size="sm">Total Payable</Heading>
             <Heading size="sm">Bag Total</Heading>
           </Flex>
+          <Heading textAlign={"left"} as={"h6"} size="sm">
+            Will be delivered to:-{selectedValue}
+          </Heading>
+          {firstName +
+            " " +
+            lastName +
+            " " +
+            address +
+            " " +
+            landMark +
+            " " +
+            mobile +
+            " " +
+            city +
+            " " +
+            state +
+            " " +
+            pinCode}
         </Flex>
       </Flex>
     </Box>

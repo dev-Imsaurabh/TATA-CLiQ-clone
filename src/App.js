@@ -6,6 +6,7 @@ import { Navbar } from "./components/Navbar";
 import { THIS_IS_SIMPLE_CONSTANTS } from "./constants/constants";
 import Footer from "./components/Footer/Footer";
 
+
 function App() {
   //cheking for .env file working or not
   console.log(process.env.REACT_APP_ENV_CHECK); //this will log simple text in console ".env is working fine"
@@ -18,6 +19,7 @@ function App() {
       <Navbar />
       <AllRoutes />
       <Footer />
+   
     </Box>
   );
 }
