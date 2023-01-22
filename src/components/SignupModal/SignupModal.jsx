@@ -27,6 +27,8 @@ import {
   CENTER,
   COLUMN,
   DEEPPINK,
+  FILL_10PARENT,
+  FILL_PARENT,
   GRAY,
   POINTER,
   RELATIVE,
@@ -36,8 +38,9 @@ import {
 import { Login, resetAuth, Signup } from "../../redux/auth/auth.actions";
 import { Loader } from "../Loader";
 import { useToast } from '@chakra-ui/react'
+import my_pixel from "../../scripts/my_pixel";
 
-export default function SignupModal() {
+export default function SignupModal({color,bg,br,w,h,cs}) {
   const toast = useToast()
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -149,13 +152,13 @@ export default function SignupModal() {
 
   return (
     <>
-      <Text cursor={POINTER} color={BLACK} onClick={()=>{
+      <Button h={h} colorScheme={cs} _hover={{bg:bg}} w={w} color={color} cursor={POINTER} bg={bg} borderRadius={my_pixel(br)} onClick={()=>{
         if(auth){
             dispatch(resetAuth())
         }else{
             onOpen()
         }
-      }}>{auth?userId.name:"Sign in/Sigin up"}</Text>
+      }}>{auth?userId.name:"Sign in/Sigin up"}</Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />

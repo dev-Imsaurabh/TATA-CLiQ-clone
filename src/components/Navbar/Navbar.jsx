@@ -34,7 +34,7 @@ import { useState } from "react";
 import logo from "../../assets/cliq_mart_logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { SearchIcon, ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
-import {CENTER, DEEPPINK, FIXED, POINTER, STICKY, TRANSPARENT} from "../../constants/typography"
+import {BLACK, CENTER, DEEPPINK, FIXED, POINTER, STICKY, TRANSPARENT} from "../../constants/typography"
 import {SignupModal} from "../SignupModal"
 
 import { useSelector } from "react-redux";
@@ -88,7 +88,7 @@ export default function Navbar() {
               {auth ? <FaUserCircle color={DEEPPINK} /> : "Sign up/Sign in"}
             </MenuButton>
             <MenuList>
-              <SignupModal />
+              <SignupModal bg={TRANSPARENT} color={BLACK} />
             </MenuList>
           </Menu>
         </Box>

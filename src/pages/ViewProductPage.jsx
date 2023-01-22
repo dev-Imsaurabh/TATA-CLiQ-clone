@@ -99,7 +99,7 @@ export default function ViewProductPage() {
   let dispatch = useDispatch();
   let { loading, error, data } = useSelector((state) => state.productsManager);
   let cart = useSelector((state)=>state.cartManager)
-  let {userId} = useSelector((state)=>state.authManager)
+  let {userId,auth} = useSelector((state)=>state.authManager)
   let { id, pid } = useParams();
   let [item, setItem] = useState({});
   let [productData, setProductData] = useState([]);
@@ -108,18 +108,19 @@ export default function ViewProductPage() {
 
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-  useEffect(() => {
     dispatch(getCategoryData(id));
   }, []);
 
   useEffect(()=>{
-    dispatch(GetCart(userId.id))
+    if(auth){
+      dispatch(GetCart(userId.id))
+    }
   },[])
 
   useEffect(()=>{
 
+    if(auth){
+      
     cart.data.forEach((el)=>{
       if(el.id==pid){
         setExist(true)
@@ -127,6 +128,7 @@ export default function ViewProductPage() {
 
       }
     })
+    }
    
 
   },[cart.data])
@@ -136,7 +138,7 @@ export default function ViewProductPage() {
   }, [data]);
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [cart.loading]);
 
   
   useEffect(() => {
@@ -149,9 +151,9 @@ export default function ViewProductPage() {
   }, [productData]);
 
 
-  console.log(exist)
+  // console.log(exist)
 
-console.log("loading",cart.loading)
+// console.log("loading",cart.loading)
   if (loading||cart.loading) return <Loader gif={LOADER_URL} />;
   if (error||cart.error) return <Loader gif={ERROR_URL} />;
 
@@ -306,6 +308,10 @@ console.log("loading",cart.loading)
                 </Button>
                 <Button
                 onClick={()=>{
+                  if(!auth){
+                    nav("/login")
+                    return
+                  }
                   if(exist){
                     nav("/cart")
                     return
