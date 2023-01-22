@@ -66,7 +66,7 @@ export default function Homepage() {
       <Carousels />
       <Grid gridTemplateColumns={{ base: R3, sm: R6, lg: R11 }}>
         {circularCategoryData.map((el) => (
-          <CardComponent {...el} />
+          <CardComponent key={el.src} key={el.src} {...el} />
         ))}
       </Grid>
 
@@ -82,7 +82,7 @@ export default function Homepage() {
           gap={my_pixel(10)}
         >
           {bankImageData.map((el) => (
-            <CardComponent {...el} />
+            <CardComponent key={el.src} {...el} />
           ))}
         </Flex>
 
@@ -98,7 +98,7 @@ export default function Homepage() {
         {/* Category wear Images */}
         <Grid gap={8} gridTemplateColumns={{ base: R1, sm: R2, lg: R4 }}>
           {dealsWheelData.map((el) => (
-            <CardComponent {...el} />
+            <CardComponent key={el.src} {...el} />
           ))}
         </Grid>
 
@@ -114,7 +114,7 @@ export default function Homepage() {
         {/* New On Cliq */}
         <Grid gap={8} gridTemplateColumns={{ base: R1, sm: R2, lg: R4 }}>
           {newOnCliqData.map((el) => (
-            <CardComponent {...el} />
+            <CardComponent key={el.src} {...el} />
           ))}
         </Grid>
         {/* gap component for simple gap */}
@@ -127,7 +127,7 @@ export default function Homepage() {
         {/* Featured brands */}
         <Grid gap={8} gridTemplateColumns={{ base: R1, sm: R2, lg: R4 }}>
           {featuredBrandData.map((el) => (
-            <CardComponent {...el} />
+            <CardComponent key={el.src} {...el} />
           ))}
         </Grid>
         {/* gap component for simple gap */}
@@ -143,7 +143,7 @@ export default function Homepage() {
         {/* POPULAR PiQs*/}
         <Grid gap={8} gridTemplateColumns={{ base: R1, sm: R2, lg: R4 }}>
           {popularpiqsData.map((el) => (
-            <CardComponent {...el} />
+            <CardComponent key={el.src} {...el} />
           ))}
         </Grid>
         {/* gap component for simple gap */}
@@ -156,12 +156,12 @@ export default function Homepage() {
         {/* women wears*/}
         <Grid gap={8} gridTemplateColumns={{ base: R1, sm: R2, lg: R4 }}>
           {womensWearData.map((el) => (
-            <CardComponent {...el} />
+            <CardComponent key={el.src} {...el} />
           ))}
         </Grid>
         {/* gap component for simple gap */}
         <Gap gap={60} />
-        <CardComponent src={theweddingedits} w={AUTO} />
+        <CardComponent  src={theweddingedits} w={AUTO} />
         <Gap gap={60} />
 
         {/* heading for womens wear */}
@@ -178,7 +178,7 @@ export default function Homepage() {
           gridTemplateColumns={{ base: R1, sm: R2, lg: R4 }}
         >
           {trendingNowData.map((el) => (
-            <CardComponent {...el} />
+            <CardComponent key={el.src} {...el} />
           ))}
         </Grid>
         {/* gap component for simple gap */}
@@ -209,7 +209,7 @@ export default function Homepage() {
           gridTemplateColumns={{ base: R1, sm: R2, lg: R4 }}
         >
           {mensWearByCliqData.map((el) => (
-            <CardComponent {...el} />
+            <CardComponent key={el.src} {...el} />
           ))}
         </Grid>
         {/* gap component for simple gap */}
@@ -240,7 +240,7 @@ export default function Homepage() {
           gridTemplateColumns={{ base: R1, sm: R2, lg: R4 }}
         >
           {shoesData.map((el) => (
-            <CardComponent {...el} />
+            <CardComponent key={el.src} {...el} />
           ))}
         </Grid>
         {/* gap component for simple gap */}
@@ -251,7 +251,7 @@ export default function Homepage() {
         {/* westside store*/}
         <Grid gap={8} gridTemplateColumns={{ base: R1, sm: R2, lg: R4 }}>
           {westSideData.map((el) => (
-            <CardComponent {...el} />
+            <CardComponent key={el.src} {...el} />
           ))}
         </Grid>
         {/* gap component for simple gap */}
