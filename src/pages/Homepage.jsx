@@ -66,7 +66,7 @@ export default function Homepage() {
       <Carousels />
       <Grid gridTemplateColumns={{ base: R3, sm: R6, lg: R11 }}>
         {circularCategoryData.map((el) => (
-          <CardComponent key={el.src} key={el.src} {...el} />
+          <CardComponent key={el.src} {...el} />
         ))}
       </Grid>
 
