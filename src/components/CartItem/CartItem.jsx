@@ -12,7 +12,7 @@ import future_date from "../../scripts/future_date";
 import { RUPEES_SYMBOL } from "../../constants/constants";
 import { color } from "@chakra-ui/styled-system";
 
-export default function CartItem({images,id,name,long_desc,color,short_desc,price,strike_price,size,sizes,quantity,delivery_time}) {
+export default function CartItem({images,id,name,long_desc,color,short_desc,price,strike_price,size,sizes,quantity,delivery_time,update,remove}) {
   return (
     <Card w={FILL_PARENT}>
       <CardBody>
@@ -52,6 +52,7 @@ export default function CartItem({images,id,name,long_desc,color,short_desc,pric
             <select
             value={quantity}
              onChange={(e)=>{
+              update(id,e.target.value)
 
              }}
               border={0}
@@ -73,7 +74,7 @@ export default function CartItem({images,id,name,long_desc,color,short_desc,pric
 
                 }} />}>Save to wishlist</Button>
                 <Button bg={TRANSPARENT}   color={GRAY} onClick={()=>{
-
+                  remove(id)
                 }}>Remove</Button>
             </HStack>
 
