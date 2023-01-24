@@ -80,7 +80,7 @@ Step-3- install some common dependencies:- <br />
 *Note:- Bhavnesh will do all the backend and admin panel so you will get apis and endpoint on day-2 morning.
 
 # Base_url
-`https://tata-cliq.onrender.com`
+`Your backend base url`
 
 # Endpoints
 `/users`
