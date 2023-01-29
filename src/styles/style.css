@@ -2,3 +2,10 @@
     margin-top: 150px;
 }
 
+
+@media only screen and (max-width: 716px) and (min-width: 0px)  {
+
+    .container{
+        margin-top: 120px;
+    }
+}

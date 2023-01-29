@@ -24,7 +24,7 @@ import { useNavigate } from "react-router-dom";
 import { Loader } from "../components/Loader";
 import { OtpModal } from "../components/OtpModal";
 import { LOADER_URL, RUPEES_SYMBOL, USERS } from "../constants/constants";
-import { AUTO, CENTER, COLUMN, FILL_80PARENT, FILL_PARENT, NONE, ROW, SB } from "../constants/typography";
+import { AUTO, CENTER, COLUMN, FILL_60PARENT, FILL_80PARENT, FILL_PARENT, NONE, ROW, SB } from "../constants/typography";
 import { AddressContext } from "../contexts/AddressContextProvider";
 import { GetCart, UdpateCart } from "../redux/cart/cart.actions";
 import "../styles/style.css";
@@ -142,16 +142,16 @@ const CheckoutPage = () => {
   if(loading) return <Loader gif={LOADER_URL}/>
 
   return (
-    <Box margin={AUTO} mt={170}  w={FILL_80PARENT} >
+    <Box margin={AUTO} mt={170} m={AUTO}  w={FILL_80PARENT} >
       <Heading textAlign={"left"}>Checkout</Heading>
       <Flex
         gap={"30px"}
         m={"30px auto"}
-        direction={{ base: COLUMN, sm: COLUMN, md: COLUMN, lg: ROW }}
+        direction={{ base: "column-reverse", sm: "column-reverse", lg: ROW }}
       >
         <Box
           boxShadow="rgba(0, 0, 0, 0.35) 0px 5px 15px"
-          width={{ base: "90%", sm: "90%", md: "90%", lg: "60%" }}
+          width={{ base: FILL_PARENT, sm: FILL_PARENT, lg: FILL_60PARENT }}
           borderRadius={"10px"}
           padding={4}
         >
@@ -289,7 +289,7 @@ const CheckoutPage = () => {
 
         <Flex
           p={"20px"}
-          width={{ base: "90%", sm: "90%", md: "90%", lg: "40%" }}
+          width={{ base: FILL_PARENT, sm: FILL_PARENT, lg: FILL_60PARENT }}
           boxShadow="rgba(0, 0, 0, 0.35) 0px 5px 15px"
           borderRadius={"10px"}
           direction={"column"}

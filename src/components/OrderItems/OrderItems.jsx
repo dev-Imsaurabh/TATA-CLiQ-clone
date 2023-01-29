@@ -1,7 +1,7 @@
 import { Card, CardBody } from "@chakra-ui/card";
 import { Image } from "@chakra-ui/image";
 import { Box, Divider, Flex, HStack, Text } from "@chakra-ui/layout";
-import { AUTO, BLACK, BOLD, CENTER, FILL_80PARENT, FILL_PARENT, GRAY, GREEN, LINE_THROUGH, NONE, SB, TRANSPARENT } from "../../constants/typography";
+import { AUTO, BLACK, BOLD, CENTER, COLUMN, FILL_15PARENT, FILL_50PARENT, FILL_80PARENT, FILL_85PARENT, FILL_PARENT, GRAY, GREEN, LINE_THROUGH, NONE, ROW, SB, TRANSPARENT } from "../../constants/typography";
 import my_pixel from "../../scripts/my_pixel";
 import { TbTruckDelivery } from "react-icons/tb";
 import { AiFillStar, AiOutlineHeart } from "react-icons/ai";
@@ -16,19 +16,20 @@ export default function OrderItems({images,id,name,long_desc,color,short_desc,pr
   return (
     <Card>
       <CardBody>
-        <Flex gap={4} >
+        <Flex gap={4} direction={{base:COLUMN,sm:COLUMN,lg:ROW}} >
           <Image
             borderRadius={my_pixel(4)}
             src={images[0]}
-            w={"15%"}
+            w={{base:FILL_PARENT,sm:FILL_50PARENT,lg:FILL_15PARENT}}
           ></Image>
 
-          <Box w={"85%"}>
-            <Flex justify={SB} gap={4}>
+          <Box             w={{base:FILL_PARENT,sm:FILL_50PARENT,lg:FILL_85PARENT}}
+>
+            <Flex direction={{base:COLUMN,sm:COLUMN,lg:ROW}} justify={SB} gap={4}>
               <Text maxW={"50%"} isTruncated={true} color={GRAY}>
                 {short_desc}
               </Text>
-              <HStack>
+              <HStack >
                 <TbTruckDelivery color={GRAY} size={24} />
                 <Text color={GRAY}>
                   Delivery by <span style={{ color: GRAY}}>

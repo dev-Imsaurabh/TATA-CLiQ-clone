@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Card,
   CardBody,
   Flex,
@@ -8,6 +9,8 @@ import {
   HStack,
   Select,
   Text,
+  useDisclosure,
+  Wrap,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,6 +18,15 @@ import { useParams, useSearchParams } from "react-router-dom";
 import { Gap } from "../components/Gap";
 import { Loader } from "../components/Loader";
 import { ProductCard } from "../components/ProductCard";
+import {
+  Drawer,
+  DrawerBody,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+} from '@chakra-ui/react'
 import {
   DISCOUNT,
   ERROR_URL,
@@ -53,12 +65,16 @@ import { BsFilter } from "react-icons/bs";
 import discount from "../scripts/discount";
 import { Filter } from "../components/Filter";
 import { FilterData } from "../constants/staticData";
+import {AiFillFilter} from "react-icons/ai"
 import axios from "axios";
+import { useRef } from "react";
 
 export default function ProductsPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   let { loading, error, data } = useSelector((state) => state.productsManager);
   const [productData, setProductData] = useState();
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const btnRef = useRef()
   const [clear,setClear] =useState(false)
   let value = searchParams.get("sort");
   let filterValues = searchParams.get("filter")?.toString().split("+") || [];
@@ -160,7 +176,49 @@ export default function ProductsPage() {
       <Gap gap={70} />
 
       <Flex m={AUTO} w={FILL_80PARENT}>
-        <HStack flex={2.5}></HStack>
+        <HStack flex={2.5}>
+
+        <>
+        <Wrap display={{base:"block",sm:"none",lg:"none"}} ref={btnRef} onClick={onOpen}><AiFillFilter /></Wrap>
+      
+      <Drawer
+        isOpen={isOpen}
+        placement='right'
+        onClose={onClose}
+        finalFocusRef={btnRef}
+      >
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+
+          <DrawerBody>
+
+          <Flex gap={4} w={FILL_80PARENT} m={AUTO}>
+        <Box w={FILL_PARENT} >
+          <Card borderRadius={10} position={STICKY} top={5} w={FILL_PARENT}>
+            <Flex padding={4} bg={"gray.100"} justify={SB} alignItems={CENTER}>
+              <Text fontWeight={BOLD}>Filters</Text>
+              <Text cursor={POINTER} onClick={()=>{
+                setClear((prev)=>!prev)
+              }} color={DEEPPINK} fontWeight={BOLD}>
+                Clear All
+              </Text>
+            </Flex>
+            <CardBody width={FILL_PARENT}>
+              <Filter setFilters={setFilters} data={FilterData} />
+            </CardBody>
+          </Card>
+        </Box>
+
+       
+      </Flex>
+            
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
+    </>
+
+        </HStack>
 
         <Flex
           borderRadius={4}
@@ -199,7 +257,7 @@ export default function ProductsPage() {
       <Gap gap={70} />
 
       <Flex gap={4} w={FILL_80PARENT} m={AUTO}>
-        <Box w={FILL_25PARENT}>
+        <Box w={FILL_25PARENT} display={{base:NONE,sm:"block",lg:"block"}}>
           <Card borderRadius={10} position={STICKY} top={5} w={FILL_PARENT}>
             <Flex padding={4} bg={"gray.100"} justify={SB} alignItems={CENTER}>
               <Text fontWeight={BOLD}>Filters</Text>
@@ -217,7 +275,7 @@ export default function ProductsPage() {
 
         <Grid
           gap={4}
-          w={FILL_75PARENT}
+          w={{base:FILL_PARENT,sm:FILL_75PARENT,lg:FILL_75PARENT}}
           gridTemplateColumns={{ base: R1, sm: R3, lg: R4 }}
         >
           {productData?.map((el) => (

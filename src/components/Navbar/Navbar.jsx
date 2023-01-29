@@ -34,9 +34,18 @@ import { useState } from "react";
 import logo from "../../assets/cliq_mart_logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { SearchIcon, ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
-import {BLACK, CENTER, DEEPPINK, FIXED, POINTER, STICKY, TRANSPARENT, WHITE} from "../../constants/typography"
-import {SignupModal} from "../SignupModal"
-import {MdAdminPanelSettings} from "react-icons/md"
+import {
+  BLACK,
+  CENTER,
+  DEEPPINK,
+  FIXED,
+  POINTER,
+  STICKY,
+  TRANSPARENT,
+  WHITE,
+} from "../../constants/typography";
+import { SignupModal } from "../SignupModal";
+import { MdAdminPanelSettings } from "react-icons/md";
 
 import { useSelector } from "react-redux";
 import { FaUserCircle } from "react-icons/fa";
@@ -46,22 +55,20 @@ export default function Navbar() {
   const { loading, signup, auth, no_user, error, exist, userId } = useSelector(
     (state) => state.authManager
   );
-  const [value,setValue] = useState("")
+  const [value, setValue] = useState("");
 
-  let nav = useNavigate()
-const handleSeacrh=(event)=>{
-
-  if(event.key=="Enter"){
-    nav(`/search?q=${value}`)
-  }
-
-}
+  let nav = useNavigate();
+  const handleSeacrh = (event) => {
+    if (event.key == "Enter") {
+      nav(`/search?q=${value}`);
+    }
+  };
 
   return (
     <Box
-    position={FIXED}
-    zIndex={100}
-    top={0}
+      position={FIXED}
+      zIndex={100}
+      top={0}
       bg="#212121"
       color="white"
       fontSize={{ base: ".3rem", md: ".6rem", lg: ".9rem" }}
@@ -74,13 +81,19 @@ const handleSeacrh=(event)=>{
         float="right"
         padding={2}
       >
-        <Box flexGrow="1"  flexBasis="0" textAlign="left">
+        <Box
+          fontSize={{ base: 8, sm: 16, lg: 16 }}
+          flexGrow="1"
+          flexBasis="0"
+          textAlign="left"
+        >
           <Link>CLiQ Luxury</Link>
         </Box>
         <Box
           display="flex"
           alignItems={CENTER}
           justifyContent="space-evenly"
+          fontSize={{ base: 8, sm: 16, lg: 16 }}
           flexGrow="1"
           flexBasis="0"
         >
@@ -90,6 +103,7 @@ const handleSeacrh=(event)=>{
           <Link to="/profile">Track Orders</Link>
           <Menu>
             <MenuButton
+              fontSize={{ base: 8, sm: 16, lg: 16 }}
               bg={TRANSPARENT}
               _active={{ bg: { TRANSPARENT } }}
               _hover={{ bg: { TRANSPARENT } }}
@@ -104,7 +118,6 @@ const handleSeacrh=(event)=>{
         </Box>
       </Box>
       <Box
-      
         display="flex"
         w="100%"
         justifyContent="space-between"
@@ -115,7 +128,7 @@ const handleSeacrh=(event)=>{
           flexGrow="1"
           flexBasis="0"
           position="relative"
-          bottom={5}
+          bottom={{ base: 0, sm: 5, lg: 5 }}
         >
           <Link to="/">
             <Image w="100%" src={logo} />
@@ -140,12 +153,12 @@ const handleSeacrh=(event)=>{
               justifyContent="center"
               alignItems="center"
               w="75%"
-              margin="auto"
             >
               <Popover placement="bottom-start" trigger="hover">
                 <PopoverTrigger>
                   <Box
                     display="flex"
+                    fontSize={{ base: 8, sm: 16, lg: 16 }}
                     onMouseEnter={() => setArrow1(true)}
                     onMouseLeave={() => setArrow1(false)}
                   >
@@ -281,13 +294,20 @@ const handleSeacrh=(event)=>{
               </Box> */}
             </Box>
           </Box>
-          <Box flexGrow="4" flexBasis="0">
+          <Box padding={2} flexGrow="4" flexBasis="0">
             <InputGroup>
               <InputLeftElement
                 pointerEvents="none"
                 children={<SearchIcon color="gray.300" />}
               />
-              <Input value={value} onKeyDown={handleSeacrh} onChange={(e)=>setValue(e.target.value)} type="tel" placeholder="Search for Products" />
+              <Input
+                h={{ base: 8, sm: 12, lg: 12 }}
+                value={value}
+                onKeyDown={handleSeacrh}
+                onChange={(e) => setValue(e.target.value)}
+                type="tel"
+                placeholder="Search for Products"
+              />
             </InputGroup>
           </Box>
           <Box
@@ -300,15 +320,32 @@ const handleSeacrh=(event)=>{
             <Box display="flex" justifyContent="center" alignItems="center">
               <BsSuitHeart size="18%" />
             </Box>
-            <Box display={(auth==true && userId.email=="admin@gmail.com")?"flex":"none"} justifyContent="center" alignItems="center">
-              <MdAdminPanelSettings cursor={POINTER}  color={"white"} size="18%" onClick={()=>{
-                nav("/admin")
-              }} />
+            <Box
+              display={
+                auth == true && userId.email == "admin@gmail.com"
+                  ? "flex"
+                  : "none"
+              }
+              justifyContent="center"
+              alignItems="center"
+            >
+              <MdAdminPanelSettings
+                cursor={POINTER}
+                color={"white"}
+                size="18%"
+                onClick={() => {
+                  nav("/admin");
+                }}
+              />
             </Box>
             <Box display="flex" justifyContent="center" alignItems="center">
-              <FiShoppingBag size={"18%"} cursor={POINTER} onClick={()=>{
-                nav("/cart")
-              }}  />
+              <FiShoppingBag
+                size={"18%"}
+                cursor={POINTER}
+                onClick={() => {
+                  nav("/cart");
+                }}
+              />
             </Box>
           </Box>
         </Box>
