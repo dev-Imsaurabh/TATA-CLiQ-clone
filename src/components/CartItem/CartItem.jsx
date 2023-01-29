@@ -1,7 +1,7 @@
 import { Card, CardBody } from "@chakra-ui/card";
 import { Image } from "@chakra-ui/image";
 import { Box, Divider, Flex, HStack, Text } from "@chakra-ui/layout";
-import { BLACK, BOLD, CENTER, FILL_PARENT, GRAY, GREEN, LINE_THROUGH, NONE, SB, TRANSPARENT } from "../../constants/typography";
+import { AUTO, BLACK, BOLD, CENTER, COLUMN, FILL_15PARENT, FILL_50PARENT, FILL_85PARENT, FILL_PARENT, GRAY, GREEN, LINE_THROUGH, NONE, ROW, SB, TRANSPARENT } from "../../constants/typography";
 import my_pixel from "../../scripts/my_pixel";
 import { TbTruckDelivery } from "react-icons/tb";
 import { AiFillStar, AiOutlineHeart } from "react-icons/ai";
@@ -16,15 +16,16 @@ export default function CartItem({images,id,name,long_desc,color,short_desc,pric
   return (
     <Card w={FILL_PARENT}>
       <CardBody>
-        <Flex gap={4}>
+        <Flex gap={4} direction={{base:COLUMN,sm:COLUMN,lg:ROW}}>
           <Image
             borderRadius={my_pixel(4)}
             src={images[0]}
-            w={"15%"}
+            m={AUTO}
+            w={{base:FILL_PARENT,sm:FILL_50PARENT,lg:FILL_15PARENT}}
           ></Image>
 
-          <Box w={"85%"}>
-            <Flex justify={SB} gap={4}>
+          <Box w={{base:FILL_PARENT,sm:FILL_PARENT,lg:FILL_85PARENT}}>
+            <Flex justify={SB} direction={{base:COLUMN,sm:COLUMN,lg:ROW}} gap={4}>
               <Text maxW={"50%"} isTruncated={true} color={GRAY}>
                 {short_desc}
               </Text>
@@ -48,7 +49,7 @@ export default function CartItem({images,id,name,long_desc,color,short_desc,pric
             <Text color={GRAY}>Color: {color} &nbsp; &nbsp; &nbsp; {size?"Size":"Variant"}: {sizes}</Text>
             <Gap gap={40} />
             <Divider color={GRAY} />
-            <Flex justify={SB} alignItems={CENTER}>
+            <Flex justify={SB} direction={{base:COLUMN,sm:COLUMN,lg:ROW}} alignItems={CENTER}>
             <select
             value={quantity}
              onChange={(e)=>{
@@ -69,7 +70,7 @@ export default function CartItem({images,id,name,long_desc,color,short_desc,pric
               <option value={5}>Qunatity:&nbsp; 5</option>
             </select>
 
-            <HStack>
+            <HStack direction={{base:COLUMN,sm:COLUMN,lg:ROW}}>
                 <Button bg={TRANSPARENT}  color={GRAY} leftIcon={<AiOutlineHeart size={24} color={GRAY} onClick={()=>{
 
                 }} />}>Save to wishlist</Button>

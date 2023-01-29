@@ -58,7 +58,7 @@ export default function ProductCard({
 
   let nav = useNavigate()
   return (
-    <Card maxHeight={500}  cursor={POINTER} w={AUTO} onClick={()=>{
+    <Card maxHeight={{base:AUTO,sm:AUTO,lg:500}}  cursor={POINTER} w={AUTO} onClick={()=>{
       nav(`/${category}/${id}`)
     }}>
       <CardBody padding={0} margin={0}>

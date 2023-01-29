@@ -13,7 +13,10 @@ import {
   AUTO,
   BOLD,
   CENTER,
+  COLUMN,
   DEEPPINK,
+  FILL_30PARENT,
+  FILL_70PARENT,
   FILL_80PARENT,
   FILL_PARENT,
   GRAY,
@@ -21,6 +24,7 @@ import {
   LARGE,
   LEFT,
   MEDIUM,
+  ROW,
   SB,
   SE,
   STICKY,
@@ -124,9 +128,9 @@ export default function CartPage() {
       </Flex>
       <Gap gap={30} />
       <Box padding={8} bg={"#e2e2e2"} w={FILL_PARENT}>
-        <Flex gap={4} w={FILL_80PARENT} margin={AUTO}>
+        <Flex gap={4} direction={{base:COLUMN,sm:COLUMN,lg:ROW}} w={{base:FILL_PARENT,sm:FILL_80PARENT,lg:FILL_80PARENT}} margin={AUTO}>
           {data.length > 0 ? (
-            <Box textAlign={LEFT} w={"70%"}>
+            <Box textAlign={LEFT} w={{base:FILL_PARENT,sm:FILL_PARENT,lg:FILL_70PARENT}}>
               <Text>
                 Apply a relevant coupon code here to avail any additional
                 discount. Applicable cashback if any will be credited to your
@@ -188,7 +192,7 @@ export default function CartPage() {
 
           {/* //panel */}
 
-          <Box display={data.length>0?"block":"none"} w={"30%"}>
+          <Box display={data.length>0?"block":"none"} w={{base:FILL_PARENT,sm:FILL_PARENT,lg:FILL_30PARENT}}>
             <VStack textAlign={LEFT} gap={2}>
               <Card w={FILL_PARENT}>
                 <CardBody>
