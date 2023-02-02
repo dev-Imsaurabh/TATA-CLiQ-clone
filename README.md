@@ -1,3 +1,21 @@
+<center><h1>CLiQ Mart</h1></center>
+
+<center><h3>Begin your journey online with one of the fastest growing, e-commerce brands in the country and have a seamless online shopping experience. Immerse yourself in the joy of browsing through the best Indian and international brands in fashion, luxury, electronics and jewellery.</h3></center>
+
+<center><img width="500px" src="https://github.com/dev-Imsaurabh/image-hosting-repo/blob/master/cliqmart/mobile%20(5).png?raw=true"></center>
+
+# Features
+ - `Login/Signup using Redux`
+ - `Multiple Filtering and Sorting options`
+ - `Search Page`
+ - `Cart Page using Redux`
+ - `Orders using OTP`
+ - `Admin Panel`
+ - `Fully Responsive` 
+
+
+# Our Team work planning and proof
+
 <!-- All the folder structure information -->
 => Before you start:
    - I have already created all the folders which you will need during journey.
@@ -374,7 +392,8 @@ Step-3- install some common dependencies:- <br />
    //Tinkle
    - `HomePage`-------------------->Saurabh/ Tinkle (Day1-Day2)
 
-   - `ViewProductPage`-------------------> Tinkle / Anyone(Help if needed) (Day1-Day2)
+   - `AccountPage`------------------------->Tinkle / Anyone(Help if needed) (Day-1) (day-2)
+
 
    //Farhaz
    - `SignupPage`------------------------->Farhaz (Day1-Day2) 
@@ -386,24 +405,31 @@ Step-3- install some common dependencies:- <br />
    - `SearchPage`------------------------> Saurabh (Day3)
    
    - `ProductPage`------------------------> Saurabh (Day3-Day4)
-
-   - `OtpPage`------------------------------>Saurabh / Anyone(Help if needed)
-
-
-   //Surya
-   - `AccountPage`------------------------->Surya / Anyone(Help if needed) (Day-1) (day-2)
    
-   - `CartPage`----------------------------> Surya (Day3-Day4) 
+   - `ViewProductPage`-------------------> Tinkle / Anyone(Help if needed) (Day1-Day2)
 
-   - `Checkout-Page`----------------------------> Surya (Day3-Day4) 
+   - `CartPage`----------------------------> Saurabh (Day3-Day4) 
+
+
+
+   //Bhavnesh
+   
+   - `Checkout-Page`----------------------------> Bhavnesh (Day3-Day4) 
+
+   - `OtpPage`------------------------------>Bhavnesh / Anyone(Help if needed)
+
+   - `Whole backend setup`-------------------> Bhavnesh
+
+
+
 
    # Components
      These are the components we need in this project.
 
    //HomePage
    - `Navbar`----------Tinkle (Day-1)
-   - `Footer`----------Tinkle (Day-1)
-   - `carousel` ------------Surya (Day-1)
+   - `Footer`----------Bhavnesh (Day-1)
+   - `carousel` ------------Bhavnesh (Day-1)
    - `Category-circular-Card`------Saurabh (Day-1)
    - `Category-rectangular-Card`--------Saurabh (Day-1)
    - `brands-Card`-----------Saurabh (Day-1)
