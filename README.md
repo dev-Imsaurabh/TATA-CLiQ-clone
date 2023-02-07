@@ -2,7 +2,7 @@
 
 <center><h3>Begin your journey online with one of the fastest growing, e-commerce brands in the country and have a seamless online shopping experience. Immerse yourself in the joy of browsing through the best Indian and international brands in fashion, luxury, electronics and jewellery.</h3></center>
 
-<center><img width="500px" src="https://github.com/dev-Imsaurabh/image-hosting-repo/blob/master/cliqmart/mobile%20(5).png?raw=true"></center>
+<center><img width="500px" src="https://drive.google.com/uc?export=view&id=1v0Bo-1q2zLVLG8pEUHJeKOiqtPs06y_2"></center>
 
 # Features
  - `Login/Signup using Redux`
