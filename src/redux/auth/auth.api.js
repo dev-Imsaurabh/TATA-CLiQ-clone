@@ -5,7 +5,7 @@ export async function signup_user(obj) {
     let flag =false
     try {
         let exist = await axios.get(USERS+"/"+obj.email)
-        console.log(exist)
+        // console.log(exist)
         if(exist.data.email!=undefined){
             flag=true
         }
