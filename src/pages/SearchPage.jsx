@@ -15,13 +15,16 @@ import "../styles/style.css"
 export default function SearchPage(){
 
     const [searchParams, setSearchParams] = useSearchParams();
-    let query =searchParams.get("q").toLowerCase()
+    let query =searchParams.get("q")?searchParams.get("q").toLowerCase():""
     let [data,setdata]=useState([])
     let [loading,setLoading] = useState(false)
    
 
     // console.log(data)
     useEffect(()=>{
+        if(query==""){
+            return
+        }
         setLoading(true)
         const getData = async()=>{
             let products =[]
@@ -48,7 +51,6 @@ export default function SearchPage(){
             setdata(products)
             setLoading(false)
         }
-
         getData()
 
     },[searchParams])
