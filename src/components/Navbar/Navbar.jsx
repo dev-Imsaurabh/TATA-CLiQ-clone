@@ -60,6 +60,9 @@ export default function Navbar() {
   let nav = useNavigate();
   const handleSeacrh = (event) => {
     if (event.key == "Enter") {
+      if(value==""){
+        return
+      }
       nav(`/search?q=${value}`);
     }
   };
