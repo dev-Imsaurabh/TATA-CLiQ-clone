@@ -26,7 +26,7 @@ const Orders = () => {
   return (
     <Box >
       <Box>
-        {prevorder?.map((el)=><OrderItems {...el} />)}
+        {prevorder?.map((el)=><OrderItems key={el.id} {...el} />)}
         <Text display={prevorder?.length>0?"none":"block"} cursor="default">You have not made any purchase yet</Text>
         
         <Button onClick={()=>{

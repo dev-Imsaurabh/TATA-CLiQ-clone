@@ -324,7 +324,7 @@ export default function AdminPanel() {
     setTableData([...res]);
   };
 
-  console.log(nproduct)
+  // console.log(nproduct)
   return (
     <Box className="container">
       <Flex>
@@ -431,7 +431,7 @@ export default function AdminPanel() {
                 <Select id="category" name="category" onChange={handleFormData}>
                   <option value="">Select category</option>
                   {cat.map((el) => (
-                    <option value={el.id}>{el.id}</option>
+                    <option key={el.id} value={el.id}>{el.id}</option>
                   ))}
                 </Select>
               </FormControl>
@@ -522,7 +522,7 @@ export default function AdminPanel() {
           >
             <option value="">Select category</option>
             {cat.map((el) => (
-              <option value={el.id}>{el.id}</option>
+              <option key={el.id} value={el.id}>{el.id}</option>
             ))}
           </Select>
 
@@ -541,9 +541,9 @@ export default function AdminPanel() {
                 </Tr>
               </Thead>
               <Tbody>
-                {console.log(tableData)}
+                {/* {console.log(tableData)} */}
                 {tableData?.map((el) => (
-                  <TableRow {...el} handleTable={handleTable} />
+                  <TableRow key={el.id} {...el} handleTable={handleTable} />
                 ))}
               </Tbody>
             </Table>

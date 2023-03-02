@@ -230,7 +230,7 @@ export default function ProductsPage() {
           <HStack flex={1}>
             <Text color={GRAY}>Sort:</Text>
             <select
-              value={value}
+              value={value||""}
               onChange={(e) => {
                 setSearchParams({
                   sort: e.target.value,
@@ -279,7 +279,8 @@ export default function ProductsPage() {
           gridTemplateColumns={{ base: R1, sm: R3, lg: R4 }}
         >
           {productData?.map((el) => (
-            <ProductCard {...el} />
+            <ProductCard key={100000 + Math.floor(Math.random() * 900000)
+            } {...el} />
           ))}
         </Grid>
       </Flex>

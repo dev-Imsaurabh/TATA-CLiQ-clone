@@ -75,16 +75,16 @@ export default function CartPage() {
 
   const updateQuantity = (pid, value) => {
     console.log("update");
-    let newData = data.map((el) => {
+    let newdata = data.map((el) => {
       if (el.id == pid) {
         el.quantity = value;
         return el;
       }
       return el;
     });
-    // console.log(newData)
-    // console.log("local",newData)
-    dispatch(UdpateCart(userId.id, { cart: newData }));
+    // console.log(newdata)
+    // console.log("local",newdata)
+    dispatch(UdpateCart(userId.id, { cart: newdata }));
   };
 
   useEffect(() => {
@@ -93,7 +93,7 @@ export default function CartPage() {
     let final_discount = 0;
 
     data.forEach(({ price, strike_price, quantity }) => {
-      console.log(strike_price);
+      // console.log(strike_price);
       checkout_total += price * quantity;
       bag_total += strike_price * quantity;
     });
@@ -142,6 +142,7 @@ export default function CartPage() {
                 {/* //inflate all cart items here */}
                 {cartData?.reverse().map((el) => (
                   <CartItem
+                  key={el.id}
                     {...el}
                     update={updateQuantity}
                     remove={removeItem}
