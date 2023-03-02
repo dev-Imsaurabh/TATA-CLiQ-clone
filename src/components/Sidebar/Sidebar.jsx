@@ -64,7 +64,7 @@ const Sidebar = () => {
       </Box>
       <Box>
         {profileLinks.map((el) => (
-          <Box textAlign="left" marginTop="15px">
+          <Box key={el.link} textAlign="left" marginTop="15px">
             <Link to={el.link}>{el.Title}</Link>
           </Box>
         ))}

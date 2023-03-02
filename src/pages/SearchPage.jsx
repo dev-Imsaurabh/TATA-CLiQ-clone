@@ -59,7 +59,7 @@ export default function SearchPage(){
         <Heading margin={16} textAlign={LEFT}>Showing {data.length} search results</Heading>
         <Grid width={FILL_80PARENT} gap={4} margin={AUTO} gridTemplateColumns={{base:R1,sm:R3,lg:R6}}>
 
-            {data?.map((el)=><ProductCard {...el} />)}
+            {data?.map((el)=><ProductCard key={el.id} {...el} />)}
 
         </Grid>
         

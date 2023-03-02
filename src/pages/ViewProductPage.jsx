@@ -171,7 +171,7 @@ export default function ViewProductPage() {
         w={FILL_80PARENT}
       >
         <Box w={{ base: FILL_PARENT, sm: FILL_PARENT, lg: FILL_50PARENT }}>
-          <ProductImageSlider images={item[0].images} />
+          <ProductImageSlider key={100000 + Math.floor(Math.random() * 900000)} images={item[0].images} />
         </Box>
 
         <Box width={{ base: FILL_PARENT, sm: FILL_PARENT, lg: FILL_50PARENT }}>
@@ -284,6 +284,7 @@ export default function ViewProductPage() {
               <Wrap padding={2}>
                 {item[0].sizes.map((el, index) => (
                   <Card
+                  key={100000 + Math.floor(Math.random() * 900000)}
                     border={index == option && my_border(1, SOLID, DEEPPINK)}
                     h={AUTO}
                     onClick={() => {

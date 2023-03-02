@@ -53,9 +53,9 @@ import { useEffect } from "react";
 import Carousels from "../components/Carousel/Carousel";
 
 export default function Homepage() {
-  console.log(BASE_URL);
-  console.log(PRODUCTS);
-  console.log(USERS);
+  // console.log(BASE_URL);
+  // console.log(PRODUCTS);
+  // console.log(USERS);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
