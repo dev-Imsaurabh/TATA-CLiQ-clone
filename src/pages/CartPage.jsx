@@ -74,7 +74,7 @@ export default function CartPage() {
   }, [data]);
 
   const updateQuantity = (pid, value) => {
-    console.log("update");
+    // console.log("update");
     let newdata = data.map((el) => {
       if (el.id == pid) {
         el.quantity = value;

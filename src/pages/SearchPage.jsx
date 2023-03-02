@@ -34,7 +34,7 @@ export default function SearchPage(){
                     if(item.name.toLowerCase().includes(s)||
                     item.short_desc.toLowerCase().includes(s)||item.long_desc.toLowerCase().includes(s)||item.category.toLowerCase().includes(s)){
                         products.push(item)
-                        console.log(item)
+                        // console.log(item)
                     }
                 })
                     
