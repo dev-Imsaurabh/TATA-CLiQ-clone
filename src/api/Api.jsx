@@ -5,8 +5,8 @@ import { BASE_URL, PRODUCTS } from "../constants/constants";
 
 export default class Api{
 
-    constructor(){
-    }
+    // constructor(){
+    // }
     
    async getProductsData(endpoint){
 

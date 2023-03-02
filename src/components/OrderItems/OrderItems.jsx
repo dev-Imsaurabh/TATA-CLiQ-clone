@@ -1,16 +1,16 @@
 import { Card, CardBody } from "@chakra-ui/card";
 import { Image } from "@chakra-ui/image";
 import { Box, Divider, Flex, HStack, Text } from "@chakra-ui/layout";
-import { AUTO, BLACK, BOLD, CENTER, COLUMN, FILL_15PARENT, FILL_50PARENT, FILL_80PARENT, FILL_85PARENT, FILL_PARENT, GRAY, GREEN, LINE_THROUGH, NONE, ROW, SB, TRANSPARENT } from "../../constants/typography";
+import { BOLD, COLUMN, FILL_15PARENT, FILL_50PARENT, FILL_85PARENT, FILL_PARENT, GRAY, GREEN, LINE_THROUGH, ROW, SB } from "../../constants/typography";
 import my_pixel from "../../scripts/my_pixel";
 import { TbTruckDelivery } from "react-icons/tb";
-import { AiFillStar, AiOutlineHeart } from "react-icons/ai";
+// import { AiFillStar, AiOutlineHeart } from "react-icons/ai";
 
 import { Gap } from "../Gap";
-import { Button } from "@chakra-ui/button";
+// import { Button } from "@chakra-ui/button";
 import future_date from "../../scripts/future_date";
 import { RUPEES_SYMBOL } from "../../constants/constants";
-import { color } from "@chakra-ui/styled-system";
+// import { color } from "@chakra-ui/styled-system";
 
 export default function OrderItems({images,id,name,long_desc,color,short_desc,price,strike_price,size,sizes,quantity,delivery_time,update,remove}) {
   return (
