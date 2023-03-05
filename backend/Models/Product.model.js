@@ -14,10 +14,9 @@ const productSchema = mongoose.Schema(
     delivery_time: { type: Number, required: true },
     size: { type: Boolean, required: true },
     sizes: { type: [String], required: true },
-    id: { type: String, required: true },
   },
   {
-    versionKey: false
+    versionKey: false,
   }
 );
 
