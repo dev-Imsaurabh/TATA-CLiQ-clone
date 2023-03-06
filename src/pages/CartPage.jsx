@@ -14,7 +14,7 @@ import {
   BOLD,
   CENTER,
   COLUMN,
-  DEEPPINK,
+  // DEEPPINK,
   FILL_30PARENT,
   FILL_70PARENT,
   FILL_80PARENT,
@@ -23,17 +23,17 @@ import {
   GREEN,
   LARGE,
   LEFT,
-  MEDIUM,
+  // MEDIUM,
   ROW,
   SB,
   SE,
-  STICKY,
-  X2LARGE,
+  // STICKY,
+  // X2LARGE,
   YELLOWGREEN,
 } from "../constants/typography";
 import { CiDiscount1 } from "react-icons/ci";
 import { MdArrowForwardIos } from "react-icons/md";
-import empty_cart from "../assets/empty_cart.png"
+import empty_cart from "../assets/empty_cart.png";
 
 import "../styles/style.css";
 import { Gap } from "../components/Gap";
@@ -42,7 +42,11 @@ import { Button } from "@chakra-ui/button";
 import { CartItem } from "../components/CartItem";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { GetCart, UdpateCart } from "../redux/cart/cart.actions";
+import {
+  deleteItemFromCart,
+  editCartItem,
+  getCartProducts,
+} from "../redux/cart/cart.actions";
 import { Loader } from "../components/Loader";
 import { ERROR_URL, LOADER_URL, RUPEES_SYMBOL } from "../constants/constants";
 import { useState } from "react";
@@ -50,53 +54,43 @@ import { Image } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
 export default function CartPage() {
-  const { userId } = useSelector((state) => state.authManager);
-  const { data, loading, error } = useSelector((state) => state.cartManager);
+  const { token } = useSelector((state) => state.authManager);
+
+  const { products, loading, error } = useSelector(
+    (state) => state.cartManager
+  );
   const [bagTotal, setBagTotal] = useState(0);
   const [bagSubTotal, setBagSubTotal] = useState(0);
   const [discount, setDiscount] = useState(0);
   const [total, setTotal] = useState(0);
-  const [cartData, setCartData] = useState([]);
-  let nav = useNavigate()
+  // const [products, setproducts] = useState([]);
+  let nav = useNavigate();
 
   let dispatch = useDispatch();
+  // console.log(products);
+  // console.log(products)
 
-  useEffect(() => {
-    dispatch(GetCart(userId.id));
-  }, []);
-
-  useEffect(() => {
-    setCartData([...data]);
-  }, [data]);
+  // console.log(products)
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [data]);
-
-  const updateQuantity = (pid, value) => {
-    // console.log("update");
-    let newdata = data.map((el) => {
-      if (el.id == pid) {
-        el.quantity = value;
-        return el;
-      }
-      return el;
-    });
-    // console.log(newdata)
-    // console.log("local",newdata)
-    dispatch(UdpateCart(userId.id, { cart: newdata }));
-  };
+  }, [products]);
+  useEffect(() => {
+    dispatch(getCartProducts(token));
+  }, [token,dispatch]);
 
   useEffect(() => {
     let bag_total = 0;
     let checkout_total = 0;
     let final_discount = 0;
+    
+    products?.forEach(({ productId, qty }) => {
+      // console.log(typeof productId.strike_price,typeof productId.qty);
+      checkout_total += +productId.price * qty;
+      bag_total += +productId.strike_price * qty;
 
-    data.forEach(({ price, strike_price, quantity }) => {
-      // console.log(strike_price);
-      checkout_total += price * quantity;
-      bag_total += strike_price * quantity;
     });
+    // console.log(bag_total,checkout_total,final_discount);
 
     final_discount = bag_total - checkout_total;
     setTotal(checkout_total);
@@ -104,19 +98,34 @@ export default function CartPage() {
     setBagTotal(bag_total);
     setBagSubTotal(bag_total);
     // console.log(checkout_total,bag_total,final_discount)
-  }, [data]);
-
-  const removeItem = (pid) => {
-    let detetedData = data.filter((el) => el.id !== pid);
-    dispatch(UdpateCart(userId.id, { cart: detetedData }));
+  }, [products]);
+  
+  const removeitem = (id) => {
+    dispatch(deleteItemFromCart(id,token));
+    dispatch(getCartProducts(token));
   };
 
+  const updatequantity = (id, value) => {
+    // console.log(newData)
+    //  console.log("local",newData)
+    products?.map((el) => {
+      // console.log(id,el._id,value);
+      if (el._id === id) {
+        el.qty = value;
+        return el;
+      }
+      return el;
+    });
+    dispatch(editCartItem(id, token, +value));
+    dispatch(getCartProducts(token));
+    // console.log(new_Quantity);
+  };
   // console.log(data)
 
   if (loading) return <Loader gif={LOADER_URL} />;
   if (error) return <Loader gif={ERROR_URL} />;
 
-  return cartData ? (
+  return products ? (
     <Box className="container">
       <Flex w={FILL_PARENT} justify={SE} alignItems={CENTER}>
         <Heading size={LARGE}>My Bag</Heading>
@@ -128,9 +137,17 @@ export default function CartPage() {
       </Flex>
       <Gap gap={30} />
       <Box padding={8} bg={"#e2e2e2"} w={FILL_PARENT}>
-        <Flex gap={4} direction={{base:COLUMN,sm:COLUMN,lg:ROW}} w={{base:FILL_PARENT,sm:FILL_80PARENT,lg:FILL_80PARENT}} margin={AUTO}>
-          {data.length > 0 ? (
-            <Box textAlign={LEFT} w={{base:FILL_PARENT,sm:FILL_PARENT,lg:FILL_70PARENT}}>
+        <Flex
+          gap={4}
+          direction={{ base: COLUMN, sm: COLUMN, lg: ROW }}
+          w={{ base: FILL_PARENT, sm: FILL_80PARENT, lg: FILL_80PARENT }}
+          margin={AUTO}
+        >
+          {products?.length ? (
+            <Box
+              textAlign={LEFT}
+              w={{ base: FILL_PARENT, sm: FILL_PARENT, lg: FILL_70PARENT }}
+            >
               <Text>
                 Apply a relevant coupon code here to avail any additional
                 discount. Applicable cashback if any will be credited to your
@@ -140,12 +157,15 @@ export default function CartPage() {
 
               <VStack gap={4} w={FILL_PARENT}>
                 {/* //inflate all cart items here */}
-                {cartData?.reverse().map((el) => (
+                {products?.reverse().map((el,index) => (
                   <CartItem
-                  key={el.id}
-                    {...el}
-                    update={updateQuantity}
-                    remove={removeItem}
+                  key={index}
+                    {...el.productId}
+                    id={el._id}
+                    qty={el.qty}
+                    update={updatequantity}
+                    remove={removeitem}
+
                   />
                 ))}
               </VStack>
@@ -157,8 +177,8 @@ export default function CartPage() {
                   w={200}
                   borderRadius={my_pixel(50)}
                   variant={"outline"}
-                  onClick={()=>{
-                    nav("/")
+                  onClick={() => {
+                    nav("/");
                   }}
                   colorScheme="brown"
                 >
@@ -170,22 +190,19 @@ export default function CartPage() {
             <Card w={FILL_PARENT}>
               <CardBody>
                 <VStack padding={8}>
-
                   <Image w={300} src={empty_cart}></Image>
-                  <Text color={GRAY}  >Your cart is empty !</Text>
+                  <Text color={GRAY}>Your cart is empty !</Text>
                   <Button
-                  w={200}
-                  onClick={()=>{
-                    nav("/")
-                  }}
-                  borderRadius={my_pixel(50)}
-                  variant={"outline"}
-                  colorScheme="brown"
-                >
-                  Continue Shopping
-                </Button>
-
-
+                    w={200}
+                    onClick={() => {
+                      nav("/");
+                    }}
+                    borderRadius={my_pixel(50)}
+                    variant={"outline"}
+                    colorScheme="brown"
+                  >
+                    Continue Shopping
+                  </Button>
                 </VStack>
               </CardBody>
             </Card>
@@ -193,7 +210,10 @@ export default function CartPage() {
 
           {/* //panel */}
 
-          <Box display={data.length>0?"block":"none"} w={{base:FILL_PARENT,sm:FILL_PARENT,lg:FILL_30PARENT}}>
+          <Box
+            display={products?.length > 0 ? "block" : "none"}
+            w={{ base: FILL_PARENT, sm: FILL_PARENT, lg: FILL_30PARENT }}
+          >
             <VStack textAlign={LEFT} gap={2}>
               <Card w={FILL_PARENT}>
                 <CardBody>
@@ -260,9 +280,13 @@ export default function CartPage() {
                         </Text>
                       </VStack>
 
-                      <Button onClick={()=>{
-                        nav("/checkout")
-                      }} colorScheme={"pink"} borderRadius={my_pixel(50)}>
+                      <Button
+                        onClick={() => {
+                          nav("/checkout");
+                        }}
+                        colorScheme={"pink"}
+                        borderRadius={my_pixel(50)}
+                      >
                         Checkout
                       </Button>
                     </Flex>

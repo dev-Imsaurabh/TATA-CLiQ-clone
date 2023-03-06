@@ -7,8 +7,10 @@ export const Signup=(obj)=>async(dispatch)=>{
  try {
     dispatch({type:SIGNUP_LOADING})
     let res = await signup_user(obj)
-    dispatch({type:SIGNUP_SUCCESS,payload:res})
+   //  console.log(res);
+    dispatch({type:SIGNUP_SUCCESS,payload:res.data})
  } catch (error) {
+   console.log(error);
     dispatch({type:SIGNUP_ERROR})
     
  }
@@ -20,7 +22,7 @@ export const Login=(obj)=>async(dispatch)=>{
     try {
        dispatch({type:LOGIN_LOADING})
        let res = await login_user(obj)
-       dispatch({type:LOGIN_SUCCESS,payload:res})
+       dispatch({type:LOGIN_SUCCESS,payload:res.data})
     } catch (error) {
        dispatch({type:LOGIN_ERROR})
        

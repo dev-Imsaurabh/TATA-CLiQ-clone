@@ -1,40 +1,64 @@
 const express = require("express");
-const { ProductModel } = require("../Models/Product.model");
+const { adminAuthentication } = require("../Middlewares/Admin.authentication");
+const { ProductModel } = require("../Models/Product.Model");
 
 const ProductRouter = express.Router();
 
-ProductRouter.post("/:category", async (req, res) => {
+//Add Product from admin side
+ProductRouter.post("/add", adminAuthentication, async (req, res) => {
   try {
-    const category = req.params.category;
-    console.log(category);
-    const product = await ProductModel.find({id:category});
-    console.log(product);
-    let data=product[0].items.push(new ProductModel(req.body))
-    await data.save();
-    console.log(data)
-    res.status(200).send({ message: "Product Added", data });
+    const product = new ProductModel(req.body);
+    await product.save();
+
+    res.status(200).send({ message: "Product Added", product: product });
   } catch (e) {
-    res.status(400).send(e);
+    res.status(400).send({ message: "Request failed", error: e.message });
   }
 });
+
+//Get Products
 ProductRouter.get("/", async (req, res) => {
   const products = await ProductModel.find();
-  res.status(200).send(products);
+  res.status(200).send({ products: products });
 });
+
 ProductRouter.get("/:category", async (req, res) => {
   const category = req.params.category;
-  console.log(category);
-  const products = await ProductModel.find({ id: category });
-  res.status(200).send(products);
+  const products = await ProductModel.find({ category: category });
+  res.status(200).send({ products: products });
 });
 
 ProductRouter.get("/:category/:id", async (req, res) => {
+  //   const category = req.params.category;
   const id = req.params.id;
-  const category = req.params.category;
-  console.log(id, category);
-  const products = await ProductModel.find({ id: category });
-  const data = products[0].items.filter((el) => el.id === id);
-  res.status(200).send(data);
+  const product = await ProductModel.findById(id);
+  res.status(200).send({ product: product });
+});
+
+//Update Product from admin side
+ProductRouter.patch("/:id", adminAuthentication, async (req, res) => {
+  //   const category = req.params.category;
+  const payload = req.body;
+  const ID = req.params.id;
+  try {
+    const product = await ProductModel.findByIdAndUpdate({ _id: ID }, payload);
+    res.status(200).send({ product: product });
+  } catch (e) {
+    res.status(400).send({ message: "Request failed", error: e.message });
+  }
+});
+
+//Delete Product from admin side
+
+ProductRouter.delete("/:id", adminAuthentication, async (req, res) => {
+  const ID = req.params.id;
+  console.log(ID);
+  try {
+    const product = await ProductModel.findByIdAndDelete({ _id: ID });
+    res.status(200).send({ message: "Product deleted", product: product });
+  } catch (e) {
+    res.status(400).send({ message: "Request failed", error: e.message });
+  }
 });
 
 module.exports = { ProductRouter };

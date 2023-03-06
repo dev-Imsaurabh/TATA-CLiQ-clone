@@ -47,16 +47,17 @@ import {
 import { SignupModal } from "../SignupModal";
 import { MdAdminPanelSettings } from "react-icons/md";
 
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import { FaUserCircle } from "react-icons/fa";
+import { useSelector } from "react-redux";
 export default function Navbar() {
   const [arrow1, setArrow1] = useState(false);
-  const [arrow2, setArrow2] = useState(false);
-  const { loading, signup, auth, no_user, error, exist, userId } = useSelector(
+  // const [arrow2, setArrow2] = useState(false);
+  
+  const [value, setValue] = useState("");
+    const { token } = useSelector(
     (state) => state.authManager
   );
-  const [value, setValue] = useState("");
-
   let nav = useNavigate();
   const handleSeacrh = (event) => {
     if (event.key == "Enter") {
@@ -67,6 +68,7 @@ export default function Navbar() {
     }
   };
 
+  
   return (
     <Box
       position={FIXED}
@@ -112,7 +114,7 @@ export default function Navbar() {
               _hover={{ bg: { TRANSPARENT } }}
               as={Button}
             >
-              {auth ? <FaUserCircle color={DEEPPINK} /> : "Sign up/Sign in"}
+              {token ? <FaUserCircle color={DEEPPINK} /> : "Sign up/Sign in"}
             </MenuButton>
             <MenuList>
               <SignupModal bg={TRANSPARENT} color={BLACK} />
@@ -325,7 +327,7 @@ export default function Navbar() {
             </Box>
             <Box
               display={
-                auth == true && userId.email == "admin@gmail.com"
+                token
                   ? "flex"
                   : "none"
               }

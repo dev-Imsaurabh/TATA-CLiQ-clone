@@ -14,7 +14,7 @@ function CheckFilter({name,setFilters}){
             return [...prev,e.target.value]
 
           }else{
-            let removeFilter = prev.filter((el)=>el!=e.target.value)
+            let removeFilter = prev.filter((el)=>el!==e.target.value)
             return [...removeFilter]
 
           }

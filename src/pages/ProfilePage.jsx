@@ -10,7 +10,9 @@ import User from "../components/User/User";
 import { AUTO, FILL_80PARENT, ROW } from "../constants/typography";
 
 const ProfilePage = () => {
-  // const {userId} = useSelector((state)=>state.authManager)
+
+ 
+
 
   return (
     <Box

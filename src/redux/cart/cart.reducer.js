@@ -1,50 +1,102 @@
-import { GET_CART_ERROR, GET_CART_LOADING, GET_CART_SUCCESS, PATCH_CART_ERROR, PATCH_CART_LOADING, PATCH_CART_SUCCESS } from "./cart.types"
+import * as types from "./cart.types";
 
-let initalData = {
-    loading:false,
-    error:false,
-    data:[]
-}
+const initState = {
+  loading: false,
+  error: false,
+  products: [],
+};
 
-export const cartReducer = (state=initalData,{type,payload})=>{
-
-    switch(type){
-
-        case GET_CART_LOADING:{
-
-            return {...state,loading:true}
-
-        }
-
-        case GET_CART_SUCCESS:{
-            
-            return {...state,data:payload,loading:false,error:false}
-        }
-
-        case GET_CART_ERROR:{
-
-            return {...state,error:true,loading:false}
-        }
-
-        case PATCH_CART_LOADING:{
-
-            return {...state,loading:true}
-
-        }
-
-        case PATCH_CART_SUCCESS:{
-            
-            return {...state,loading:false,error:false}
-        }
-
-        case PATCH_CART_ERROR:{
-
-            return {...state,error:true,loading:false}
-        }
-
-        default:{
-            return state
-        }
+export const cartReducer = (state = initState, { type, payload }) => {
+  switch (type) {
+    case types.GET_CART_LOADING: {
+      return {
+        ...state,
+        loading: true,
+        error: false,
+      };
+    }
+    case types.GET_CART_ERROR: {
+      return {
+        ...state,
+        loading: false,
+        error: true,
+      };
+    }
+    case types.GET_CART_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        error: false,
+        products: payload,
+      };
+    }
+    case types.DELETE_CART_LOADING: {
+      return {
+        ...state,
+        loading: true,
+        error: false,
+      };
+    }
+    case types.DELETE_CART_ERROR: {
+      return {
+        ...state,
+        loading: false,
+        error: true,
+      };
+    }
+    case types.DELETE_CART_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        error: false,
+      };
+    }
+    case types.EDIT_CART_LOADING: {
+      return {
+        ...state,
+        loading: true,
+        error: false,
+      };
+    }
+    case types.EDIT_CART_ERROR: {
+      return {
+        ...state,
+        loading: false,
+        error: true,
+      };
+    }
+    case types.EDIT_CART_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        error: false,
+      };
     }
 
-}
+    case types.ADD_CART_LOADING: {
+      return {
+        ...state,
+        loading: true,
+        error: false,
+      };
+    }
+    case types.ADD_CART_ERROR: {
+      return {
+        ...state,
+        loading: false,
+        error: true,
+      };
+    }
+    case types.ADD_CART_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        error: false,
+       products:payload
+      };
+    }
+    default: {
+      return state;
+    }
+  }
+};

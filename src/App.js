@@ -3,7 +3,7 @@ import "./App.css";
 import { Box } from "@chakra-ui/react";
 import AllRoutes from "./routes/AllRoutes";
 import { Navbar } from "./components/Navbar";
-import { THIS_IS_SIMPLE_CONSTANTS } from "./constants/constants";
+// import { THIS_IS_SIMPLE_CONSTANTS } from "./constants/constants";
 import Footer from "./components/Footer/Footer";
 
 

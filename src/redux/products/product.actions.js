@@ -5,7 +5,7 @@ export const  getCategoryData=(category)=>async(dispatch)=>{
     try {
         dispatch({type:LODING_PRODUCTS})
     let payload = await getDataByCategory(category)
-    dispatch({type:SUCCESS_PRODUCTS,payload:payload.items})
+    dispatch({type:SUCCESS_PRODUCTS,payload:payload.products})
         
     } catch (error) {
 

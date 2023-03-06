@@ -1,4 +1,4 @@
-import { Box, Flex, Grid, HStack, VStack } from "@chakra-ui/react";
+import { Box, Flex, Grid } from "@chakra-ui/react";
 import CardComponent from "../components/Card-Component/CardComponent";
 import { Gap } from "../components/Gap";
 import {
@@ -18,9 +18,9 @@ import {
   AUTO,
   CENTER,
   COLUMN,
-  FILL_70PARENT,
+  // FILL_70PARENT,
   FILL_75PARENT,
-  FILL_80PARENT,
+  // FILL_80PARENT,
   FILL_PARENT,
   R1,
   R11,
@@ -29,7 +29,7 @@ import {
   R4,
   R6,
   ROW,
-  SB,
+  // SB,
 } from "../constants/typography";
 import my_pixel from "../scripts/my_pixel";
 import estside_banner_img from "../assets/estside_banner_img.png";
@@ -38,16 +38,16 @@ import winterstyle_banner from "../assets/winterstyle_banner.png";
 import trendingnow_banner from "../assets/trendingnow_banner.png";
 import strike_choice_banner from "../assets/strike_choice_banner.png";
 
-import baby_hop_banner from "../assets/baby_hop_banner.png";
-import beauty_banner from "../assets/beauty_banner.png";
-import cosy_corner_banner from "../assets/cosy_corner_banner.png";
+// import baby_hop_banner from "../assets/baby_hop_banner.png";
+// import beauty_banner from "../assets/beauty_banner.png";
+// import cosy_corner_banner from "../assets/cosy_corner_banner.png";
 import shoes_banner from "../assets/shoes_banner.png";
 import trending_men_banner from "../assets/trending_men_banner.png";
 
 import { Heading } from "../components/Heading";
-import { Carousel } from "../components/Carousel";
-import { BASE_URL, PRODUCTS, USERS } from "../constants/constants";
-import { ProductCard } from "../components/ProductCard";
+// import { Carousel } from "../components/Carousel";
+// import { BASE_URL, PRODUCTS, USERS } from "../constants/constants";
+// import { ProductCard } from "../components/ProductCard";
 import { useEffect } from "react";
 
 import Carousels from "../components/Carousel/Carousel";
@@ -161,7 +161,7 @@ export default function Homepage() {
         </Grid>
         {/* gap component for simple gap */}
         <Gap gap={60} />
-        <CardComponent  src={theweddingedits} w={AUTO} />
+        <CardComponent src={theweddingedits} w={AUTO} />
         <Gap gap={60} />
 
         {/* heading for womens wear */}

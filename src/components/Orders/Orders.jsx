@@ -1,27 +1,27 @@
 import { Box, Button, Text } from "@chakra-ui/react";
-import axios from "axios";
+// import axios from "axios";
 import React, { useState } from "react";
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
+// import { useEffect } from "react";
+// import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { USERS } from "../../constants/constants";
-import { FILL_80PARENT } from "../../constants/typography";
+// import { USERS } from "../../constants/constants";
+// import { FILL_80PARENT } from "../../constants/typography";
 import { OrderItems } from "../OrderItems";
 
 const Orders = () => {
 
-  let {userId} = useSelector((state)=>state.authManager)
+//   let {token} = useSelector((state)=>state.authManager)
   const [prevorder,setPrevOrder]=useState([])
   const nav = useNavigate()
 
-  useEffect(()=>{
-    const orders = async()=>{
-      let res = await axios.get(USERS+"/"+userId.id)
-      setPrevOrder(res.data.orders)
-    }
+//   useEffect(()=>{
+//     const orders = async()=>{
+//       let res = await axios.get(USERS+"/"+token)
+//       setPrevOrder(res.data.orders)
+//     }
 
-    orders()
-  },[])
+//     orders()
+//   },[])
 
   return (
     <Box >

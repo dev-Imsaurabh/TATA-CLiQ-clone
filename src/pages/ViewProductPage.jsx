@@ -4,8 +4,8 @@ import {
   Card,
   CardBody,
   Flex,
-  Grid,
-  Heading,
+  // Grid,
+  // Heading,
   HStack,
   Image,
   Input,
@@ -15,15 +15,15 @@ import {
 } from "@chakra-ui/react";
 import {
   Table,
-  Thead,
+  // Thead,
   Tbody,
-  Tfoot,
+  // Tfoot,
   Tr,
-  Th,
+  // Th,
   Td,
-  TableCaption,
+  // TableCaption,
   TableContainer,
-} from '@chakra-ui/react'
+} from "@chakra-ui/react";
 import {
   Accordion,
   AccordionItem,
@@ -32,7 +32,7 @@ import {
   AccordionIcon,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
+// import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { Loader } from "../components/Loader";
@@ -43,13 +43,12 @@ import {
   PERCENT_SYMBOL,
   RUPEES_SYMBOL,
 } from "../constants/constants";
-import CardComponent from "../components/Card-Component/CardComponent";
+// import CardComponent from "../components/Card-Component/CardComponent";
 
 import "../styles/style.css";
 
-
 import {
-  ABSOLUTE,
+  // ABSOLUTE,
   AUTO,
   BLACK,
   BOLD,
@@ -58,7 +57,7 @@ import {
   DEEPPINK,
   FILL_50PARENT,
   FILL_80PARENT,
-  FILL_90PARENT,
+  // FILL_90PARENT,
   FILL_PARENT,
   GRAY,
   GREEN,
@@ -67,10 +66,10 @@ import {
   LINE_THROUGH,
   MEDIUM,
   NONE,
-  NORMAL,
+  // NORMAL,
   POINTER,
   RED,
-  RELATIVE,
+  // RELATIVE,
   ROW,
   SB,
   SMALL,
@@ -80,7 +79,7 @@ import {
   WHITE,
   X1LARGE,
   X2LARGE,
-  YELLOW,
+  // YELLOW,
 } from "../constants/typography";
 import { getCategoryData } from "../redux/products/product.actions";
 
@@ -95,47 +94,44 @@ import { TbTruckDelivery } from "react-icons/tb";
 import { AiFillStar, AiOutlineHeart } from "react-icons/ai";
 import discount from "../scripts/discount";
 import future_date from "../scripts/future_date";
-import { GetCart, UdpateCart } from "../redux/cart/cart.actions";
+import { addToCart, getCartProducts } from "../redux/cart/cart.actions";
 
 export default function ViewProductPage() {
-  let toast = useToast()
-  let nav = useNavigate()
+  let toast = useToast();
+  let nav = useNavigate();
   let dispatch = useDispatch();
   let { loading, error, data } = useSelector((state) => state.productsManager);
-  let cart = useSelector((state)=>state.cartManager)
-  let {userId,auth} = useSelector((state)=>state.authManager)
-  let { id, pid } = useParams();
+  let cart = useSelector((state) => state.cartManager);
+  let { token } = useSelector((state) => state.authManager);
+
+  let { _id, category } = useParams();
   let [item, setItem] = useState({});
   let [productData, setProductData] = useState([]);
   let [option, setOption] = useState(0);
-  let [exist,setExist] = useState(false)
+  let [exist, setExist] = useState(false);
 
+  // console.log(data,category,item)
+  useEffect(() => {
+    dispatch(getCategoryData(category));
+  }, [category]);
+  // console.log(cart);
 
   useEffect(() => {
-    dispatch(getCategoryData(id));
-  }, []);
-
-  useEffect(()=>{
-    if(auth){
-      dispatch(GetCart(userId.id))
+    if (token) {
+      dispatch(getCartProducts(token));
     }
-  },[])
+  }, [token,dispatch]);
 
-  useEffect(()=>{
-
-    if(auth){
-      
-    cart.data.forEach((el)=>{
-      if(el.id==pid){
-        setExist(true)
-      
-
-      }
-    })
+  useEffect(() => {
+    if (token) {
+      cart.products?.forEach((el) => {
+        //  console.log(el)
+        if (el.productId._id === _id) {
+          setExist(true);
+        }
+      });
     }
-   
-
-  },[cart.data])
+  }, [cart.products,exist]);
 
   useEffect(() => {
     setProductData(data);
@@ -144,22 +140,21 @@ export default function ViewProductPage() {
     window.scrollTo(0, 0);
   }, [cart.loading]);
 
-  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [productData]);
 
   useEffect(() => {
-    let product = productData?.filter((el) => el.id == pid);
+    let product = productData?.filter((el) => el._id === _id);
     setItem(product);
   }, [productData]);
 
-
+  // console.log(item);
   // console.log(exist)
 
-// console.log("loading",cart.loading)
-  if (loading||cart.loading) return <Loader gif={LOADER_URL} />;
-  if (error||cart.error) return <Loader gif={ERROR_URL} />;
+  // console.log("loading",cart.loading)
+  if (loading || cart.loading) return <Loader gif={LOADER_URL} />;
+  if (error || cart.error) return <Loader gif={ERROR_URL} />;
 
   return item.length > 0 ? (
     <Box className="container" w={FILL_PARENT} m={AUTO}>
@@ -251,11 +246,12 @@ export default function ViewProductPage() {
               <Image
                 mt={2}
                 src={
-                  "https://www.tatacliq.com/src/pdp/components/img/genericOfferIcon.svg"
+                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS928i97c7uYqrtEvKs-Gl3HMY5UAfsYHGAw&usqp=CAU"
                 }
+                alt="icon"
                 w={my_pixel(20)}
                 h={my_pixel(20)}
-              ></Image>
+              />
               <Wrap padding={2}>
                 Extra 50% off on each discounted product when you buy 2
                 discounted products (or in multiples of 2), final discounted
@@ -279,11 +275,12 @@ export default function ViewProductPage() {
             <Gap gap={20} />
             <Box>
               <Text fontWeight={BOLD} fontSize={SMALL}>
-                {item[0].size?"Select Size":"Select Variant"}
+                {item[0].size ? "Select Size" : "Select Variant"}
               </Text>
               <Wrap padding={2}>
                 {item[0].sizes.map((el, index) => (
                   <Card
+
                   key={100000 + Math.floor(Math.random() * 900000)}
                     border={index == option && my_border(1, SOLID, DEEPPINK)}
                     h={AUTO}
@@ -313,35 +310,34 @@ export default function ViewProductPage() {
                   BUY NOW
                 </Button>
                 <Button
-                onClick={()=>{
-                  if(!auth){
-                    nav("/login")
-                    return
-                  }
-                  if(exist){
-                    nav("/cart")
-                    return
-                  }
+                  onClick={() => {
+                    if (!token) {
+                      nav("/login");
+                      return;
+                    }
+                    if (exist) {
+                      nav("/cart");
+                      return;
+                    }
 
-                  let copyItem = {...item[0]}
-                  copyItem.quantity=1
-                  copyItem.sizes=item[0].sizes[option]
+                    // let copyItem = {...item[0]}
+                    // copyItem.quantity=1
+                    // copyItem.sizes=item[0].sizes[option]
 
-                  let addItem = {
-                    cart:[...cart.data,copyItem]
-                  }
-                  dispatch(UdpateCart(userId.id,addItem))
-                  if(!loading&&!error){
-                    toast({
-                      title: 'Item added in your cart',
-                      description: "Go to Cart to see item",
-                      status: 'success',
-                      duration: 2000,
-                      isClosable: true,
-                    })
-                  }
-
-                }}
+                    // let addItem = {
+                    //   cart:[...cart.data,copyItem]
+                    // }
+                    dispatch(addToCart(item[0]._id, token));
+                    if (!loading && !error) {
+                      toast({
+                        title: "Item added in your cart",
+                        description: "Go to Cart to see item",
+                        status: "success",
+                        duration: 2000,
+                        isClosable: true,
+                      });
+                    }
+                  }}
                   h={45}
                   w={200}
                   borderRadius={50}
@@ -349,7 +345,7 @@ export default function ViewProductPage() {
                   colorScheme={"pink"}
                   size="md"
                 >
-                 {exist?"GO TO CART":" ADD TO BAG"}
+                  {exist ? "GO TO CART" : " ADD TO BAG"}
                 </Button>
               </HStack>
             </Box>
@@ -387,11 +383,10 @@ export default function ViewProductPage() {
         <Gap gap={40} />
         <Card w={FILL_80PARENT} m={AUTO}>
           <CardBody>
-            
-            <Accordion allowMultiple defaultIndex={[0,1,2,3]} >
+            <Accordion allowMultiple defaultIndex={[0, 1, 2, 3]}>
               <AccordionItem>
                 <h2>
-                  <AccordionButton >
+                  <AccordionButton>
                     <Box as="span" fontWeight={BOLD} flex="1" textAlign="left">
                       Product Description
                     </Box>
@@ -406,66 +401,69 @@ export default function ViewProductPage() {
               <AccordionItem>
                 <h2>
                   <AccordionButton>
-                    <Box as="span" flex="1"  fontWeight={BOLD} textAlign="left">
+                    <Box as="span" flex="1" fontWeight={BOLD} textAlign="left">
                       Return & Refund
                     </Box>
                     <AccordionIcon />
                   </AccordionButton>
                 </h2>
-                <AccordionPanel  textAlign={LEFT} pb={4}>
-
+                <AccordionPanel textAlign={LEFT} pb={4}>
                   <Text fontSize={MEDIUM}>30 Days Easy Return</Text>
-                  <ul style={{marginLeft:my_pixel(16)}}>
-                    <li>An order, once placed, can be cancelled until the seller processes it.</li>
-                    <li>This product can be returned within 30 day(s) of delivery,subject to the Return Policy.</li>
-                    <li>For any other queries, do reach out to CliQ Care at 90291 08282.</li>
+                  <ul style={{ marginLeft: my_pixel(16) }}>
+                    <li>
+                      An order, once placed, can be cancelled until the seller
+                      processes it.
+                    </li>
+                    <li>
+                      This product can be returned within 30 day(s) of
+                      delivery,subject to the Return Policy.
+                    </li>
+                    <li>
+                      For any other queries, do reach out to CliQ Care at 90291
+                      08282.
+                    </li>
                   </ul>
-                 
                 </AccordionPanel>
               </AccordionItem>
 
               <AccordionItem>
                 <h2>
                   <AccordionButton>
-                    <Box as="span" flex="1"  fontWeight={BOLD} textAlign="left">
+                    <Box as="span" flex="1" fontWeight={BOLD} textAlign="left">
                       Brand Info
                     </Box>
                     <AccordionIcon />
                   </AccordionButton>
                 </h2>
-                <AccordionPanel  textAlign={LEFT} pb={4}>
-                  {item[0].short_desc}                  
-                 
+                <AccordionPanel textAlign={LEFT} pb={4}>
+                  {item[0].short_desc}
                 </AccordionPanel>
               </AccordionItem>
               <AccordionItem>
                 <h2>
                   <AccordionButton>
-                    <Box as="span" flex="1"  fontWeight={BOLD} textAlign="left">
+                    <Box as="span" flex="1" fontWeight={BOLD} textAlign="left">
                       Manufacturing, Packaging and Import Info
                     </Box>
                     <AccordionIcon />
                   </AccordionButton>
                 </h2>
-                <AccordionPanel  textAlign={LEFT} pb={4}>
+                <AccordionPanel textAlign={LEFT} pb={4}>
                   {/* //table */}
                   <TableContainer>
-  <Table variant='simple'>
-    <Tbody>
-      <Tr>
-        <Td fontWeight={BOLD}>Generic Name</Td>
-        <Td>{item[0].name}</Td>
-      </Tr>
-      <Tr>
-        <Td fontWeight={BOLD}>Country of Origin</Td>
-        <Td>India</Td>
-      </Tr>
-      
-    </Tbody>
-
-  </Table>
-</TableContainer>
-
+                    <Table variant="simple">
+                      <Tbody>
+                        <Tr>
+                          <Td fontWeight={BOLD}>Generic Name</Td>
+                          <Td>{item[0].name}</Td>
+                        </Tr>
+                        <Tr>
+                          <Td fontWeight={BOLD}>Country of Origin</Td>
+                          <Td>India</Td>
+                        </Tr>
+                      </Tbody>
+                    </Table>
+                  </TableContainer>
                 </AccordionPanel>
               </AccordionItem>
             </Accordion>
