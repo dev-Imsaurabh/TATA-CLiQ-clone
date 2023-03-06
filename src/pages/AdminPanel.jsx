@@ -87,7 +87,7 @@ export function TableRow({
   const EditProduct = async () => {
     setLoading(true);
     let res = await api.getProductsData(`/${category}`);
-    console.log(res);
+    // console.log(res);
 
     let newData = res.map((el) => {
       if (el.id == id) {
@@ -102,13 +102,13 @@ export function TableRow({
       return el;
     });
 
-    console.log(newData);
+    // console.log(newData);
     let res1 = await axios(PRODUCTS + `/${category}`, {
       method: "patch",
       data: { items: newData },
     });
 
-    console.log(res1);
+    // console.log(res1);
     setLoading(false);
     onClose();
     handleTable(category);
@@ -116,7 +116,7 @@ export function TableRow({
 
   const deleteItem = async () => {
     let res = await api.getProductsData(`/${category}`);
-    console.log(res);
+    // console.log(res);
 
     let newData = res.filter((el) => el.id != id);
 
@@ -127,7 +127,7 @@ export function TableRow({
       }
     );
 
-    console.log(res1);
+    // console.log(res1);
     handleTable(category);
   };
 
@@ -286,13 +286,13 @@ export default function AdminPanel() {
       items: [],
     };
     let res = await api.setData(obj, PRODUCTS);
-    console.log(res);
+    // console.log(res);
   };
 
   const handleProSubmit = async (event) => {
     event.preventDefault();
     let res = await api.getProductsData(`/${nproduct.category}`);
-    console.log(res);
+    // console.log(res);
     nproduct.id = Math.random() + Date.now();
     nproduct.price = Number(nproduct.price);
     nproduct.strike_price = Number(nproduct.strike_price);
@@ -324,7 +324,7 @@ export default function AdminPanel() {
     setTableData([...res]);
   };
 
-  console.log(nproduct)
+  // console.log(nproduct)
   return (
     <Box className="container">
       <Flex>
@@ -431,7 +431,7 @@ export default function AdminPanel() {
                 <Select id="category" name="category" onChange={handleFormData}>
                   <option value="">Select category</option>
                   {cat.map((el) => (
-                    <option value={el.id}>{el.id}</option>
+                    <option key={el.id} value={el.id}>{el.id}</option>
                   ))}
                 </Select>
               </FormControl>
@@ -522,7 +522,7 @@ export default function AdminPanel() {
           >
             <option value="">Select category</option>
             {cat.map((el) => (
-              <option value={el.id}>{el.id}</option>
+              <option key={el.id} value={el.id}>{el.id}</option>
             ))}
           </Select>
 
@@ -541,9 +541,9 @@ export default function AdminPanel() {
                 </Tr>
               </Thead>
               <Tbody>
-                {console.log(tableData)}
+                {/* {console.log(tableData)} */}
                 {tableData?.map((el) => (
-                  <TableRow {...el} handleTable={handleTable} />
+                  <TableRow key={el.id} {...el} handleTable={handleTable} />
                 ))}
               </Tbody>
             </Table>

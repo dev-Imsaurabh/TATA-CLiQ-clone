@@ -79,19 +79,16 @@ export default function CartPage() {
     dispatch(getCartProducts(token));
   }, [token,dispatch]);
 
-  // useEffect(() => {
-  //   setproducts([...products]);
-  // }, [products]);
-
   useEffect(() => {
     let bag_total = 0;
     let checkout_total = 0;
     let final_discount = 0;
-
+    
     products?.forEach(({ productId, qty }) => {
       // console.log(typeof productId.strike_price,typeof productId.qty);
       checkout_total += +productId.price * qty;
       bag_total += +productId.strike_price * qty;
+
     });
     // console.log(bag_total,checkout_total,final_discount);
 
@@ -102,6 +99,7 @@ export default function CartPage() {
     setBagSubTotal(bag_total);
     // console.log(checkout_total,bag_total,final_discount)
   }, [products]);
+  
   const removeitem = (id) => {
     dispatch(deleteItemFromCart(id,token));
     dispatch(getCartProducts(token));
@@ -167,6 +165,7 @@ export default function CartPage() {
                     qty={el.qty}
                     update={updatequantity}
                     remove={removeitem}
+
                   />
                 ))}
               </VStack>

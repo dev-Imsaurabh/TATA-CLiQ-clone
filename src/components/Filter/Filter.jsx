@@ -21,6 +21,7 @@ import { CheckFilter } from '../CheckFilter'
     let allFilters = data?.map(({name,options})=>{
 
       return <AccordionItem key={name+options}>
+
       <h2>
         <AccordionButton>
           <Box as="span" flex='1' textAlign={LEFT}>
@@ -37,6 +38,7 @@ import { CheckFilter } from '../CheckFilter'
       </AccordionPanel>
     </AccordionItem>
     })
+
 
 
 

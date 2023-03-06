@@ -55,16 +55,19 @@ export default function Navbar() {
   // const [arrow2, setArrow2] = useState(false);
   
   const [value, setValue] = useState("");
-  
+    const { token } = useSelector(
+    (state) => state.authManager
+  );
   let nav = useNavigate();
   const handleSeacrh = (event) => {
-    if (event.key === "Enter") {
+    if (event.key == "Enter") {
+      if(value==""){
+        return
+      }
       nav(`/search?q=${value}`);
     }
   };
-  const { token } = useSelector(
-    (state) => state.authManager
-  );
+
   
   return (
     <Box

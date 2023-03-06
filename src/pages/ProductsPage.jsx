@@ -224,7 +224,7 @@ export default function ProductsPage() {
           <HStack flex={1}>
             <Text color={GRAY}>Sort:</Text>
             <select
-              value={value}
+              value={value||""}
               onChange={(e) => {
                 setSearchParams({
                   sort: e.target.value,

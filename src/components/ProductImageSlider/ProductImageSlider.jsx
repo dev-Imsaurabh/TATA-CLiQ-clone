@@ -69,6 +69,8 @@ export default function ProductImageSlider({ images}) {
       <Gap gap={16} />
       <Flex justify={CENTER} gap={4}>
         {images.map((el,index)=>(<Image
+
+        key={100000 + Math.floor(Math.random() * 900000)}
                 cursor={POINTER}
                 onClick={() => {
                     setCurrent(index)
