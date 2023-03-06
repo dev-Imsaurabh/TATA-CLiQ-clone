@@ -21,7 +21,7 @@ import my_border from "../../scripts/my_border";
 import { Gap } from "../Gap";
 import "../../styles/style.css";
 
-export default function ProductImageSlider({ images }) {
+export default function ProductImageSlider({ images}) {
   const [current, setCurrent] = useState(0);
 
   return (
@@ -38,7 +38,7 @@ export default function ProductImageSlider({ images }) {
               size={my_pixel(50)}
             />
           }
-          disabled={current == 0}
+          disabled={current === 0}
           onClick={() => {
             setCurrent((prev) => {
               return prev - 1;
@@ -58,7 +58,7 @@ export default function ProductImageSlider({ images }) {
               size={my_pixel(50)}
             />
           }
-          disabled={current == images.length - 1}
+          disabled={current === images.length - 1}
           onClick={() => {
             setCurrent((prev) => {
               return prev + 1;
@@ -75,13 +75,14 @@ export default function ProductImageSlider({ images }) {
 
                     
                 }}
-                opacity={current==index?1:0.5}
+                opacity={current===index?1:0.5}
 
-
+                key={index}
                 w={my_pixel(60)}
                 border={my_border(1, SOLID, GRAY)}
                 src={el}
-              ></Image>))}
+                alt=""
+              />))}
       </Flex>
     </Box>
   );

@@ -42,7 +42,7 @@ import discount from "../../scripts/discount";
 import { useNavigate } from "react-router-dom";
 
 export default function ProductCard({
-  id,
+  _id,
   images,
   name,
   short_desc,
@@ -59,7 +59,7 @@ export default function ProductCard({
   let nav = useNavigate()
   return (
     <Card maxHeight={{base:AUTO,sm:AUTO,lg:500}}  cursor={POINTER} w={AUTO} onClick={()=>{
-      nav(`/${category}/${id}`)
+      nav(`/${category}/${_id}`)
     }}>
       <CardBody padding={0} margin={0}>
         <Box position={RELATIVE}>

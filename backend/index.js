@@ -6,6 +6,7 @@ const { AdminRouter } = require("./Routes/Admin.route");
 const { CartRouter } = require("./Routes/Cart.Route");
 const { ProductRouter } = require("./Routes/Product.Route");
 const { UserRouter } = require("./Routes/User.Route");
+const { OrderRouter } = require("./Routes/Order.Route");
 
 const app = express();
 app.use(express.json());
@@ -24,6 +25,7 @@ app.use("/products", ProductRouter);
 app.use("/admin", AdminRouter);
 app.use("/users", UserRouter);
 app.use("/cart", CartRouter);
+app.use("/order", OrderRouter);
 
 app.listen(process.env.port, async () => {
   try {

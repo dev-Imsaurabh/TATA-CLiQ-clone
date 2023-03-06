@@ -31,7 +31,7 @@ export default function AllRoutes() {
           </PrivateRoute>
         }
       ></Route>
-      <Route path="/:id/:pid" element={<ViewProductPage />}></Route>
+      <Route path="/:category/:_id" element={<ViewProductPage />}></Route>
       <Route
         path="/cart"
         element={

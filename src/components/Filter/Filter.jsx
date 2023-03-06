@@ -4,15 +4,15 @@ import {
     AccordionButton,
     AccordionPanel,
     Box,
-    AccordionIcon,
-    Input,
-    Checkbox,
-    VStack,
+    // AccordionIcon,
+    // Input,
+    // Checkbox,
+    // VStack,
     Wrap,
   } from '@chakra-ui/react'
 import React from 'react'
   import {AiOutlinePlus} from "react-icons/ai"
-import { CHECK_BOX, LEFT } from '../../constants/typography'
+import {  LEFT } from '../../constants/typography'
 import { CheckFilter } from '../CheckFilter'
  function Filter({data,setFilters}){
 
@@ -20,7 +20,7 @@ import { CheckFilter } from '../CheckFilter'
     
     let allFilters = data?.map(({name,options})=>{
 
-      return <AccordionItem>
+      return <AccordionItem key={name+options}>
       <h2>
         <AccordionButton>
           <Box as="span" flex='1' textAlign={LEFT}>
@@ -31,7 +31,7 @@ import { CheckFilter } from '../CheckFilter'
       </h2>
       <AccordionPanel pb={4}> 
       <Wrap>
-      {options.map((el=><CheckFilter name={el} setFilters={setFilters} />))}
+      {options.map((el=><CheckFilter key={el} name={el} setFilters={setFilters} />))}
       </Wrap>
        
       </AccordionPanel>

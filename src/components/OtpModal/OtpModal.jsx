@@ -72,7 +72,7 @@ export default function OtpModal({callback,total}) {
             <Button
             
               onClick={()=>{
-                console.log("clked")
+                // console.log("clked")
                 callback(onClose)
               }}
               colorScheme="pink"

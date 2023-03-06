@@ -3,9 +3,15 @@ const mongoose = require("mongoose");
 const orderSchema = mongoose.Schema(
   {
     userID: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
-    productId: { type: mongoose.Schema.Types.ObjectId, ref: "product" },
-    cartId: { type: mongoose.Schema.Types.ObjectId, ref: "cart" },
-    address: { type: String, required: true },
+    order: [
+      {
+        _id: { type: mongoose.Schema.Types.ObjectId, ref: "cart" },
+        
+        productId: { type: mongoose.Schema.Types.ObjectId, ref: "product" },
+        qty: { type: Number, required: true },
+        address: { type: String, required: true },
+      },
+    ],
   },
   {
     versionKey: false,

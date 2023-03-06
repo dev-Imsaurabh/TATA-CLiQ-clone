@@ -1,13 +1,11 @@
 import {
   Box,
-  Button,
   Card,
   CardBody,
   Flex,
   Grid,
   Heading,
   HStack,
-  Select,
   Text,
   useDisclosure,
   Wrap,
@@ -21,8 +19,6 @@ import { ProductCard } from "../components/ProductCard";
 import {
   Drawer,
   DrawerBody,
-  DrawerFooter,
-  DrawerHeader,
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
@@ -49,7 +45,6 @@ import {
   NONE,
   POINTER,
   R1,
-  R2,
   R3,
   R4,
   SB,
@@ -66,7 +61,6 @@ import discount from "../scripts/discount";
 import { Filter } from "../components/Filter";
 import { FilterData } from "../constants/staticData";
 import {AiFillFilter} from "react-icons/ai"
-import axios from "axios";
 import { useRef } from "react";
 
 export default function ProductsPage() {
@@ -76,7 +70,7 @@ export default function ProductsPage() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = useRef()
   const [clear,setClear] =useState(false)
-  let value = searchParams.get("sort");
+  let value = searchParams.get("sort") || "";
   let filterValues = searchParams.get("filter")?.toString().split("+") || [];
 
   useEffect(() => {
@@ -100,15 +94,15 @@ export default function ProductsPage() {
     //     setSearchParams(`?sort=${POPULARITY}`)
     // }
 
-    if (value == POPULARITY) {
+    if (value === POPULARITY) {
       setProductData([...data]);
-    } else if (value == LTH) {
+    } else if (value === LTH) {
       let lthData = data?.sort((a, b) => a.price - b.price);
       setProductData([...lthData]);
-    } else if (value == HTL) {
+    } else if (value === HTL) {
       let htlData = data?.sort((a, b) => b.price - a.price);
       setProductData([...htlData]);
-    } else if (value == DISCOUNT.toLowerCase()) {
+    } else if (value === DISCOUNT.toLowerCase()) {
       let discountData = data?.sort(
         (a, b) =>
           discount(b.strike_price, b.price) - discount(a.strike_price, a.price)
@@ -134,8 +128,8 @@ export default function ProductsPage() {
       // console.log(el)
       productData?.forEach((option) => {
         if (
-          option.color == el ||
-          Math.floor(option.ratings) == el ||
+          option.color === el ||
+          Math.floor(option.ratings) === el ||
           option.sizes.includes(el)
         ) {
           // console.log(option);
@@ -279,7 +273,7 @@ export default function ProductsPage() {
           gridTemplateColumns={{ base: R1, sm: R3, lg: R4 }}
         >
           {productData?.map((el) => (
-            <ProductCard {...el} />
+            <ProductCard key={el._id} {...el} />
           ))}
         </Grid>
       </Flex>

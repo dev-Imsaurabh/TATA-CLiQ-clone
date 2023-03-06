@@ -54,7 +54,7 @@ CartRouter.patch("/update/:id", userAuthentication, async (req, res) => {
   const _id = req.params.id;
   const payload = req.body;
   try {
-    await CartModel.findOneAndUpdate({ _id }, payload);
+    await CartModel.findByIdAndUpdate({ _id }, payload);
     res.status(200).send({ message: "Product Quantity updated" });
   } catch (e) {
     return res
@@ -66,7 +66,7 @@ CartRouter.patch("/update/:id", userAuthentication, async (req, res) => {
 CartRouter.delete("/delete/:id", userAuthentication, async (req, res) => {
   const _id = req.params.id;
   try {
-    await CartModel.findOneAndDelete({ _id });
+    await CartModel.findByIdAndDelete({ _id });
     res.send({ message: "Product removed from cart" });
   } catch (e) {
     return res

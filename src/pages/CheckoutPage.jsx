@@ -23,10 +23,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Loader } from "../components/Loader";
 import { OtpModal } from "../components/OtpModal";
-import { LOADER_URL, RUPEES_SYMBOL, USERS } from "../constants/constants";
+import { BASE_URL, LOADER_URL, RUPEES_SYMBOL, USERS } from "../constants/constants";
 import { AUTO, CENTER, COLUMN, FILL_60PARENT, FILL_80PARENT, FILL_PARENT, NONE, ROW, SB } from "../constants/typography";
 import { AddressContext } from "../contexts/AddressContextProvider";
-import { GetCart, UdpateCart } from "../redux/cart/cart.actions";
+import { deleteItemFromCart, getCartProducts, UdpateCart } from "../redux/cart/cart.actions";
 import "../styles/style.css";
 
 const CheckoutPage = () => {
@@ -54,20 +54,21 @@ const CheckoutPage = () => {
   } = useContext(AddressContext);
   let toast =useToast()
 
-  const { userId } = useSelector((state) => state.authManager);
-  const { data, loading, error } = useSelector((state) => state.cartManager);
+  const { token } = useSelector((state) => state.authManager);
+
+  const { products, loading } = useSelector((state) => state.cartManager);
   const [bagTotal, setBagTotal] = useState(0);
   const [bagSubTotal, setBagSubTotal] = useState(0);
   const [discount, setDiscount] = useState(0);
   const [total, setTotal] = useState(0);
-  const [cartData, setCartData] = useState([]);
+  // const [cartData, setCartData] = useState([]);
   let nav = useNavigate()
   let full_address = useRef()
   let dispatch = useDispatch();
   const [prevorder,setPrevOrder]=useState([])
 
   useEffect(() => {
-    dispatch(GetCart(userId.id));
+    dispatch(getCartProducts(token));
   }, []);
 
   useEffect(() => {
@@ -80,10 +81,10 @@ const CheckoutPage = () => {
     let checkout_total = 0;
     let final_discount = 0;
 
-    data.forEach(({ price, strike_price, quantity }) => {
+    products.forEach(({ productId,qty }) => {
       // console.log(strike_price);
-      checkout_total += price * quantity;
-      bag_total += strike_price * quantity;
+      checkout_total += productId.price * qty;
+      bag_total += productId.strike_price * qty;
     });
 
     final_discount = bag_total - checkout_total;
@@ -92,39 +93,44 @@ const CheckoutPage = () => {
     setBagTotal(bag_total);
     setBagSubTotal(bag_total);
     // console.log(checkout_total,bag_total,final_discount)
-  }, [data]);
+  }, [products]);
 
   useEffect(()=>{
 
-    if(data.length==0){
+    if(products.length===0){
       nav("/cart")
     }
 
-  },[data])
+  },[products])
 
   useEffect(()=>{
-    const orders = async()=>{
-      let res = await axios.get(USERS+"/"+userId.id)
-      setPrevOrder(res.data.orders)
-    }
-
-    orders()
+    dispatch(getCartProducts(token))
   },[])
 
-
-  const makeOrder =(onClose)=>{
-    let orders = [...data]
+// console.log(products);
+  const makeOrder =async(onClose)=>{
+    let orders = [...products]
     // console.log(orders)
     let newdata = orders.map((el)=>{
       el.address=full_address.current.textContent
       return el
 
     })
+    let obj={
+      order:newdata,
+    }
 
-    // console.log(prevorder)
+    // console.log(obj,newdata)
+    await fetch(BASE_URL+"/order/add",{
+      method:"POST",
+      body:JSON.stringify(obj),
+      headers:{
+        "Content-Type":"application/json",
+        Authorization:token,
+      }
+    })
+
     
-
-    dispatch(UdpateCart(userId.id,{cart:[],orders:[...prevorder,...newdata]}))
     if(!loading){
 
       toast({
@@ -282,7 +288,21 @@ const CheckoutPage = () => {
           </Box>
           <Flex display={"flex"} alignItems={CENTER} justify={"end"} >
           <Button display={NONE}  mr={"20px"}>Cancel</Button>
-            <OtpModal total={total} callback={makeOrder} />
+            <OtpModal total={total} callback={makeOrder} address={firstName +
+            " " +
+            lastName +
+            " " +
+            address +
+            " " +
+            landMark +
+            " " +
+            mobile +
+            " " +
+            city +
+            " " +
+            state +
+            " " +
+            pinCode} />
           </Flex>
 
         </Box>
