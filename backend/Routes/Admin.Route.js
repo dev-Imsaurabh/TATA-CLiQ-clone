@@ -54,8 +54,8 @@ AdminRouter.post("/login", async (req, res) => {
         }
       } else {
         res
-          .status(400)
-          .send({ message: "Something Went Wrong", error: "Wrong Password" });
+          .status(200)
+          .send({ message: "Wrong Credentials", error: "Wrong Password" });
       }
     });
   } else {

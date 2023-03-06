@@ -11,7 +11,8 @@ export default class Api{
    async getProductsData(endpoint){
 
             let res = await axios.get(PRODUCTS+endpoint);
-            return res.data.items
+            // console.log(res);
+            return res.data.products
           
           }
 

@@ -7,9 +7,9 @@ import {
   Flex,
   Heading,
   Image,
-  Radio,
-  RadioGroup,
-  Stack,
+  // Radio,
+  // RadioGroup,
+  // Stack,
   Textarea,
   VStack,
 } from "@chakra-ui/react";
@@ -23,7 +23,7 @@ import {
   Table,
   Thead,
   Tbody,
-  Tfoot,
+  // Tfoot,
   Tr,
   Th,
   Td,
@@ -40,7 +40,7 @@ import {
 } from "@chakra-ui/react";
 import Api from "../api/Api";
 import axios from "axios";
-import { tab } from "@testing-library/user-event/dist/tab";
+// import { tab } from "@testing-library/user-event/dist/tab";
 import { Icon } from "../components/Icon";
 import { PRODUCTS } from "../constants/constants";
 
@@ -50,7 +50,7 @@ export function TableRow({
   price,
   category,
   ratings,
-  id,
+  _id,
   handleTable,
   long_desc,
   short_desc,
@@ -83,14 +83,16 @@ export function TableRow({
   }, []);
 
   let api = new Api();
-
   const EditProduct = async () => {
+    let token = JSON.parse(localStorage.getItem("admintoken"));
+    console.log(token);
     setLoading(true);
     let res = await api.getProductsData(`/${category}`);
-    // console.log(res);
+    console.log(res);
 
     let newData = res.map((el) => {
-      if (el.id == id) {
+      console.log(_id, el._id);
+      if (el._id === _id) {
         el.name = ename;
         el.images = [eimage, eimage1, eimage2];
         el.price = +eprice;
@@ -98,34 +100,40 @@ export function TableRow({
         el.long_desc = longd;
         el.short_desc = shortd;
         el.strike_price = strikep;
+        return el;
       }
       return el;
     });
 
-    // console.log(newData);
-    let res1 = await axios(PRODUCTS + `/${category}`, {
-      method: "patch",
-      data: { items: newData },
-    });
+    console.log(newData);
+    await fetch(`${PRODUCTS}/${_id}`, {
+      method: "PATCH",
+      body: JSON.stringify(newData),
+      headers: {
+        Authorization: JSON.stringify(token),
+        "Content-Type":"application/json"
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => console.log(res))
+      .catch((e) => console.log(e));
 
     // console.log(res1);
     setLoading(false);
     onClose();
-    handleTable(category);
+    handleTable(_id);
   };
 
   const deleteItem = async () => {
-    let res = await api.getProductsData(`/${category}`);
+    let res = await api.getProductsData(`/${_id}`);
     // console.log(res);
 
-    let newData = res.filter((el) => el.id != id);
+    let newData = res.filter((el) => el._id !== _id);
 
-    let res1 = await axios(PRODUCTS+`/${category}`,
-      {
-        method: "patch",
-        data: { items: newData },
-      }
-    );
+    let res1 = await axios(PRODUCTS + `/${_id}`, {
+      method: "delete",
+      data: { items: newData },
+    });
 
     // console.log(res1);
     handleTable(category);
@@ -242,7 +250,6 @@ export function TableRow({
 }
 
 let product = {
-  id: null,
   images: null,
   name: "",
   short_desc: "",
@@ -259,7 +266,7 @@ let product = {
 
 export default function AdminPanel() {
   let api = new Api();
-
+  let token = localStorage.getItem("admintoken");
   const [value, setValue] = useState(""); // State to store the value of the input field
   const [cat, setCat] = useState([]);
   const [nproduct, setnPorcut] = useState(product);
@@ -272,7 +279,8 @@ export default function AdminPanel() {
   useEffect(() => {
     const getCat = async () => {
       let res = await api.getData("/products");
-      setCat(res.data);
+      // console.log(res);
+      setCat(res.data.products);
     };
 
     getCat();
@@ -298,29 +306,28 @@ export default function AdminPanel() {
     nproduct.strike_price = Number(nproduct.strike_price);
     nproduct.delivery_time = Number(nproduct.delivery_time);
     nproduct.ratings = Number(nproduct.ratings);
-    nproduct.images=nproduct.images?.split(",");
-    nproduct.sizes=nproduct.sizes?.split(",")
-    let res1 = await axios(PRODUCTS+`/${nproduct.category}`,
-      {
-        headers: {
-          'Access-Control-Allow-Origin': '*'
-        },
-        method: "patch",
-        data: { items: [...res, nproduct] },
-      }
-    );
+    nproduct.images = nproduct.images?.split(",");
+    nproduct.sizes = nproduct.sizes?.split(",");
+    let res1 = await axios(PRODUCTS + `/${nproduct.category}`, {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+      method: "patch",
+      data: { items: [...res, nproduct] },
+    });
     console.log(res1);
-    console.log(nproduct)
+    console.log(nproduct);
   };
 
   const handleFormData = (e) => {
-    const val =e.target.name=="size"?e.target.checked:e.target.value;
+    const val = e.target.name === "size" ? e.target.checked : e.target.value;
 
     setnPorcut({ ...nproduct, [e.target.name]: val });
   };
 
   const handleTable = async (value) => {
     let res = await api.getProductsData(`/${value}`);
+    // console.log(res);
     setTableData([...res]);
   };
 
@@ -430,8 +437,10 @@ export default function AdminPanel() {
                 <FormLabel htmlFor="category">Category</FormLabel>
                 <Select id="category" name="category" onChange={handleFormData}>
                   <option value="">Select category</option>
-                  {cat.map((el) => (
-                    <option key={el.id} value={el.id}>{el.id}</option>
+                  {cat?.map((el) => (
+                    <option key={el._id} value={el.category}>
+                      {el.category}
+                    </option>
                   ))}
                 </Select>
               </FormControl>
@@ -470,7 +479,9 @@ export default function AdminPanel() {
 
               <FormControl>
                 <FormLabel htmlFor="is Size?">is Size?</FormLabel>
-               <Checkbox name="size" onChange={handleFormData}>yes</Checkbox>
+                <Checkbox name="size" onChange={handleFormData}>
+                  yes
+                </Checkbox>
               </FormControl>
 
               <FormControl>
@@ -521,9 +532,10 @@ export default function AdminPanel() {
             }}
           >
             <option value="">Select category</option>
-            {cat.map((el) => (
-              <option key={el.id} value={el.id}>{el.id}</option>
-            ))}
+            <option value="shoes">shoes</option>
+            <option value="menswear">menswear</option>
+            <option value="womenswear">womenswear</option>
+            <option value="gadgets">gadgets</option>
           </Select>
 
           <TableContainer>
@@ -543,7 +555,7 @@ export default function AdminPanel() {
               <Tbody>
                 {/* {console.log(tableData)} */}
                 {tableData?.map((el) => (
-                  <TableRow key={el.id} {...el} handleTable={handleTable} />
+                  <TableRow key={el._id} {...el} handleTable={handleTable} />
                 ))}
               </Tbody>
             </Table>

@@ -8,18 +8,18 @@ import {
   InputLeftElement,
   Menu,
   MenuButton,
-  MenuItem,
+  // MenuItem,
   MenuList,
   Button,
   Popover,
   PopoverTrigger,
   PopoverContent,
-  PopoverHeader,
+  // PopoverHeader,
   PopoverBody,
-  PopoverFooter,
-  PopoverArrow,
-  PopoverCloseButton,
-  PopoverAnchor,
+  // PopoverFooter,
+  // PopoverArrow,
+  // PopoverCloseButton,
+  // PopoverAnchor,
   Tabs,
   TabList,
   TabPanels,
@@ -28,8 +28,8 @@ import {
 } from "@chakra-ui/react";
 import { BsSuitHeart } from "react-icons/bs";
 import { FiShoppingBag } from "react-icons/fi";
-import { AiOutlineArrowDown } from "react-icons/ai";
-import { BiSearchAlt2 } from "react-icons/bi";
+// import { AiOutlineArrowDown } from "react-icons/ai";
+// import { BiSearchAlt2 } from "react-icons/bi";
 import { useState } from "react";
 import logo from "../../assets/cliq_mart_logo.png";
 import { Link, useNavigate } from "react-router-dom";
@@ -40,9 +40,9 @@ import {
   DEEPPINK,
   FIXED,
   POINTER,
-  STICKY,
+  // STICKY,
   TRANSPARENT,
-  WHITE,
+  // WHITE,
 } from "../../constants/typography";
 import { SignupModal } from "../SignupModal";
 import { MdAdminPanelSettings } from "react-icons/md";
@@ -50,25 +50,24 @@ import { MdAdminPanelSettings } from "react-icons/md";
 // import { useSelector } from "react-redux";
 import { FaUserCircle } from "react-icons/fa";
 import { useSelector } from "react-redux";
+import { AdminModal } from "../AdminModal";
 export default function Navbar() {
   const [arrow1, setArrow1] = useState(false);
-  // const [arrow2, setArrow2] = useState(false);
   
+  // const [arrow2, setArrow2] = useState(false);
+
   const [value, setValue] = useState("");
-    const { token } = useSelector(
-    (state) => state.authManager
-  );
+  const { token } = useSelector((state) => state.authManager);
   let nav = useNavigate();
   const handleSeacrh = (event) => {
-    if (event.key == "Enter") {
-      if(value==""){
-        return
+    if (event.key === "Enter") {
+      if (value === "") {
+        return;
       }
       nav(`/search?q=${value}`);
     }
   };
 
-  
   return (
     <Box
       position={FIXED}
@@ -115,6 +114,7 @@ export default function Navbar() {
               as={Button}
             >
               {token ? <FaUserCircle color={DEEPPINK} /> : "Sign up/Sign in"}
+              
             </MenuButton>
             <MenuList>
               <SignupModal bg={TRANSPARENT} color={BLACK} />
@@ -326,22 +326,26 @@ export default function Navbar() {
               <BsSuitHeart size="18%" />
             </Box>
             <Box
-              display={
-                token
-                  ? "flex"
-                  : "none"
-              }
+              display={"flex"}
               justifyContent="center"
               alignItems="center"
+            > <Menu>
+            <MenuButton
+              as={Button}
+              bg="#212121"
+              
             >
-              <MdAdminPanelSettings
+               <MdAdminPanelSettings
                 cursor={POINTER}
-                color={"white"}
-                size="18%"
-                onClick={() => {
-                  nav("/admin");
-                }}
+
               />
+              
+            </MenuButton>
+            <MenuList>
+              <AdminModal/>
+            </MenuList>
+          </Menu>
+             
             </Box>
             <Box display="flex" justifyContent="center" alignItems="center">
               <FiShoppingBag
