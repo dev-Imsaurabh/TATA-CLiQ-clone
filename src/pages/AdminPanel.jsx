@@ -11,6 +11,7 @@ import {
   // RadioGroup,
   // Stack,
   Textarea,
+  useToast,
   VStack,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
@@ -69,7 +70,7 @@ export function TableRow({
   const [shortd, setShortd] = useState();
   const [strikep, setStrikep] = useState();
   const [loading, setLoading] = useState(false);
-
+  const toast = useToast();
   useEffect(() => {
     setename(name);
     seteimage(images[0]);
@@ -105,7 +106,13 @@ export function TableRow({
     // .then((res) => res.json())
     // .then((res) => console.log(res))
     // .catch((e) => console.log(e));
-
+    toast({
+      title: "Product Edited",
+      description: "",
+      status: "success",
+      duration: 2000,
+      isClosable: true,
+    });
     // console.log(res1);
     setLoading(false);
     // let res = await api.getProductsData(`/${category}`);
@@ -122,6 +129,13 @@ export function TableRow({
         Authorization: token,
         "Content-Type": "application/json",
       },
+    });
+    toast({
+      title: "Product Deleted",
+      description: "",
+      status: "success",
+      duration: 2000,
+      isClosable: true,
     });
     // .then((res) => res.json())
     // .then((res) => console.log(res))
@@ -260,7 +274,7 @@ let product = {
 
 export default function AdminPanel() {
   let api = new Api();
-
+  const toast = useToast();
   // const [value, setValue] = useState(""); // State to store the value of the input field
   const [cat, setCat] = useState([]);
   const [nproduct, setnPorcut] = useState(product);
@@ -298,12 +312,43 @@ export default function AdminPanel() {
       images: nproduct.images?.split(","),
       sizes: nproduct.sizes?.split(","),
     };
+
+    if (
+      item.name === "" ||
+      item.short_desc === "" ||
+      item.long_desc === "" ||
+      item.category === "" ||
+      item.color === "" ||
+      item.images === "" ||
+      item.size === "" ||
+      item.sizes === "" ||
+      item.price === "" ||
+      item.strike_price === "" ||
+      item.delivery_time === "" ||
+      item.ratings === ""
+    ) {
+      toast({
+        title: "Please enter all details",
+        description: "",
+        status: "error",
+        duration: 2000,
+        isClosable: true,
+      });
+      return;
+    }
     await fetch(PRODUCTS + `/add`, {
       method: "POST",
       body: JSON.stringify(item),
       headers: {
         "Content-Type": "application/json",
       },
+    });
+    toast({
+      title: "Product Added",
+      description: "",
+      status: "success",
+      duration: 2000,
+      isClosable: true,
     });
     // console.log(res);
     // console.log(item);

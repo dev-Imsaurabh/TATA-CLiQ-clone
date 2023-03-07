@@ -66,7 +66,7 @@ ProductRouter.patch("/:id", async (req, res) => {
 
 ProductRouter.delete("/:id", async (req, res) => {
   const ID = req.params.id;
-  console.log(ID);
+  // console.log(ID);
   try {
     const product = await ProductModel.findByIdAndDelete({ _id: ID });
     res.status(200).send({ message: "Product deleted", product: product });

@@ -31,7 +31,7 @@ export const ADMINLogin = (data) => async (dispatch) => {
       });
     }
   } catch (error) {
-    console.log("error: ", error);
+    // console.log("error: ", error);
 
     dispatch({
       type: ADMIN_LOGIN_FAILURE,
