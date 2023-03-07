@@ -18,7 +18,7 @@ import {
   HStack,
 } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react-use-disclosure";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { LOADER_URL } from "../../constants/constants";
 import {
@@ -42,6 +42,7 @@ import { useToast } from "@chakra-ui/react";
 import my_pixel from "../../scripts/my_pixel";
 import { FaUserCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function SignupModal({ color, bg, br, w, h, cs }) {
   const toast = useToast();
@@ -51,14 +52,77 @@ export default function SignupModal({ color, bg, br, w, h, cs }) {
   const [option, setOption] = useState(0);
   let dispatch = useDispatch();
   let nav = useNavigate();
-  const { loading, message,token } = useSelector(
+  const { loading, message, token } = useSelector(
     (state) => state.authManager
   );
-  
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  
-  const handleAuth = async () => {
 
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  useEffect(() => {
+    if (message === "User already exist, Please login") {
+      toast({
+        title: "User already exist",
+        description: "Hint: Login to your account",
+        status: "error",
+        duration: 2000,
+        isClosable: true,
+      });
+      // console.log(message);
+      // dispatch(resetAuth());
+      // return;
+    }
+    if (message === "User Registration Suceessful") {
+      toast({
+        title: "Sign up successful",
+        description: "Login into your account",
+        status: "success",
+        duration: 2000,
+        isClosable: true,
+      });
+    }
+    if (message==="Login Suceessful") {
+      
+      toast({
+        title: "Login Suceessful",
+        description: "",
+        status: "success",
+        duration: 2000,
+        isClosable: true,
+      });
+      // localStorage.setItem("token", JSON.stringify(token));
+      nav("/profile");
+      onClose();
+    }
+    if (message === "User is not registered,Please register first") {
+      toast({
+        title: message,
+        description: "",
+        status: "success",
+        duration: 2000,
+        isClosable: true,
+      });
+      onClose();
+    }
+    if (message === "Wrong Credentials") {
+      toast({
+        title: message,
+        description: "",
+        status: "success",
+        duration: 2000,
+        isClosable: true,
+      });
+      onClose();
+    }
+  }, [message,token]);
+
+  const resetValues = () => {
+    setEmail("");
+    setName("");
+    setPassword("");
+  };
+
+  const handleAuth = () => {
+    // console.log(option,"clicked");
     if (option === 0) {
       if (name === "" || email === "" || password === "") {
         toast({
@@ -69,8 +133,9 @@ export default function SignupModal({ color, bg, br, w, h, cs }) {
           isClosable: true,
         });
         return;
-      }
-      dispatch(Signup({ name, email, password }));
+      } 
+        dispatch(Signup({ name, email, password }));
+        resetValues();
     } else {
       //   console.log("Log in process");
       if (email === "" || password === "") {
@@ -82,85 +147,13 @@ export default function SignupModal({ color, bg, br, w, h, cs }) {
           isClosable: true,
         });
         return;
-      }
-
-      dispatch(Login({ email, password }));
+      } 
+        dispatch(Login({ email, password }));
+        resetValues();
     }
-    resetValues();
   };
 
-  const resetValues = () => {
-    setEmail("");
-    setName("");
-    setPassword("");
-  };
-
-  useEffect(()=>{
-    
-      if (message === "User already exist, Please login") {
-        toast({
-          title: "User already exist",
-          description: "Hint: Login to your account",
-          status: "error",
-          duration: 2000,
-          isClosable: true,
-        });
-        console.log(message);
-        // dispatch(resetAuth());
-        // return;
-      }
-  
-      else if (message === "User Registration Suceessful") {
-        toast({
-          title: "Sign up successful",
-          description: "Login into your account",
-          status: "success",
-          duration: 2000,
-          isClosable: true,
-        });
-        // nav("/login")
-        // dispatch(resetAuth());
-      }
-      // if(no_user){
-      //     toast({
-      //         title: 'no user found',
-      //         description: "Please Sign up",
-      //         status: 'error',
-      //         duration: 2000,
-      //         isClosable: true,
-      //       })
-      //       setOption(()=>1);
-      //       dispatch(resetAuth())
-  
-      // }
-  
-      else if (message==="Login Suceessful") {
-        toast({
-          title: "Login Suceessful",
-          description: "",
-          status: "success",
-          duration: 2000,
-          isClosable: true,
-        });
-        localStorage.setItem("token",JSON.stringify(token))
-        onClose();
-      }
-      else if (message==="User is not registered,Please register first") {
-        toast({
-          title: message,
-          description: "",
-          status: "success",
-          duration: 2000,
-          isClosable: true,
-        });
-        onClose();
-      }
-      // setOption(() => 1);
-    
-  },[message])
-
- 
-
+  // console.log(token);
   return (
     <>
       <Button
@@ -217,7 +210,7 @@ export default function SignupModal({ color, bg, br, w, h, cs }) {
                 {" "}
                 Please enter your Name and Email{" "}
               </Text>
-              <label style={{ display: option===0 ? "block" : "none" }}>
+              <label style={{ display: option === 0 ? "block" : "none" }}>
                 Name
                 <Input
                   placeholder="Please enter your name"
@@ -254,7 +247,7 @@ export default function SignupModal({ color, bg, br, w, h, cs }) {
                   }}
                   style={{ color: DEEPPINK }}
                 >
-                  {option===0 ? "Sign In" : "Sign Up"}
+                  {option === 0 ? "Sign In" : "Sign Up"}
                 </span>
               </Text>
 
@@ -272,7 +265,7 @@ export default function SignupModal({ color, bg, br, w, h, cs }) {
                 colorScheme={"pink"}
                 onClick={handleAuth}
               >
-                {option===0? "Sign Up" : "Sign In"}
+                {option === 0 ? "Sign Up" : "Sign In"}
               </Button>
             </Flex>
           </ModalBody>

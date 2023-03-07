@@ -49,15 +49,17 @@ import { MdAdminPanelSettings } from "react-icons/md";
 
 // import { useSelector } from "react-redux";
 import { FaUserCircle } from "react-icons/fa";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import { AdminModal } from "../AdminModal";
+// import { useEffect } from "react";
 export default function Navbar() {
   const [arrow1, setArrow1] = useState(false);
-  
+
   // const [arrow2, setArrow2] = useState(false);
 
   const [value, setValue] = useState("");
-  const { token } = useSelector((state) => state.authManager);
+  const token = JSON.parse(localStorage.getItem("token")) || null;
+
   let nav = useNavigate();
   const handleSeacrh = (event) => {
     if (event.key === "Enter") {
@@ -114,7 +116,6 @@ export default function Navbar() {
               as={Button}
             >
               {token ? <FaUserCircle color={DEEPPINK} /> : "Sign up/Sign in"}
-              
             </MenuButton>
             <MenuList>
               <SignupModal bg={TRANSPARENT} color={BLACK} />
@@ -325,27 +326,22 @@ export default function Navbar() {
             <Box display="flex" justifyContent="center" alignItems="center">
               <BsSuitHeart size="18%" />
             </Box>
-            <Box
-              display={"flex"}
-              justifyContent="center"
-              alignItems="center"
-            > <Menu>
-            <MenuButton
-              as={Button}
-              bg="#212121"
-              
-            >
-               <MdAdminPanelSettings
-                cursor={POINTER}
-
-              />
-              
-            </MenuButton>
-            <MenuList>
-              <AdminModal/>
-            </MenuList>
-          </Menu>
-             
+            <Box display={"flex"} justifyContent="center" alignItems="center">
+              {" "}
+              <Menu>
+                <MenuButton
+                  fontSize={{ base: 8, sm: 16, lg: 16 }}
+                  bg={TRANSPARENT}
+                  _active={{ bg: { TRANSPARENT } }}
+                  _hover={{ bg: { TRANSPARENT } }}
+                  as={Button}
+                >
+                  <MdAdminPanelSettings cursor={POINTER} />
+                </MenuButton>
+                <MenuList>
+                  <AdminModal />
+                </MenuList>
+              </Menu>
             </Box>
             <Box display="flex" justifyContent="center" alignItems="center">
               <FiShoppingBag

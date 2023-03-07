@@ -59,6 +59,15 @@ const AdminModal = () => {
         isClosable: true,
       });
       onClose();
+    }else if (adminLogin.message === "Admin is not registered") {
+      toast({
+        title: adminLogin.message,
+        description: "Please Check Your Credentials",
+        status: "warning",
+        duration: 2000,
+        isClosable: true,
+      });
+      onClose();
     }
     // setOption(() => 1);
   }, [adminLogin.message, data.admintoken]);
@@ -114,7 +123,7 @@ const AdminModal = () => {
               nav("/");
             }, 1000);
             toast({
-              title: "Logout Successful",
+              title: "Admin Logout Successful",
               description: "Redirecting to Homepage",
               status: "success",
               duration: 2000,

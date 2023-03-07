@@ -2,8 +2,6 @@
 import { BASE_URL } from "../../constants/constants";
 import * as types from "./cart.types";
 
-// const BASE_URL = "https://shy-ruby-piglet.cyclic.app";
-
 export const getCartProducts = (token) => async(dispatch) => {
   try{
     dispatch({ type: types.GET_CART_LOADING });
@@ -25,7 +23,7 @@ export const deleteItemFromCart = (id,token) => async(dispatch) => {
   
   try{
     dispatch({ type: types.DELETE_CART_LOADING });
-    let cartData=await fetch(`${BASE_URL}/cart/delete/${id}`,{
+    await fetch(`${BASE_URL}/cart/delete/${id}`,{
       method:"DELETE",
       headers:{
         Authorization: token,

@@ -11,9 +11,6 @@ import { AUTO, FILL_80PARENT, ROW } from "../constants/typography";
 
 const ProfilePage = () => {
 
- 
-
-
   return (
     <Box
       display="flex"

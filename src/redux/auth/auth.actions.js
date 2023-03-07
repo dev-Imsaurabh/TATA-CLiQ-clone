@@ -10,7 +10,7 @@ export const Signup=(obj)=>async(dispatch)=>{
    //  console.log(res);
     dispatch({type:SIGNUP_SUCCESS,payload:res.data})
  } catch (error) {
-   console.log(error);
+   // console.log(error);
     dispatch({type:SIGNUP_ERROR})
     
  }

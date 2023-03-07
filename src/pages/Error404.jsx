@@ -7,13 +7,12 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { SignupModal } from "../components/SignupModal";
-import { AUTO, DEEPPINK, FILL_80PARENT, GRAY, PINK, WHITE } from "../constants/typography";
+
+import { AUTO, FILL_80PARENT, GRAY} from "../constants/typography";
 import my_pixel from "../scripts/my_pixel";
 import "../styles/style.css";
 import error404_image from "../assets/error404_image.jpg"
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
+
 import { useNavigate } from "react-router-dom";
 
 export default function Error404() {

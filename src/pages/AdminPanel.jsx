@@ -39,7 +39,7 @@ import {
   ModalCloseButton,
 } from "@chakra-ui/react";
 import Api from "../api/Api";
-import axios from "axios";
+// import axios from "axios";
 // import { tab } from "@testing-library/user-event/dist/tab";
 import { Icon } from "../components/Icon";
 import { PRODUCTS } from "../constants/constants";
@@ -82,60 +82,50 @@ export function TableRow({
     setStrikep(strike_price);
   }, []);
 
-  let api = new Api();
-  const EditProduct = async () => {
-    let token = JSON.parse(localStorage.getItem("admintoken"));
-    console.log(token);
+  const EditProduct = async (_id) => {
+    let newData = {
+      name: ename,
+      images: [eimage, eimage1, eimage2],
+      price: +eprice,
+      ratings: +eratings,
+      long_desc: longd,
+      short_desc: shortd,
+      strike_price: +strikep,
+    };
     setLoading(true);
-    let res = await api.getProductsData(`/${category}`);
-    console.log(res);
 
-    let newData = res.map((el) => {
-      console.log(_id, el._id);
-      if (el._id === _id) {
-        el.name = ename;
-        el.images = [eimage, eimage1, eimage2];
-        el.price = +eprice;
-        el.ratings = +eratings;
-        el.long_desc = longd;
-        el.short_desc = shortd;
-        el.strike_price = strikep;
-        return el;
-      }
-      return el;
-    });
-
-    console.log(newData);
     await fetch(`${PRODUCTS}/${_id}`, {
       method: "PATCH",
       body: JSON.stringify(newData),
       headers: {
-        Authorization: JSON.stringify(token),
-        "Content-Type":"application/json"
+        Authorization: localStorage.getItem("admintoken"),
+        "Content-Type": "application/json",
       },
-    })
-      .then((res) => res.json())
-      .then((res) => console.log(res))
-      .catch((e) => console.log(e));
+    });
+    // .then((res) => res.json())
+    // .then((res) => console.log(res))
+    // .catch((e) => console.log(e));
 
     // console.log(res1);
     setLoading(false);
+    // let res = await api.getProductsData(`/${category}`);
+    // console.log(res);
     onClose();
-    handleTable(_id);
+    handleTable(category);
   };
 
   const deleteItem = async () => {
-    let res = await api.getProductsData(`/${_id}`);
-    // console.log(res);
-
-    let newData = res.filter((el) => el._id !== _id);
-
-    let res1 = await axios(PRODUCTS + `/${_id}`, {
-      method: "delete",
-      data: { items: newData },
+    let token = localStorage.getItem("admintoken");
+    await fetch(PRODUCTS + `/${_id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: token,
+        "Content-Type": "application/json",
+      },
     });
-
-    // console.log(res1);
+    // .then((res) => res.json())
+    // .then((res) => console.log(res))
+    // .catch((e) => console.log(e));
     handleTable(category);
   };
 
@@ -157,7 +147,7 @@ export function TableRow({
             size={16}
           ></Icon>
         </Td>
-        <Td onClick={deleteItem}>
+        <Td onClick={() => deleteItem(_id)}>
           <Icon
             image="https://cdn-icons-png.flaticon.com/512/1214/1214428.png"
             size={16}
@@ -239,7 +229,11 @@ export function TableRow({
             <Button colorScheme="blue" mr={3} onClick={onClose}>
               Close
             </Button>
-            <Button isLoading={loading} onClick={EditProduct} variant="ghost">
+            <Button
+              isLoading={loading}
+              onClick={() => EditProduct(_id)}
+              variant="ghost"
+            >
               Edit
             </Button>
           </ModalFooter>
@@ -266,15 +260,15 @@ let product = {
 
 export default function AdminPanel() {
   let api = new Api();
-  let token = localStorage.getItem("admintoken");
-  const [value, setValue] = useState(""); // State to store the value of the input field
+
+  // const [value, setValue] = useState(""); // State to store the value of the input field
   const [cat, setCat] = useState([]);
   const [nproduct, setnPorcut] = useState(product);
   const [tableData, setTableData] = useState([]);
 
-  const handleChange = (event) => {
-    setValue(event.target.value); // Update the value of the input field when the user types
-  };
+  // const handleChange = (event) => {
+  //   setValue(event.target.value); // Update the value of the input field when the user types
+  // };
 
   useEffect(() => {
     const getCat = async () => {
@@ -286,37 +280,33 @@ export default function AdminPanel() {
     getCat();
   }, []);
 
-  const handleSubmit = async (event) => {
-    value.toLowerCase();
-    event.preventDefault();
-    let obj = {
-      id: value,
-      items: [],
-    };
-    let res = await api.setData(obj, PRODUCTS);
-    // console.log(res);
-  };
-
   const handleProSubmit = async (event) => {
     event.preventDefault();
-    let res = await api.getProductsData(`/${nproduct.category}`);
+
     // console.log(res);
-    nproduct.id = Math.random() + Date.now();
-    nproduct.price = Number(nproduct.price);
-    nproduct.strike_price = Number(nproduct.strike_price);
-    nproduct.delivery_time = Number(nproduct.delivery_time);
-    nproduct.ratings = Number(nproduct.ratings);
-    nproduct.images = nproduct.images?.split(",");
-    nproduct.sizes = nproduct.sizes?.split(",");
-    let res1 = await axios(PRODUCTS + `/${nproduct.category}`, {
+    let item = {
+      name: nproduct.name,
+      short_desc: nproduct.short_desc,
+      long_desc: nproduct.long_desc,
+      category: nproduct.category,
+      color: nproduct.color,
+      size: nproduct.size,
+      price: Number(nproduct.price),
+      strike_price: Number(nproduct.strike_price),
+      delivery_time: Number(nproduct.delivery_time),
+      ratings: Number(nproduct.ratings),
+      images: nproduct.images?.split(","),
+      sizes: nproduct.sizes?.split(","),
+    };
+    await fetch(PRODUCTS + `/add`, {
+      method: "POST",
+      body: JSON.stringify(item),
       headers: {
-        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
       },
-      method: "patch",
-      data: { items: [...res, nproduct] },
     });
-    console.log(res1);
-    console.log(nproduct);
+    // console.log(res);
+    // console.log(item);
   };
 
   const handleFormData = (e) => {
@@ -327,7 +317,6 @@ export default function AdminPanel() {
 
   const handleTable = async (value) => {
     let res = await api.getProductsData(`/${value}`);
-    // console.log(res);
     setTableData([...res]);
   };
 
@@ -336,7 +325,7 @@ export default function AdminPanel() {
     <Box className="container">
       <Flex>
         <VStack w="30%">
-          <form onSubmit={handleSubmit}>
+          {/* <form onSubmit={handleSubmit}>
             <Flex direction="column" padding={8} m="auto">
               <Card>
                 <CardBody>
@@ -364,7 +353,7 @@ export default function AdminPanel() {
                 </CardBody>
               </Card>
             </Flex>
-          </form>
+          </form> */}
 
           <Divider />
 
@@ -437,11 +426,10 @@ export default function AdminPanel() {
                 <FormLabel htmlFor="category">Category</FormLabel>
                 <Select id="category" name="category" onChange={handleFormData}>
                   <option value="">Select category</option>
-                  {cat?.map((el) => (
-                    <option key={el._id} value={el.category}>
-                      {el.category}
-                    </option>
-                  ))}
+                  <option value="shoes">shoes</option>
+                  <option value="menswear">menswear</option>
+                  <option value="womenswear">womenswear</option>
+                  <option value="gadgets">gadgets</option>
                 </Select>
               </FormControl>
               <FormControl>
@@ -485,7 +473,7 @@ export default function AdminPanel() {
               </FormControl>
 
               <FormControl>
-                <FormLabel htmlFor="Long Description">
+                <FormLabel htmlFor="Short Description">
                   Short Description
                 </FormLabel>
                 <Input
@@ -553,7 +541,6 @@ export default function AdminPanel() {
                 </Tr>
               </Thead>
               <Tbody>
-                {/* {console.log(tableData)} */}
                 {tableData?.map((el) => (
                   <TableRow key={el._id} {...el} handleTable={handleTable} />
                 ))}

@@ -1,11 +1,10 @@
 const express = require("express");
-const { adminAuthentication } = require("../Middlewares/Admin.authentication");
 const { ProductModel } = require("../Models/Product.Model");
 
 const ProductRouter = express.Router();
 
 //Add Product from admin side
-ProductRouter.post("/add", adminAuthentication, async (req, res) => {
+ProductRouter.post("/add", async (req, res) => {
   try {
     const product = new ProductModel(req.body);
     await product.save();
@@ -18,8 +17,23 @@ ProductRouter.post("/add", adminAuthentication, async (req, res) => {
 
 //Get Products
 ProductRouter.get("/", async (req, res) => {
-  const products = await ProductModel.find();
-  res.status(200).send({ products: products });
+  const { category, q } = req.query;
+
+  if (q) {
+    const products = await ProductModel.find({
+      long_desc: { $regex: `${q}`, $options: "i" },
+    });
+    res.status(200).send(products);
+  } else if (category) {
+    const products = await ProductModel.find({
+      category: { $regex: `${category}`, $options: "i" },
+    });
+
+    res.status(200).send(products);
+  } else {
+    const products = await ProductModel.find();
+    res.status(200).send(products);
+  }
 });
 
 ProductRouter.get("/:category", async (req, res) => {
@@ -36,7 +50,7 @@ ProductRouter.get("/:category/:id", async (req, res) => {
 });
 
 //Update Product from admin side
-ProductRouter.patch("/:id", adminAuthentication, async (req, res) => {
+ProductRouter.patch("/:id", async (req, res) => {
   //   const category = req.params.category;
   const payload = req.body;
   const ID = req.params.id;
@@ -50,7 +64,7 @@ ProductRouter.patch("/:id", adminAuthentication, async (req, res) => {
 
 //Delete Product from admin side
 
-ProductRouter.delete("/:id", adminAuthentication, async (req, res) => {
+ProductRouter.delete("/:id", async (req, res) => {
   const ID = req.params.id;
   console.log(ID);
   try {
