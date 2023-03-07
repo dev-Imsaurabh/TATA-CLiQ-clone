@@ -7,9 +7,9 @@ import {
   Flex,
   Heading,
   Image,
-  Radio,
-  RadioGroup,
-  Stack,
+  // Radio,
+  // RadioGroup,
+  // Stack,
   Textarea,
   VStack,
 } from "@chakra-ui/react";
@@ -23,7 +23,7 @@ import {
   Table,
   Thead,
   Tbody,
-  Tfoot,
+  // Tfoot,
   Tr,
   Th,
   Td,
@@ -39,8 +39,8 @@ import {
   ModalCloseButton,
 } from "@chakra-ui/react";
 import Api from "../api/Api";
-import axios from "axios";
-import { tab } from "@testing-library/user-event/dist/tab";
+// import axios from "axios";
+// import { tab } from "@testing-library/user-event/dist/tab";
 import { Icon } from "../components/Icon";
 import { PRODUCTS } from "../constants/constants";
 
@@ -50,7 +50,7 @@ export function TableRow({
   price,
   category,
   ratings,
-  id,
+  _id,
   handleTable,
   long_desc,
   short_desc,
@@ -82,52 +82,50 @@ export function TableRow({
     setStrikep(strike_price);
   }, []);
 
-  let api = new Api();
-
-  const EditProduct = async () => {
+  const EditProduct = async (_id) => {
+    let newData = {
+      name: ename,
+      images: [eimage, eimage1, eimage2],
+      price: +eprice,
+      ratings: +eratings,
+      long_desc: longd,
+      short_desc: shortd,
+      strike_price: +strikep,
+    };
     setLoading(true);
-    let res = await api.getProductsData(`/${category}`);
-    // console.log(res);
 
-    let newData = res.map((el) => {
-      if (el.id == id) {
-        el.name = ename;
-        el.images = [eimage, eimage1, eimage2];
-        el.price = +eprice;
-        el.ratings = +eratings;
-        el.long_desc = longd;
-        el.short_desc = shortd;
-        el.strike_price = strikep;
-      }
-      return el;
+    await fetch(`${PRODUCTS}/${_id}`, {
+      method: "PATCH",
+      body: JSON.stringify(newData),
+      headers: {
+        Authorization: localStorage.getItem("admintoken"),
+        "Content-Type": "application/json",
+      },
     });
-
-    // console.log(newData);
-    let res1 = await axios(PRODUCTS + `/${category}`, {
-      method: "patch",
-      data: { items: newData },
-    });
+    // .then((res) => res.json())
+    // .then((res) => console.log(res))
+    // .catch((e) => console.log(e));
 
     // console.log(res1);
     setLoading(false);
+    // let res = await api.getProductsData(`/${category}`);
+    // console.log(res);
     onClose();
     handleTable(category);
   };
 
   const deleteItem = async () => {
-    let res = await api.getProductsData(`/${category}`);
-    // console.log(res);
-
-    let newData = res.filter((el) => el.id != id);
-
-    let res1 = await axios(PRODUCTS+`/${category}`,
-      {
-        method: "patch",
-        data: { items: newData },
-      }
-    );
-
-    // console.log(res1);
+    let token = localStorage.getItem("admintoken");
+    await fetch(PRODUCTS + `/${_id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: token,
+        "Content-Type": "application/json",
+      },
+    });
+    // .then((res) => res.json())
+    // .then((res) => console.log(res))
+    // .catch((e) => console.log(e));
     handleTable(category);
   };
 
@@ -149,7 +147,7 @@ export function TableRow({
             size={16}
           ></Icon>
         </Td>
-        <Td onClick={deleteItem}>
+        <Td onClick={() => deleteItem(_id)}>
           <Icon
             image="https://cdn-icons-png.flaticon.com/512/1214/1214428.png"
             size={16}
@@ -231,7 +229,11 @@ export function TableRow({
             <Button colorScheme="blue" mr={3} onClick={onClose}>
               Close
             </Button>
-            <Button isLoading={loading} onClick={EditProduct} variant="ghost">
+            <Button
+              isLoading={loading}
+              onClick={() => EditProduct(_id)}
+              variant="ghost"
+            >
               Edit
             </Button>
           </ModalFooter>
@@ -242,7 +244,6 @@ export function TableRow({
 }
 
 let product = {
-  id: null,
   images: null,
   name: "",
   short_desc: "",
@@ -260,61 +261,56 @@ let product = {
 export default function AdminPanel() {
   let api = new Api();
 
-  const [value, setValue] = useState(""); // State to store the value of the input field
+  // const [value, setValue] = useState(""); // State to store the value of the input field
   const [cat, setCat] = useState([]);
   const [nproduct, setnPorcut] = useState(product);
   const [tableData, setTableData] = useState([]);
 
-  const handleChange = (event) => {
-    setValue(event.target.value); // Update the value of the input field when the user types
-  };
+  // const handleChange = (event) => {
+  //   setValue(event.target.value); // Update the value of the input field when the user types
+  // };
 
   useEffect(() => {
     const getCat = async () => {
       let res = await api.getData("/products");
-      setCat(res.data);
+      // console.log(res);
+      setCat(res.data.products);
     };
 
     getCat();
   }, []);
 
-  const handleSubmit = async (event) => {
-    value.toLowerCase();
-    event.preventDefault();
-    let obj = {
-      id: value,
-      items: [],
-    };
-    let res = await api.setData(obj, PRODUCTS);
-    // console.log(res);
-  };
-
   const handleProSubmit = async (event) => {
     event.preventDefault();
-    let res = await api.getProductsData(`/${nproduct.category}`);
+
     // console.log(res);
-    nproduct.id = Math.random() + Date.now();
-    nproduct.price = Number(nproduct.price);
-    nproduct.strike_price = Number(nproduct.strike_price);
-    nproduct.delivery_time = Number(nproduct.delivery_time);
-    nproduct.ratings = Number(nproduct.ratings);
-    nproduct.images=nproduct.images?.split(",");
-    nproduct.sizes=nproduct.sizes?.split(",")
-    let res1 = await axios(PRODUCTS+`/${nproduct.category}`,
-      {
-        headers: {
-          'Access-Control-Allow-Origin': '*'
-        },
-        method: "patch",
-        data: { items: [...res, nproduct] },
-      }
-    );
-    console.log(res1);
-    console.log(nproduct)
+    let item = {
+      name: nproduct.name,
+      short_desc: nproduct.short_desc,
+      long_desc: nproduct.long_desc,
+      category: nproduct.category,
+      color: nproduct.color,
+      size: nproduct.size,
+      price: Number(nproduct.price),
+      strike_price: Number(nproduct.strike_price),
+      delivery_time: Number(nproduct.delivery_time),
+      ratings: Number(nproduct.ratings),
+      images: nproduct.images?.split(","),
+      sizes: nproduct.sizes?.split(","),
+    };
+    await fetch(PRODUCTS + `/add`, {
+      method: "POST",
+      body: JSON.stringify(item),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    // console.log(res);
+    // console.log(item);
   };
 
   const handleFormData = (e) => {
-    const val =e.target.name=="size"?e.target.checked:e.target.value;
+    const val = e.target.name === "size" ? e.target.checked : e.target.value;
 
     setnPorcut({ ...nproduct, [e.target.name]: val });
   };
@@ -329,7 +325,7 @@ export default function AdminPanel() {
     <Box className="container">
       <Flex>
         <VStack w="30%">
-          <form onSubmit={handleSubmit}>
+          {/* <form onSubmit={handleSubmit}>
             <Flex direction="column" padding={8} m="auto">
               <Card>
                 <CardBody>
@@ -357,7 +353,7 @@ export default function AdminPanel() {
                 </CardBody>
               </Card>
             </Flex>
-          </form>
+          </form> */}
 
           <Divider />
 
@@ -430,9 +426,10 @@ export default function AdminPanel() {
                 <FormLabel htmlFor="category">Category</FormLabel>
                 <Select id="category" name="category" onChange={handleFormData}>
                   <option value="">Select category</option>
-                  {cat.map((el) => (
-                    <option key={el.id} value={el.id}>{el.id}</option>
-                  ))}
+                  <option value="shoes">shoes</option>
+                  <option value="menswear">menswear</option>
+                  <option value="womenswear">womenswear</option>
+                  <option value="gadgets">gadgets</option>
                 </Select>
               </FormControl>
               <FormControl>
@@ -470,11 +467,13 @@ export default function AdminPanel() {
 
               <FormControl>
                 <FormLabel htmlFor="is Size?">is Size?</FormLabel>
-               <Checkbox name="size" onChange={handleFormData}>yes</Checkbox>
+                <Checkbox name="size" onChange={handleFormData}>
+                  yes
+                </Checkbox>
               </FormControl>
 
               <FormControl>
-                <FormLabel htmlFor="Long Description">
+                <FormLabel htmlFor="Short Description">
                   Short Description
                 </FormLabel>
                 <Input
@@ -521,9 +520,10 @@ export default function AdminPanel() {
             }}
           >
             <option value="">Select category</option>
-            {cat.map((el) => (
-              <option key={el.id} value={el.id}>{el.id}</option>
-            ))}
+            <option value="shoes">shoes</option>
+            <option value="menswear">menswear</option>
+            <option value="womenswear">womenswear</option>
+            <option value="gadgets">gadgets</option>
           </Select>
 
           <TableContainer>
@@ -541,9 +541,8 @@ export default function AdminPanel() {
                 </Tr>
               </Thead>
               <Tbody>
-                {/* {console.log(tableData)} */}
                 {tableData?.map((el) => (
-                  <TableRow key={el.id} {...el} handleTable={handleTable} />
+                  <TableRow key={el._id} {...el} handleTable={handleTable} />
                 ))}
               </Tbody>
             </Table>

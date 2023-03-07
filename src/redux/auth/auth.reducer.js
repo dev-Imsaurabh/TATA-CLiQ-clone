@@ -30,6 +30,7 @@ export const authReducer = (state = initialData, { type, payload }) => {
       return { ...state, loading: true };
     }
     case LOGIN_SUCCESS: {
+      localStorage.setItem("token",JSON.stringify(payload.token))
       return {
         ...state,
         token: payload.token,
@@ -42,6 +43,7 @@ export const authReducer = (state = initialData, { type, payload }) => {
       return { ...state, loading: false, message: payload.message };
     }
     case AUTH_RESET: {
+      localStorage.removeItem("token")
       return initialData;
     }
 

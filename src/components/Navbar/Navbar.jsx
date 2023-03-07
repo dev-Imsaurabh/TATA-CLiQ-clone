@@ -8,18 +8,18 @@ import {
   InputLeftElement,
   Menu,
   MenuButton,
-  MenuItem,
+  // MenuItem,
   MenuList,
   Button,
   Popover,
   PopoverTrigger,
   PopoverContent,
-  PopoverHeader,
+  // PopoverHeader,
   PopoverBody,
-  PopoverFooter,
-  PopoverArrow,
-  PopoverCloseButton,
-  PopoverAnchor,
+  // PopoverFooter,
+  // PopoverArrow,
+  // PopoverCloseButton,
+  // PopoverAnchor,
   Tabs,
   TabList,
   TabPanels,
@@ -28,8 +28,8 @@ import {
 } from "@chakra-ui/react";
 import { BsSuitHeart } from "react-icons/bs";
 import { FiShoppingBag } from "react-icons/fi";
-import { AiOutlineArrowDown } from "react-icons/ai";
-import { BiSearchAlt2 } from "react-icons/bi";
+// import { AiOutlineArrowDown } from "react-icons/ai";
+// import { BiSearchAlt2 } from "react-icons/bi";
 import { useState } from "react";
 import logo from "../../assets/cliq_mart_logo.png";
 import { Link, useNavigate } from "react-router-dom";
@@ -40,35 +40,36 @@ import {
   DEEPPINK,
   FIXED,
   POINTER,
-  STICKY,
+  // STICKY,
   TRANSPARENT,
-  WHITE,
+  // WHITE,
 } from "../../constants/typography";
 import { SignupModal } from "../SignupModal";
 import { MdAdminPanelSettings } from "react-icons/md";
 
 // import { useSelector } from "react-redux";
 import { FaUserCircle } from "react-icons/fa";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
+import { AdminModal } from "../AdminModal";
+// import { useEffect } from "react";
 export default function Navbar() {
   const [arrow1, setArrow1] = useState(false);
+
   // const [arrow2, setArrow2] = useState(false);
-  
+
   const [value, setValue] = useState("");
-    const { token } = useSelector(
-    (state) => state.authManager
-  );
+  const token = JSON.parse(localStorage.getItem("token")) || null;
+
   let nav = useNavigate();
   const handleSeacrh = (event) => {
-    if (event.key == "Enter") {
-      if(value==""){
-        return
+    if (event.key === "Enter") {
+      if (value === "") {
+        return;
       }
       nav(`/search?q=${value}`);
     }
   };
 
-  
   return (
     <Box
       position={FIXED}
@@ -325,23 +326,22 @@ export default function Navbar() {
             <Box display="flex" justifyContent="center" alignItems="center">
               <BsSuitHeart size="18%" />
             </Box>
-            <Box
-              display={
-                token
-                  ? "flex"
-                  : "none"
-              }
-              justifyContent="center"
-              alignItems="center"
-            >
-              <MdAdminPanelSettings
-                cursor={POINTER}
-                color={"white"}
-                size="18%"
-                onClick={() => {
-                  nav("/admin");
-                }}
-              />
+            <Box display={"flex"} justifyContent="center" alignItems="center">
+              {" "}
+              <Menu>
+                <MenuButton
+                  fontSize={{ base: 8, sm: 16, lg: 16 }}
+                  bg={TRANSPARENT}
+                  _active={{ bg: { TRANSPARENT } }}
+                  _hover={{ bg: { TRANSPARENT } }}
+                  as={Button}
+                >
+                  <MdAdminPanelSettings cursor={POINTER} />
+                </MenuButton>
+                <MenuList>
+                  <AdminModal />
+                </MenuList>
+              </Menu>
             </Box>
             <Box display="flex" justifyContent="center" alignItems="center">
               <FiShoppingBag

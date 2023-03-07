@@ -16,6 +16,7 @@ import ProfilePage from "../pages/ProfilePage";
 import AdminPanel from "../pages/AdminPanel";
 import SearchPage from "../pages/SearchPage";
 import ProtectAdmin from "../contexts/ProtectAdmin";
+import AdminRoute from "./AdminRoute";
 export default function AllRoutes() {
   return (
     <Routes>
@@ -43,7 +44,7 @@ export default function AllRoutes() {
 
       {/* profile */}
       <Route path="/profile" element={<PrivateRoute><ProfilePage /></PrivateRoute>} />
-      <Route path="/admin" element={<PrivateRoute><ProtectAdmin><AdminPanel /></ProtectAdmin></PrivateRoute>} />
+      <Route path="/admin" element={<AdminRoute><AdminPanel /></AdminRoute>} />
       <Route path="/search" element={<SearchPage />} />
 
 

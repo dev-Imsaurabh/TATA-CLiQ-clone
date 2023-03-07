@@ -2,7 +2,7 @@ const express = require("express");
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const { userAuthentication } = require("../Middlewares/User.authentication");
+// const { userAuthentication } = require("../Middlewares/User.authentication");
 const { UserModel } = require("../Models/User.Model");
 const UserRouter = express.Router();
 
@@ -48,12 +48,12 @@ UserRouter.post("/login", async (req, res) => {
           );
           res.status(200).send({ message: "Login Suceessful", token: token });
         } catch (e) {
-          res.status(400).send({ message: "Wrong Credentials", err: e.message });
+          res.status(401).send({ message: "Something Went Wrong", err: e.message });
         }
       } else {
         res
           .status(201)
-          .send({ message: "Something Went Wrong", error: "Wrong Password" });
+          .send({ message: "Wrong Credentials", error: "Wrong Password" });
       }
     });
   } else {

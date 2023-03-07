@@ -1,9 +1,8 @@
 import { Box, Avatar, Text, Button, useToast } from "@chakra-ui/react";
 import React from "react";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { AUTO, FILL_25PARENT, FILL_PARENT } from "../../constants/typography";
+import { FILL_25PARENT, FILL_PARENT } from "../../constants/typography";
 import { resetAuth } from "../../redux/auth/auth.actions";
 
 const User = () => {
@@ -32,7 +31,7 @@ const User = () => {
             title: "Logout Successful",
             description: "Redirecting to Homepage",
             status: "success",
-            duration: 2000,
+            duration: 1000,
             isClosable: true,
           });
         }}
