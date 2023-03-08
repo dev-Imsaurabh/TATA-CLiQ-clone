@@ -62,11 +62,13 @@ export default function SignupModal({ color, bg, br, w, h, cs }) {
     if (message === "User already exist, Please login") {
       toast({
         title: "User already exist",
+        position: 'top',
         description: "Hint: Login to your account",
         status: "error",
         duration: 2000,
         isClosable: true,
       });
+      setOption(1)
       // console.log(message);
       // dispatch(resetAuth());
       // return;
@@ -74,17 +76,20 @@ export default function SignupModal({ color, bg, br, w, h, cs }) {
     if (message === "User Registration Suceessful") {
       toast({
         title: "Sign up successful",
-        description: "Login into your account",
+        position: 'top',
+        description: "Please Login into your account",
         status: "success",
         duration: 2000,
         isClosable: true,
       });
+      setOption(1)
     }
     if (message==="Login Suceessful") {
       
       toast({
         title: "Login Suceessful",
         description: "",
+        position: 'top',
         status: "success",
         duration: 2000,
         isClosable: true,
@@ -97,6 +102,7 @@ export default function SignupModal({ color, bg, br, w, h, cs }) {
       toast({
         title: message,
         description: "",
+        position: 'top',
         status: "success",
         duration: 2000,
         isClosable: true,
@@ -107,6 +113,7 @@ export default function SignupModal({ color, bg, br, w, h, cs }) {
       toast({
         title: message,
         description: "",
+        position: 'top',
         status: "success",
         duration: 2000,
         isClosable: true,
@@ -127,7 +134,19 @@ export default function SignupModal({ color, bg, br, w, h, cs }) {
       if (name === "" || email === "" || password === "") {
         toast({
           title: "Please enter all details",
+          position: 'top',
           description: "",
+          status: "error",
+          duration: 2000,
+          isClosable: true,
+        });
+        return;
+      } 
+      if (password.length<8) {
+        toast({
+          title: "Password must be greater than or equal to 8 Characters",
+          description: "",
+          position: 'top',
           status: "error",
           duration: 2000,
           isClosable: true,
@@ -142,6 +161,7 @@ export default function SignupModal({ color, bg, br, w, h, cs }) {
         toast({
           title: "Please enter all details",
           description: "",
+          position: 'top',
           status: "error",
           duration: 2000,
           isClosable: true,

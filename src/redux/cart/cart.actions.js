@@ -7,6 +7,7 @@ export const getCartProducts = (token) => async(dispatch) => {
     dispatch({ type: types.GET_CART_LOADING });
     let cartData=await fetch(`${BASE_URL}/cart`,{
       headers:{
+        "Content-Type": "application/json",
         Authorization: token,
       }
     })
@@ -23,13 +24,14 @@ export const deleteItemFromCart = (id,token) => async(dispatch) => {
   
   try{
     dispatch({ type: types.DELETE_CART_LOADING });
-    await fetch(`${BASE_URL}/cart/delete/${id}`,{
+    let cartData=await fetch(`${BASE_URL}/cart/delete/${id}`,{
       method:"DELETE",
       headers:{
+        "Content-Type": "application/json",
         Authorization: token,
       }
     })
-    // await cartData.json();
+    await cartData.json();
     // console.log(cartData)
         dispatch({ type: types.DELETE_CART_SUCCESS});
     

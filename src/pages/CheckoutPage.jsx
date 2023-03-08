@@ -23,14 +23,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Loader } from "../components/Loader";
 import { OtpModal } from "../components/OtpModal";
-import { BASE_URL, LOADER_URL, RUPEES_SYMBOL, USERS } from "../constants/constants";
-import { AUTO, CENTER, COLUMN, FILL_60PARENT, FILL_80PARENT, FILL_PARENT, NONE, ROW, SB } from "../constants/typography";
+import { BASE_URL, LOADER_URL, RUPEES_SYMBOL } from "../constants/constants";
+import {
+  AUTO,
+  CENTER,
+  COLUMN,
+  FILL_60PARENT,
+  FILL_80PARENT,
+  FILL_PARENT,
+  NONE,
+  ROW,
+  SB,
+} from "../constants/typography";
 import { AddressContext } from "../contexts/AddressContextProvider";
-import { deleteItemFromCart, getCartProducts, UdpateCart } from "../redux/cart/cart.actions";
+import { getCartProducts } from "../redux/cart/cart.actions";
 import "../styles/style.css";
 
 const CheckoutPage = () => {
-  const navigate = useNavigate();
   const {
     firstName,
     lastName,
@@ -52,7 +61,7 @@ const CheckoutPage = () => {
     setState,
     clearAll,
   } = useContext(AddressContext);
-  let toast =useToast()
+  let toast = useToast();
 
   const { token } = useSelector((state) => state.authManager);
 
@@ -62,10 +71,9 @@ const CheckoutPage = () => {
   const [discount, setDiscount] = useState(0);
   const [total, setTotal] = useState(0);
   // const [cartData, setCartData] = useState([]);
-  let nav = useNavigate()
-  let full_address = useRef()
+  let nav = useNavigate();
+  let full_address = useRef();
   let dispatch = useDispatch();
-  const [prevorder,setPrevOrder]=useState([])
 
   useEffect(() => {
     dispatch(getCartProducts(token));
@@ -75,13 +83,12 @@ const CheckoutPage = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  
   useEffect(() => {
     let bag_total = 0;
     let checkout_total = 0;
     let final_discount = 0;
 
-    products.forEach(({ productId,qty }) => {
+    products.forEach(({ productId, qty }) => {
       // console.log(strike_price);
       checkout_total += productId.price * qty;
       bag_total += productId.strike_price * qty;
@@ -95,60 +102,57 @@ const CheckoutPage = () => {
     // console.log(checkout_total,bag_total,final_discount)
   }, [products]);
 
-  useEffect(()=>{
-
-    if(products.length===0){
-      nav("/cart")
+  useEffect(() => {
+    if (products.length === 0) {
+      nav("/cart");
     }
+  }, [products]);
 
-  },[products])
+  useEffect(() => {
+    dispatch(getCartProducts(token));
+  }, []);
 
-  useEffect(()=>{
-    dispatch(getCartProducts(token))
-  },[])
-
-// console.log(products);
-  const makeOrder =async(onClose)=>{
-    let orders = [...products]
+  // console.log(products);
+  const makeOrder = async (onClose) => {
+    
+    let orders = [...products];
     // console.log(orders)
-    let newdata = orders.map((el)=>{
-      el.address=full_address.current.textContent
-      return el
-
-    })
-    let obj={
-      order:newdata,
-    }
+    let newdata = orders.map((el) => {
+      el.address = full_address.current.textContent;
+      return el;
+    });
+    let obj = {
+      order: newdata,
+    };
 
     // console.log(obj,newdata)
-    await fetch(BASE_URL+"/order/add",{
-      method:"POST",
-      body:JSON.stringify(obj),
-      headers:{
-        "Content-Type":"application/json",
-        Authorization:token,
-      }
-    })
+    await fetch(BASE_URL + "/order/add", {
+      method: "POST",
+      body: JSON.stringify(obj),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
 
-    
-    if(!loading){
-
+    if (!loading) {
       toast({
-        title: 'Order Placed',
-        description: "Go to orders page to see your orders",
-        status: 'success',
+        title: "Order Placed,Thank you for Shopping with us",
+        description: "Redirecting you to Home",
+        position: "top",
+        status: "success",
         duration: 2000,
         isClosable: true,
-      })
-      onClose()
-
+      });
+      onClose();
+      nav("/");
     }
-  }
+  };
 
-  if(loading) return <Loader gif={LOADER_URL}/>
+  if (loading) return <Loader gif={LOADER_URL} />;
 
   return (
-    <Box margin={AUTO} mt={170} m={AUTO}  w={FILL_80PARENT} >
+    <Box margin={AUTO} mt={170} m={AUTO} w={FILL_80PARENT}>
       <Heading textAlign={"left"}>Checkout</Heading>
       <Flex
         gap={"30px"}
@@ -201,59 +205,51 @@ const CheckoutPage = () => {
             >
               <Box>
                 <FormControl isRequired={true}>
-                <Stack spacing={3}>
-                  <Box>
-                    <Input
-                      placeholder="First Name"
-                      
-                      width={{
+                  <Stack spacing={2}>
+                    <Box
+                      w={{
                         base: "100%",
                         sm: "100%",
                         md: "100%",
-                        lg: "48%",
+                        lg: "90%",
                       }}
-                      mr={"12px"}
-                      mb={"10px"}
-                      value={firstName}
-                      onChange={(e) => setFirstName(e.target.value)}
-                    />
-                    <Input
-                      placeholder="Last Name"
-              
-                      width={{
-                        base: "100%",
-                        sm: "100%",
-                        md: "100%",
-                        lg: "48%",
-                      }}
-                      value={lastName}
-                      onChange={(e) => setLastName(e.target.value)}
-                    />
-                  </Box>
-                  <Input
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                    placeholder="City"
-                    
-                  />
-                  <Input
-                    value={state}
-                    onChange={(e) => setState(e.target.value)}
-                    placeholder="State"
-                    
-                  />
-                  <Input
-                    value={landMark}
-                    onChange={(e) => setLandMark(e.target.value)}
-                    placeholder="Landmark"
-                    
-                  />
-                </Stack>
+                    >
+                      <Input
+                        placeholder="First Name"
+                        mr={"12px"}
+                        mb={"10px"}
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                      />
+                      <Input
+                        placeholder="Last Name"
+                        mb={"10px"}
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                      />
+                      <Input
+                        value={city}
+                        onChange={(e) => setCity(e.target.value)}
+                        placeholder="City"
+                        mb={"10px"}
+                      />
+                      <Input
+                        value={state}
+                        onChange={(e) => setState(e.target.value)}
+                        placeholder="State"
+                        mb={"10px"}
+                      />
+                      <Input
+                        value={landMark}
+                        onChange={(e) => setLandMark(e.target.value)}
+                        placeholder="Landmark"
+                      />
+                    </Box>
+                  </Stack>
                 </FormControl>
               </Box>
               <Box
-                ml={{ base: "0%", sm: "0%", md: "0%", lg: "2%" }}
-                width={{ base: "100%", sm: "100%", md: "100%", lg: "48%" }}
+                w={{ base: "100%", sm: "100%", md: "100%", lg: "200%" }}
                 direction={{ base: COLUMN, sm: COLUMN, md: COLUMN, lg: ROW }}
               >
                 <Stack spacing={3}>
@@ -286,25 +282,32 @@ const CheckoutPage = () => {
               <Radio value="Office">Office</Radio>
             </RadioGroup>
           </Box>
-          <Flex display={"flex"} alignItems={CENTER} justify={"end"} >
-          <Button display={NONE}  mr={"20px"}>Cancel</Button>
-            <OtpModal total={total} callback={makeOrder} address={firstName +
-            " " +
-            lastName +
-            " " +
-            address +
-            " " +
-            landMark +
-            " " +
-            mobile +
-            " " +
-            city +
-            " " +
-            state +
-            " " +
-            pinCode} />
+          <Flex display={"flex"} alignItems={CENTER} justify={"end"}>
+            <Button display={NONE} mr={"20px"}>
+              Cancel
+            </Button>
+            <OtpModal
+              total={total}
+              callback={makeOrder}
+              address={
+                firstName +
+                " " +
+                lastName +
+                " " +
+                address +
+                " " +
+                landMark +
+                " " +
+                mobile +
+                " " +
+                city +
+                " " +
+                state +
+                " " +
+                pinCode
+              }
+            />
           </Flex>
-
         </Box>
 
         <Flex
@@ -318,7 +321,7 @@ const CheckoutPage = () => {
         >
           <Flex justifyContent={SB}>
             <Text>Bag Total</Text>
-            <Text>{RUPEES_SYMBOL+bagTotal.toFixed(2)}</Text>
+            <Text>{RUPEES_SYMBOL + bagTotal.toFixed(2)}</Text>
           </Flex>
           <Flex justifyContent={SB}>
             <Text>Shipping Charge</Text>
@@ -328,7 +331,7 @@ const CheckoutPage = () => {
           </Flex>
           <Flex justifyContent={SB}>
             <Text>Bag Subtotal</Text>
-            <Text>{RUPEES_SYMBOL+bagSubTotal.toFixed(2)}</Text>
+            <Text>{RUPEES_SYMBOL + bagSubTotal.toFixed(2)}</Text>
           </Flex>
           <Flex justifyContent={SB}>
             <Text>Product Discount(s)</Text>
@@ -336,32 +339,35 @@ const CheckoutPage = () => {
           </Flex>
 
           <Text textAlign={"left"} color={"darkgreen"} fontWeight={"bold"}>
-            You will save {(RUPEES_SYMBOL + discount.toFixed(2))} on this order.
+            You will save {RUPEES_SYMBOL + discount.toFixed(2)} on this order.
           </Text>
 
           <Divider />
           <Flex justifyContent={SB}>
             <Heading size="sm">Total Payable</Heading>
-            <Heading size="sm">{RUPEES_SYMBOL+total.toFixed(2)}</Heading>
+            <Heading size="sm">{RUPEES_SYMBOL + total.toFixed(2)}</Heading>
           </Flex>
           <Heading textAlign={"left"} as={"h6"} size="sm">
             Will be delivered to:-{selectedValue}
           </Heading>
-         <Wrap ref={full_address}> {firstName +
-            " " +
-            lastName +
-            " " +
-            address +
-            " " +
-            landMark +
-            " " +
-            mobile +
-            " " +
-            city +
-            " " +
-            state +
-            " " +
-            pinCode}</Wrap>
+          <Wrap ref={full_address}>
+            {" "}
+            {firstName +
+              " " +
+              lastName +
+              " " +
+              address +
+              " " +
+              landMark +
+              " " +
+              mobile +
+              " " +
+              city +
+              " " +
+              state +
+              " " +
+              pinCode}
+          </Wrap>
         </Flex>
       </Flex>
     </Box>
