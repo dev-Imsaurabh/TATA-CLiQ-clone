@@ -30,6 +30,7 @@ const User = () => {
           toast({
             title: "Logout Successful",
             description: "Redirecting to Homepage",
+            position: 'top',
             status: "success",
             duration: 1000,
             isClosable: true,

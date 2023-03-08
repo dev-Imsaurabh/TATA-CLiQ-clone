@@ -50,12 +50,12 @@ import {
 import { Loader } from "../components/Loader";
 import { ERROR_URL, LOADER_URL, RUPEES_SYMBOL } from "../constants/constants";
 import { useState } from "react";
-import { Image } from "@chakra-ui/react";
+import { Image, useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
 export default function CartPage() {
-  const { token } = useSelector((state) => state.authManager);
-
+    const token = JSON.parse(localStorage.getItem("token")) || null;
+    const toast =useToast();
   const { products, loading, error } = useSelector(
     (state) => state.cartManager
   );
@@ -63,14 +63,10 @@ export default function CartPage() {
   const [bagSubTotal, setBagSubTotal] = useState(0);
   const [discount, setDiscount] = useState(0);
   const [total, setTotal] = useState(0);
-  // const [products, setproducts] = useState([]);
   let nav = useNavigate();
 
   let dispatch = useDispatch();
-  // console.log(products);
-  // console.log(products)
 
-  // console.log(products)
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -100,12 +96,21 @@ export default function CartPage() {
     // console.log(checkout_total,bag_total,final_discount)
   }, [products]);
   
-  const removeitem = (id) => {
-    dispatch(deleteItemFromCart(id,token));
-    dispatch(getCartProducts(token));
+  const removeitem = async(id) => {
+    await dispatch(deleteItemFromCart(id,token));
+    await dispatch(getCartProducts(token));
+
+    toast({
+      title: `Product Removed from Cart`,
+      position: 'top',
+      description: "",
+      status: "success",
+      duration: 2000,
+      isClosable: true,
+    });
   };
 
-  const updatequantity = (id, value) => {
+  const updatequantity = async(id, value) => {
     // console.log(newData)
     //  console.log("local",newData)
     products?.map((el) => {
@@ -116,9 +121,17 @@ export default function CartPage() {
       }
       return el;
     });
-    dispatch(editCartItem(id, token, +value));
-    dispatch(getCartProducts(token));
+    await dispatch(editCartItem(id, token, +value));
+    await dispatch(getCartProducts(token));
     // console.log(new_Quantity);
+    toast({
+      title: `Product Quantity updated to ${value}`,
+      position: 'top',
+      description: "",
+      status: "success",
+      duration: 2000,
+      isClosable: true,
+    });
   };
   // console.log(data)
 
@@ -157,7 +170,7 @@ export default function CartPage() {
 
               <VStack gap={4} w={FILL_PARENT}>
                 {/* //inflate all cart items here */}
-                {products?.reverse().map((el,index) => (
+                {products?.map((el,index) => (
                   <CartItem
                   key={index}
                     {...el.productId}

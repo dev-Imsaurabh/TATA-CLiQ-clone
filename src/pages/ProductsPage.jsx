@@ -22,7 +22,7 @@ import {
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
-} from '@chakra-ui/react'
+} from "@chakra-ui/react";
 import {
   DISCOUNT,
   ERROR_URL,
@@ -60,16 +60,16 @@ import { BsFilter } from "react-icons/bs";
 import discount from "../scripts/discount";
 import { Filter } from "../components/Filter";
 import { FilterData } from "../constants/staticData";
-import {AiFillFilter} from "react-icons/ai"
+import { AiFillFilter } from "react-icons/ai";
 import { useRef } from "react";
 
 export default function ProductsPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   let { loading, error, data } = useSelector((state) => state.productsManager);
   const [productData, setProductData] = useState();
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const btnRef = useRef()
-  const [clear,setClear] =useState(false)
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const btnRef = useRef();
+  const [clear, setClear] = useState(false);
   let value = searchParams.get("sort") || "";
   let filterValues = searchParams.get("filter")?.toString().split("+") || [];
 
@@ -77,24 +77,24 @@ export default function ProductsPage() {
     window.scrollTo(0, 0);
   }, [data]);
 
-
   let dispatch = useDispatch();
   //   console.log(error);
 
   let { id } = useParams();
   const [filter, setFilters] = useState([]);
-  
 
   useEffect(() => {
     dispatch(getCategoryData(id));
+    // console.log(filterValues);
   }, [clear]);
 
   useEffect(() => {
-    // if(value==undefined){
+    // if(value==""){
     //     setSearchParams(`?sort=${POPULARITY}`)
     // }
 
     if (value === POPULARITY) {
+      // let popularityData = data?.sort((a, b) => b.ratings - a.ratings);
       setProductData([...data]);
     } else if (value === LTH) {
       let lthData = data?.sort((a, b) => a.price - b.price);
@@ -121,40 +121,35 @@ export default function ProductsPage() {
   }, [filter]);
 
   useEffect(() => {
-
-
     let filteredData = [];
     filterValues?.forEach((el) => {
-      // console.log(el)
       productData?.forEach((option) => {
         if (
           option.color === el ||
-          Math.floor(option.ratings) === el ||
+          Math.floor(option.ratings) == el ||
           option.sizes.includes(el)
         ) {
-          // console.log(option);
-          if(filteredData.length>0){
-            filteredData.forEach((el)=>{
-              if(JSON.stringify(el)!==JSON.stringify(option)){
+          if (filteredData.length > 0) {
+            filteredData.forEach((el) => {
+              if (JSON.stringify(el) !== JSON.stringify(option)) {
                 filteredData = [...filteredData, option];
               }
-            })
-
-          }else{
+            });
+          } else {
             filteredData = [...filteredData, option];
-
           }
-        
-       
         }
       });
     });
 
     if (filteredData.length > 0) {
-      let unique = filteredData.filter((v,i,a)=>a.findIndex(v2=>(v2.id===v.id))===i)
+      let unique = filteredData.filter(
+        (v, i, a) => a.findIndex((v2) => v2._id === v._id) === i
+      );
 
       setProductData([...unique]);
     }
+    // console.log("filteredData", filteredData);
   }, [searchParams]);
 
   // console.log(filter)
@@ -171,47 +166,62 @@ export default function ProductsPage() {
 
       <Flex m={AUTO} w={FILL_80PARENT}>
         <HStack flex={2.5}>
+          <>
+            <Wrap
+              display={{ base: "block", sm: "none", lg: "none" }}
+              ref={btnRef}
+              onClick={onOpen}
+            >
+              <AiFillFilter />
+            </Wrap>
 
-        <>
-        <Wrap display={{base:"block",sm:"none",lg:"none"}} ref={btnRef} onClick={onOpen}><AiFillFilter /></Wrap>
-      
-      <Drawer
-        isOpen={isOpen}
-        placement='right'
-        onClose={onClose}
-        finalFocusRef={btnRef}
-      >
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
+            <Drawer
+              isOpen={isOpen}
+              placement="right"
+              onClose={onClose}
+              finalFocusRef={btnRef}
+            >
+              <DrawerOverlay />
+              <DrawerContent>
+                <DrawerCloseButton />
 
-          <DrawerBody>
-
-          <Flex gap={4} w={FILL_80PARENT} m={AUTO}>
-        <Box w={FILL_PARENT} >
-          <Card borderRadius={10} position={STICKY} top={5} w={FILL_PARENT}>
-            <Flex padding={4} bg={"gray.100"} justify={SB} alignItems={CENTER}>
-              <Text fontWeight={BOLD}>Filters</Text>
-              <Text cursor={POINTER} onClick={()=>{
-                setClear((prev)=>!prev)
-              }} color={DEEPPINK} fontWeight={BOLD}>
-                Clear All
-              </Text>
-            </Flex>
-            <CardBody width={FILL_PARENT}>
-              <Filter setFilters={setFilters} data={FilterData} />
-            </CardBody>
-          </Card>
-        </Box>
-
-       
-      </Flex>
-            
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
-    </>
-
+                <DrawerBody>
+                  <Flex gap={4} w={FILL_80PARENT} m={AUTO}>
+                    <Box w={FILL_PARENT}>
+                      <Card
+                        borderRadius={10}
+                        position={STICKY}
+                        top={5}
+                        w={FILL_PARENT}
+                      >
+                        <Flex
+                          padding={4}
+                          bg={"gray.100"}
+                          justify={SB}
+                          alignItems={CENTER}
+                        >
+                          <Text fontWeight={BOLD}>Filters</Text>
+                          <Text
+                            cursor={POINTER}
+                            onClick={() => {
+                              setClear((prev) => !prev);
+                            }}
+                            color={DEEPPINK}
+                            fontWeight={BOLD}
+                          >
+                            Clear All
+                          </Text>
+                        </Flex>
+                        <CardBody width={FILL_PARENT}>
+                          <Filter setFilters={setFilters} data={FilterData} />
+                        </CardBody>
+                      </Card>
+                    </Box>
+                  </Flex>
+                </DrawerBody>
+              </DrawerContent>
+            </Drawer>
+          </>
         </HStack>
 
         <Flex
@@ -224,7 +234,7 @@ export default function ProductsPage() {
           <HStack flex={1}>
             <Text color={GRAY}>Sort:</Text>
             <select
-              value={value||""}
+              value={value || ""}
               onChange={(e) => {
                 setSearchParams({
                   sort: e.target.value,
@@ -251,13 +261,21 @@ export default function ProductsPage() {
       <Gap gap={70} />
 
       <Flex gap={4} w={FILL_80PARENT} m={AUTO}>
-        <Box w={FILL_25PARENT} display={{base:NONE,sm:"block",lg:"block"}}>
+        <Box
+          w={FILL_25PARENT}
+          display={{ base: NONE, sm: "block", lg: "block" }}
+        >
           <Card borderRadius={10} position={STICKY} top={5} w={FILL_PARENT}>
             <Flex padding={4} bg={"gray.100"} justify={SB} alignItems={CENTER}>
               <Text fontWeight={BOLD}>Filters</Text>
-              <Text cursor={POINTER} onClick={()=>{
-                setClear((prev)=>!prev)
-              }} color={DEEPPINK} fontWeight={BOLD}>
+              <Text
+                cursor={POINTER}
+                onClick={() => {
+                  setClear((prev) => !prev);
+                }}
+                color={DEEPPINK}
+                fontWeight={BOLD}
+              >
                 Clear All
               </Text>
             </Flex>
@@ -269,7 +287,7 @@ export default function ProductsPage() {
 
         <Grid
           gap={4}
-          w={{base:FILL_PARENT,sm:FILL_75PARENT,lg:FILL_75PARENT}}
+          w={{ base: FILL_PARENT, sm: FILL_75PARENT, lg: FILL_75PARENT }}
           gridTemplateColumns={{ base: R1, sm: R3, lg: R4 }}
         >
           {productData?.map((el) => (
