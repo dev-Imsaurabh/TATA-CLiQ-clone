@@ -42,6 +42,7 @@ const AdminModal = () => {
     if (adminLogin.message === "Login Suceessful" && data.isAuthenticated) {
       toast({
         title: "Login Suceessful",
+        position: 'top',
         description: "",
         status: "success",
         duration: 2000,
@@ -53,6 +54,7 @@ const AdminModal = () => {
     } else if (adminLogin.message === "Wrong Credentials") {
       toast({
         title: adminLogin.message,
+        position: 'top',
         description: "",
         status: "success",
         duration: 2000,
@@ -63,6 +65,7 @@ const AdminModal = () => {
       toast({
         title: adminLogin.message,
         description: "Please Check Your Credentials",
+        position: 'top',
         status: "warning",
         duration: 2000,
         isClosable: true,
@@ -78,6 +81,7 @@ const AdminModal = () => {
     if (email === "" || password === "") {
       toast({
         title: "Please enter all details",
+        position: 'top',
         description: "",
         status: "error",
         duration: 2000,
@@ -124,6 +128,7 @@ const AdminModal = () => {
             }, 1000);
             toast({
               title: "Admin Logout Successful",
+              position: 'top',
               description: "Redirecting to Homepage",
               status: "success",
               duration: 2000,

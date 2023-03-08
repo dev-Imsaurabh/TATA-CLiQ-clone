@@ -282,7 +282,7 @@ export default function ViewProductPage() {
                   <Card
 
                   key={100000 + Math.floor(Math.random() * 900000)}
-                    border={index == option && my_border(1, SOLID, DEEPPINK)}
+                    border={index === option && my_border(1, SOLID, DEEPPINK)}
                     h={AUTO}
                     onClick={() => {
                       setOption(index);
@@ -332,6 +332,7 @@ export default function ViewProductPage() {
                       toast({
                         title: "Item added in your cart",
                         description: "Go to Cart to see item",
+                        position: 'top',
                         status: "success",
                         duration: 2000,
                         isClosable: true,
