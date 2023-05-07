@@ -52,75 +52,50 @@ export default function SignupModal({ color, bg, br, w, h, cs }) {
   const [option, setOption] = useState(0);
   let dispatch = useDispatch();
   let nav = useNavigate();
-  const { loading, message, token } = useSelector(
-    (state) => state.authManager
-  );
-
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { loading, message } = useSelector((state) => state.authManager);
+  const token = JSON.parse(localStorage.getItem("token")) || null;
+  // console.log(loading, message, token);
 
   useEffect(() => {
-    if (message === "User already exist, Please login") {
+    if (message === "Login Successful") {
       toast({
-        title: "User already exist",
-        position: 'top',
-        description: "Hint: Login to your account",
-        status: "error",
-        duration: 2000,
-        isClosable: true,
-      });
-      setOption(1)
-      // console.log(message);
-      // dispatch(resetAuth());
-      // return;
-    }
-    if (message === "User Registration Suceessful") {
-      toast({
-        title: "Sign up successful",
-        position: 'top',
-        description: "Please Login into your account",
-        status: "success",
-        duration: 2000,
-        isClosable: true,
-      });
-      setOption(1)
-    }
-    if (message==="Login Suceessful") {
-      
-      toast({
-        title: "Login Suceessful",
+        title: "Login Successful",
         description: "",
-        position: 'top',
+        position: "top",
         status: "success",
         duration: 2000,
         isClosable: true,
       });
       // localStorage.setItem("token", JSON.stringify(token));
-      nav("/profile");
+      nav("/");
       onClose();
-    }
-    if (message === "User is not registered,Please register first") {
+      return;
+    } else if (message === "User is not registered,Please register first") {
       toast({
         title: message,
         description: "",
-        position: 'top',
-        status: "success",
+        position: "top",
+        status: "error",
         duration: 2000,
         isClosable: true,
       });
-      onClose();
-    }
-    if (message === "Wrong Credentials") {
+      setOption(0);
+      return;
+    } else if (message === "Wrong Credentials") {
       toast({
         title: message,
-        description: "",
-        position: 'top',
-        status: "success",
+        description: "Please Enter correct Details",
+        position: "top",
+        status: "error",
         duration: 2000,
         isClosable: true,
       });
-      onClose();
+      return;
+      // onClose();
     }
-  }, [message,token]);
+  }, [message]);
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const resetValues = () => {
     setEmail("");
@@ -130,46 +105,111 @@ export default function SignupModal({ color, bg, br, w, h, cs }) {
 
   const handleAuth = () => {
     // console.log(option,"clicked");
+
+    const emailRegex = /\S+@\S+\.\S+/;
+    function validateEmail(email) {
+      if (!emailRegex.test(email)) {
+        return false; // Email is not in valid format
+      } else if (email.indexOf("@gmail.com") === -1) {
+        return false; // Email does not have the required domain name
+      }
+      return true; // Email is valid
+    }
     if (option === 0) {
       if (name === "" || email === "" || password === "") {
         toast({
           title: "Please enter all details",
-          position: 'top',
+          position: "top",
           description: "",
           status: "error",
           duration: 2000,
           isClosable: true,
         });
         return;
-      } 
-      if (password.length<8) {
+      }
+      if (password.length < 8) {
         toast({
           title: "Password must be greater than or equal to 8 Characters",
           description: "",
-          position: 'top',
+          position: "top",
           status: "error",
           duration: 2000,
           isClosable: true,
         });
         return;
-      } 
-        dispatch(Signup({ name, email, password }));
-        resetValues();
+      }
+      if (!validateEmail(email)) {
+        return toast({
+          title: "Email must include @gmail.com",
+          description: "",
+          position: "top",
+          status: "error",
+          duration: 2000,
+          isClosable: true,
+        });
+      }
+      dispatch(Signup({ name, email, password }));
+      if (message === "User already exist, Please login") {
+        toast({
+          title: "User already exist",
+          position: "top",
+          description: "Hint: Login to your account",
+          status: "error",
+          duration: 2000,
+          isClosable: true,
+        });
+        setOption(1);
+      } else if (message === "User Registration Suceessful") {
+        toast({
+          title: "Sign up successful",
+          position: "top",
+          description: "Please Login into your account",
+          status: "success",
+          duration: 2000,
+          isClosable: true,
+        });
+        setOption(1);
+      }
+
+      resetValues();
     } else {
       //   console.log("Log in process");
       if (email === "" || password === "") {
         toast({
           title: "Please enter all details",
           description: "",
-          position: 'top',
+          position: "top",
           status: "error",
           duration: 2000,
           isClosable: true,
         });
         return;
-      } 
-        dispatch(Login({ email, password }));
-        resetValues();
+      }
+      if (password.length < 8) {
+        toast({
+          title: "Password must be greater than or equal to 8 Characters",
+          description: "",
+          position: "top",
+          status: "error",
+          duration: 2000,
+          isClosable: true,
+        });
+        return;
+      }
+      if (!validateEmail(email)) {
+        return toast({
+          title: "Email must include @gmail.com",
+          description: "",
+          position: "top",
+          status: "error",
+          duration: 2000,
+          isClosable: true,
+        });
+      }
+      dispatch(Login({ email, password }));
+      resetValues();
+      // setCurrMessage("Login Successful")
+      // console.log(currMessage);
     }
   };
 
@@ -199,7 +239,7 @@ export default function SignupModal({ color, bg, br, w, h, cs }) {
             <Text>My Account</Text>
           </HStack>
         ) : (
-          "Sign in/Sign up"
+          <Text>Sign in/Sign up</Text>
         )}
       </Button>
 

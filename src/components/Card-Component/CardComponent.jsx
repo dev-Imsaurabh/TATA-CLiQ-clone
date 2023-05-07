@@ -1,6 +1,5 @@
 import { Image, VStack } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import { PRODUCTS } from "../../constants/constants";
 import { POINTER } from "../../constants/typography";
 import my_pixel from "../../scripts/my_pixel";
 

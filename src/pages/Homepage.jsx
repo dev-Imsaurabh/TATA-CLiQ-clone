@@ -13,7 +13,7 @@ import {
   trendingNowData,
   westSideData,
   womensWearData,
-} from "../constants/staticData";
+} from "../constants/staticData.js";
 import {
   AUTO,
   CENTER,

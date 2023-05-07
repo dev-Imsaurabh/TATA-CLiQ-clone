@@ -1,7 +1,7 @@
 import my_border from "../scripts/my_border";
 import my_pixel from "../scripts/my_pixel";
 import { ALL_DISCOUNT, AVAILABILITY, BRAND, COLLAR, COLORS_TYPES, COLOUR, DISCOUNT, FABRIC_FAMILY, FEATURES, FEATURES_TYPES, FIT, OCCASION, PATTERN, PRICE, RATINGS, RATINGS_TYPES, SIZE, SIZES_TYPES, TYPE } from "./constants";
-import { FILL_10PARENT, FILL_PARENT, RED, SOLID, WHEAT, WHITE ,AUTO} from "./typography";
+import {   SOLID, WHEAT ,AUTO} from "./typography";
 
 export const circularCategoryData = [
   {

@@ -12,7 +12,7 @@ let initialData = {
   message: "",
   token: JSON.parse(localStorage.getItem("token")) || null,
   loading: false,
-  auth:false,
+  auth: false,
 };
 
 export const authReducer = (state = initialData, { type, payload }) => {
@@ -30,20 +30,21 @@ export const authReducer = (state = initialData, { type, payload }) => {
       return { ...state, loading: true };
     }
     case LOGIN_SUCCESS: {
-      localStorage.setItem("token",JSON.stringify(payload.token))
+      if (payload.token !== undefined) {
+        localStorage.setItem("token", JSON.stringify(payload.token));
+      }
       return {
         ...state,
         token: payload.token,
         loading: false,
         message: payload.message,
-        auth:true,
+        auth: true,
       };
     }
     case LOGIN_ERROR: {
       return { ...state, loading: false, message: payload.message };
     }
     case AUTH_RESET: {
-      localStorage.removeItem("token")
       return initialData;
     }
 

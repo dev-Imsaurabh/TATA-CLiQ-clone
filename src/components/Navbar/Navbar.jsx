@@ -30,7 +30,7 @@ import { BsSuitHeart } from "react-icons/bs";
 import { FiShoppingBag } from "react-icons/fi";
 // import { AiOutlineArrowDown } from "react-icons/ai";
 // import { BiSearchAlt2 } from "react-icons/bi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import logo from "../../assets/cliq_mart_logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { SearchIcon, ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
@@ -46,19 +46,27 @@ import {
 } from "../../constants/typography";
 import { SignupModal } from "../SignupModal";
 import { MdAdminPanelSettings } from "react-icons/md";
-
-// import { useSelector } from "react-redux";
 import { FaUserCircle } from "react-icons/fa";
-// import { useSelector } from "react-redux";
 import { AdminModal } from "../AdminModal";
-// import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getCartProducts } from "../../redux/cart/cart.actions";
+
 export default function Navbar() {
   const [arrow1, setArrow1] = useState(false);
+  const { products } = useSelector((state) => state.cartManager);
+  const [cart, setCart] = useState("");
+  let dispatch = useDispatch();
+  const token = JSON.parse(localStorage.getItem("token")) || null;
+
+  useEffect(() => {
+    dispatch(getCartProducts(token));
+
+    setCart(products?.length);
+  }, [token, dispatch,products?.length]);
 
   // const [arrow2, setArrow2] = useState(false);
 
   const [value, setValue] = useState("");
-  const token = JSON.parse(localStorage.getItem("token")) || null;
 
   let nav = useNavigate();
   const handleSeacrh = (event) => {
@@ -78,9 +86,11 @@ export default function Navbar() {
       bg="#212121"
       color="white"
       fontSize={{ base: ".3rem", md: ".6rem", lg: ".9rem" }}
+      maxWidth={"100%"}
     >
       <Box
         display="flex"
+        flexDirection={{ base: "column", sm: "row" }}
         justifyContent="space-between"
         bg="black"
         w="82%"
@@ -88,7 +98,7 @@ export default function Navbar() {
         padding={2}
       >
         <Box
-          fontSize={{ base: 8, sm: 16, lg: 16 }}
+          fontSize={{ base: 12, sm: 16, lg: 16 }}
           flexGrow="1"
           flexBasis="0"
           textAlign="left"
@@ -99,7 +109,7 @@ export default function Navbar() {
           display="flex"
           alignItems={CENTER}
           justifyContent="space-evenly"
-          fontSize={{ base: 8, sm: 16, lg: 16 }}
+          fontSize={{ base: 12, sm: 16, lg: 16 }}
           flexGrow="1"
           flexBasis="0"
         >
@@ -109,7 +119,7 @@ export default function Navbar() {
           <Link to="/profile">Track Orders</Link>
           <Menu>
             <MenuButton
-              fontSize={{ base: 8, sm: 16, lg: 16 }}
+              fontSize={{ base: 12, sm: 16, lg: 16 }}
               bg={TRANSPARENT}
               _active={{ bg: { TRANSPARENT } }}
               _hover={{ bg: { TRANSPARENT } }}
@@ -134,10 +144,13 @@ export default function Navbar() {
           flexGrow="1"
           flexBasis="0"
           position="relative"
-          bottom={{ base: 0, sm: 5, lg: 5 }}
+          bottom={{ base: 0, sm: 10, md: 5, lg: 5 }}
         >
           <Link to="/">
-            <Image w="100%" src={logo} />
+            <Image
+              maxWidth={{ base: "275%", sm: "135%", md: "100%" }}
+              src={logo}
+            />
           </Link>
         </Box>
         <Box
@@ -290,14 +303,6 @@ export default function Navbar() {
                   </PopoverBody>
                 </PopoverContent>
               </Popover>
-              {/* <Box
-                display="flex"
-                onMouseEnter={() => setArrow2(true)}
-                onMouseLeave={() => setArrow2(false)}
-              >
-                <Text>Brands</Text>
-                <Box>{arrow2 ? <ChevronUpIcon /> : <ChevronDownIcon />}</Box>
-              </Box> */}
             </Box>
           </Box>
           <Box padding={2} flexGrow="4" flexBasis="0">
@@ -320,38 +325,33 @@ export default function Navbar() {
             flexGrow="2"
             flexBasis="0"
             display="flex"
-            justifyContent="space-between"
+            justifyContent="space-around"
             alignItems="center"
+            fontSize={{ base: 12, sm: 12, lg: 16 }}
           >
-            <Box display="flex" justifyContent="center" alignItems="center">
-              <BsSuitHeart size="18%" />
-            </Box>
-            <Box display={"flex"} justifyContent="center" alignItems="center">
-              {" "}
-              <Menu>
-                <MenuButton
-                  fontSize={{ base: 8, sm: 16, lg: 16 }}
-                  bg={TRANSPARENT}
-                  _active={{ bg: { TRANSPARENT } }}
-                  _hover={{ bg: { TRANSPARENT } }}
-                  as={Button}
-                >
-                  <MdAdminPanelSettings cursor={POINTER} />
-                </MenuButton>
-                <MenuList>
-                  <AdminModal />
-                </MenuList>
-              </Menu>
-            </Box>
-            <Box display="flex" justifyContent="center" alignItems="center">
-              <FiShoppingBag
-                size={"18%"}
-                cursor={POINTER}
-                onClick={() => {
-                  nav("/cart");
-                }}
+            <BsSuitHeart size="10%" />{" "}
+            <Menu>
+              <MenuButton
+                fontSize={{ base: 8, sm: 18, lg: 24 }}
+                bg={TRANSPARENT}
+                _active={{ bg: { TRANSPARENT } }}
+                _hover={{ bg: { TRANSPARENT } }}
+                as={Button}
+              >
+                <MdAdminPanelSettings cursor={POINTER} />
+              </MenuButton>
+              <MenuList>
+                <AdminModal />
+              </MenuList>
+            </Menu>
+            <FiShoppingBag
+              size={"10%"}
+              cursor={POINTER}
+              onClick={() => {
+                nav("/cart");
+              }}
               />
-            </Box>
+              <Text ml={{sm:"-15px",md:"-30px",lg:"-40px",xl:"-50px"}} mt={{base:"-30px",md:"-40px"}}>({cart})</Text>
           </Box>
         </Box>
       </Box>

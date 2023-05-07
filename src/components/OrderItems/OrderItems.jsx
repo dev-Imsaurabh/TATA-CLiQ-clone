@@ -10,9 +10,28 @@ import { Gap } from "../Gap";
 // import { Button } from "@chakra-ui/button";
 import future_date from "../../scripts/future_date";
 import { RUPEES_SYMBOL } from "../../constants/constants";
+import { useState } from "react";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 // import { color } from "@chakra-ui/styled-system";
 
-export default function OrderItems({images,id,name,long_desc,color,short_desc,price,strike_price,size,sizes,quantity,delivery_time,update,remove}) {
+export default function OrderItems({productId,qty}) {
+
+  const [products,setProducts]=useState({});
+  let dispatch = useDispatch();
+
+  const getProducts=async(productId)=>{
+    let res=await fetch(`https://calm-blue-ray-yoke.cyclic.app/products/product/${productId}`);
+    res=await res.json();
+    console.log(res);
+  }
+
+
+  useEffect(()=>{
+    dispatch(getProducts(productId))
+  },[])
+
+  const {images,_id,name,long_desc,color,short_desc,price,strike_price,size,sizes,quantity,delivery_time,update,remove}=products;
   return (
     <Card>
       <CardBody>
